@@ -3,17 +3,23 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom'
 
 import './App.css'
 
+// Components
+import { Navbar } from './components'
+
 // Pages
 import { Home, ServiceOrder, Dashboard } from './pages'
 
 function App() {
   return (
     <BrowserRouter>
-      <Routes>
-        <Route path='/' element={<Home />} /> 
-        <Route path='/dashboard' element={<Dashboard />} />
-        <Route path='/service-order' element={<ServiceOrder />} /> 
-      </Routes>
+      <Navbar />
+      <div className="container">
+        <Routes>
+          <Route path='/' element={<Home />} /> 
+          <Route path='/dashboard' element={<Dashboard />} />
+          <Route path='/order-service' element={<ServiceOrder />} /> 
+        </Routes>
+      </div>
     </BrowserRouter>
   )
 }
