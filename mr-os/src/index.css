@@ -41,7 +41,7 @@ label span {
 }
 
 input {
-  background-color: #3b3b3b;
+  background-color: #f7f4f4;
   color: #aaa;
   border: 1px solid #555;
   border-radius: 2px;
@@ -74,7 +74,7 @@ input[type="submit"] {
 
 input:disabled {
   cursor: not-allowed;
-  background-color: #000;
+  background-color: #08a791;
 }
 
 button:hover,
