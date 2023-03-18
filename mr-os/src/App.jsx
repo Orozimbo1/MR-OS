@@ -4,7 +4,7 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import './App.css'
 
 // Components
-import { Navbar } from './components'
+import { Navbar, Footer } from './components'
 
 // Pages
 import { Home, ServiceOrder, Dashboard } from './pages'
@@ -20,6 +20,7 @@ function App() {
           <Route path='/order-service' element={<ServiceOrder />} /> 
         </Routes>
       </div>
+      <Footer />
     </BrowserRouter>
   )
 }
