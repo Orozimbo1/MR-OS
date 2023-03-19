@@ -8,13 +8,11 @@ const register = async (data) => {
   let res = {}
 
   try {
-    
     res = await createUserWithEmailAndPassword(
         auth,
         data.email,
         data.password
-    ) 
-
+    )
   } catch (err) {
     res = {error: err}
     return res
@@ -33,11 +31,29 @@ const register = async (data) => {
 }
 
 // Sign in an user
+const login = async (data) => {
+  let res = {}
+
+  try {
+    res = await signInWithEmailAndPassword(
+      auth, 
+      data.email,
+      data.password
+    )
+  } catch (err) {
+    res = {error: err}
+    return res
+  }
+
+  const { user } = res
+  return user
+}
 
 // Logout an user
 
 const authService = {
   register,
+  login
 }
 
 export default authService
