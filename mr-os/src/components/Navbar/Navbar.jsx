@@ -1,14 +1,34 @@
 import './Navbar.css'
 
+// Components
 import { Link, NavLink } from 'react-router-dom'
-import { useAuth } from '../../hooks'
 
+// Hooks
+import { useAuth } from '../../hooks'
+import { useSelector, useDispatch } from 'react-redux'
+import { useNavigate } from 'react-router-dom'
+
+// Icons
 import { AiOutlineDashboard } from 'react-icons/ai'
 import { BsHouse, BsPerson } from 'react-icons/bs'
 import { BiTask } from 'react-icons/bi'
 
+// Redux
+import { logout, reset } from '../../slices/authSlice'
+
 const Navbar = () => {
   const { auth } = useAuth()
+
+  const navigate = useNavigate()
+
+  const dispatch = useDispatch()
+
+  const handleLogout = () => {
+    dispatch(logout())
+    dispatch(reset())
+
+    navigate('/login')
+  }
 
   return (
     <nav id='nav'>
@@ -40,7 +60,7 @@ const Navbar = () => {
         )}
         {auth && (
           <li>
-            <span>Sair</span>
+            <span onClick={handleLogout}>Sair</span>
           </li>
         )}
       </ul>
