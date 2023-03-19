@@ -25,6 +25,8 @@ ul {
 form {
   display: flex;
   flex-direction: column;
+  margin: 0 auto;
+  width: 70%;
 }
 
 label {
@@ -35,9 +37,9 @@ label {
 
 label span {
   font-weight: bold;
-  margin-bottom: .5em;
   color: #aaa;
-  font-size: .7em;
+  font-size: 1em;
+  margin: .7em 0;
 }
 
 input {
@@ -47,7 +49,7 @@ input {
   border-radius: 2px;
   padding: 10px 8px;
   outline: none;
-  margin-bottom: .6em;
+  margin-bottom: .7em;
 }
 
 input::placeholder {

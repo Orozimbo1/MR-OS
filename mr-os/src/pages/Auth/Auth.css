@@ -1,0 +1,23 @@
+
+#auth {
+    background-color: pink;
+    margin: auto;
+    border-radius: 10px;
+    box-shadow: 2px 2px 5px gray;
+}
+
+#auth h2 {
+    text-align: center;
+    font-size: 2em;
+    padding: 1.5em;
+}
+
+#auth p {
+    text-align: center;
+    padding: 1.5em;
+}
+
+#auth p a {
+    color: #878787;
+}
+

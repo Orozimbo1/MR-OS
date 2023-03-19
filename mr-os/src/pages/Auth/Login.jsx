@@ -4,8 +4,8 @@ import { Link } from 'react-router-dom'
 
 const Login = () => {
   return (
-    <div>
-      <h2>Faça login</h2>
+    <div id='auth'>
+      <h2><span>Login</span></h2>
       <form>
         <label>
           <span>Email:</span>

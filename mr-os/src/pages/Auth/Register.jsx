@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom'
 
 const Register = () => {
   return (
-    <div>
+    <div id='auth'>
       <h2>Cadastre-se</h2>
       <form>
         <label>
