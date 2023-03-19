@@ -46,6 +46,10 @@ const login = async (data) => {
   }
 
   const { user } = res
+
+  if(user) {
+    localStorage.setItem('user', JSON.stringify(user))
+  }
   return user
 }
 
