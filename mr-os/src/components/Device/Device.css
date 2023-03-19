@@ -1,0 +1,42 @@
+#dados {
+    width: 100%;
+    border-bottom: solid 1px #C7C5C5;
+}
+
+#dados form {
+    align-items: center;
+    margin: 20px 0px 20px 70px;
+}
+
+#dados input  {
+    width: 100%;
+    border: none;
+    background-color:#C7C5C5;
+    color: black;
+}
+
+#dados textarea {
+    background-color:#C7C5C5; color: black;
+    border: none;
+
+}
+
+#botoes {
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    flex-direction: row;
+}
+
+#botoes input {
+    margin: 10px;
+    width: 30%;
+}
+
+#botoes  .finalizar {
+    background-color:#5081AC ;
+}
+
+#botoes .add {
+    background-color: #49D631;
+}
