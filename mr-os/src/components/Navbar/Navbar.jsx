@@ -1,12 +1,15 @@
 import './Navbar.css'
 
 import { Link, NavLink } from 'react-router-dom'
+import { useAuth } from '../../hooks'
 
 import { AiOutlineDashboard } from 'react-icons/ai'
 import { BsHouse, BsPerson } from 'react-icons/bs'
 import { BiTask } from 'react-icons/bi'
 
 const Navbar = () => {
+  const { auth } = useAuth()
+
   return (
     <nav id='nav'>
       <Link to='/'>
@@ -28,11 +31,18 @@ const Navbar = () => {
             <BiTask />
           </NavLink>
         </li>
-        <li>
-          <NavLink to='/login'>
-            <BsPerson />
-          </NavLink>
-        </li>
+        {!auth && (
+          <li>
+            <NavLink to='/login'>
+              <BsPerson />
+            </NavLink>
+          </li>
+        )}
+        {auth && (
+          <li>
+            <span>Sair</span>
+          </li>
+        )}
       </ul>
     </nav>
   )

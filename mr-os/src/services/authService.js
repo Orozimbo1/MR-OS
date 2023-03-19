@@ -50,6 +50,10 @@ const login = async (data) => {
 }
 
 // Logout an user
+const logout = () => {
+  localStorage.removeItem('user')
+  signOut(auth)
+}
 
 const authService = {
   register,
