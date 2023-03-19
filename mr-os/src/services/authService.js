@@ -46,14 +46,23 @@ const login = async (data) => {
   }
 
   const { user } = res
+
+  if(user) {
+    localStorage.setItem('user', JSON.stringify(user))
+  }
   return user
 }
 
 // Logout an user
+const logout = () => {
+  localStorage.removeItem('user')
+  signOut(auth)
+}
 
 const authService = {
   register,
-  login
+  login,
+  logout
 }
 
 export default authService
