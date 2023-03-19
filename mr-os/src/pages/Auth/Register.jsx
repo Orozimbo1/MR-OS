@@ -2,6 +2,7 @@ import './Auth.css'
 
 // Components
 import { Link } from 'react-router-dom'
+import { Message } from '../../components' 
 
 // Hooks
 import { useEffect, useState } from 'react'
@@ -31,9 +32,10 @@ const Register = () => {
     dispatch(register(user))
   }
 
-  // useEffect(() => {
-  //   dispatch(reset())
-  // }, [dispatch])
+  useEffect(() => {
+    dispatch(reset())
+    console.log(error)
+  }, [dispatch])
 
   return (
     <div>
@@ -66,10 +68,10 @@ const Register = () => {
             value={password}
           />
         </label>
-        <input type="submit" value="Cadastrar" />
+        {!loading && <input type="submit" value="Cadastrar" />}
+        {loading && <input type="submit" value="Aguarde.." disabled />}
+        {error && <Message msg={error} type='error' />}
       </form>
-      {/* {loading && console.log(loading)} */}
-      {error && console.log(error)}
       <p>Já tem conta? <Link to='/login'>Clique aqui</Link> </p>
     </div>
   )
