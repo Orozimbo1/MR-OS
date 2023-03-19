@@ -1,11 +1,23 @@
 import './ServiceOrder.css'
-
-import { CustomData, DeviceData } from '../../components'
+import  DeviceData  from '../../components/Device/DeviceData.jsx'
 
 const ServiceOrder = () => {
   return (
     <div>
-      <CustomData />
+      <form action="">
+          <label>
+            <span>Nome:</span> 
+            <input type="text" />
+          </label>
+          <label>
+            <span>Telefone:</span>
+            <input type="text" />
+          </label>
+          <label>
+            <span>Endereço:</span>
+            <input type="text" />
+          </label>
+      </form>
       <DeviceData />
     </div>
   )
