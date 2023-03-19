@@ -1,6 +1,5 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
 import authService from '../services/authService'
-import { async } from '@firebase/util'
 
 const user = JSON.parse(localStorage.getItem('user'))
 
@@ -11,6 +10,7 @@ const initialState = {
   success: false,
 }
 
+
 // Register an user and sign in
 export const register = createAsyncThunk(
   'auth/register',
@@ -18,10 +18,14 @@ export const register = createAsyncThunk(
 
     const data = await authService.register(user)
 
-    // Check for errors
-    // if(data.error) {
-    //   return thunkAPI.rejectWithValue(data.error)
-    // }
+    //Check for errors
+    if(data.error.code.includes('already')) {
+      return thunkAPI.rejectWithValue('Email já está em uso.')
+    } else if (data.error.code.includes('password')) {
+      return thunkAPI.rejectWithValue('Senha precisa conter pelo menos 6 caracteres.')
+    } else if (data.error.code.includes('invalid')) {
+      return thunkAPI.rejectWithValue('Por favor insira um email válido.')
+    }
     
     return data
   }

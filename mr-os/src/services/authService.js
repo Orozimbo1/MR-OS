@@ -5,28 +5,31 @@ const auth = getAuth(app)
 
 // Register an user
 const register = async (data) => {
+  let res = {}
 
   try {
     
-    const { user } = await createUserWithEmailAndPassword(
+    res = await createUserWithEmailAndPassword(
         auth,
         data.email,
         data.password
     ) 
 
-    await updateProfile(user, {
-      displayName: data.displayName
-    })
-
-    if(user) {
-      localStorage.setItem('user', JSON.stringify(user))
-    }
-
-    return user
-
-  } catch (error) {
-    console.log(error)
+  } catch (err) {
+    res = {error: err}
+    return res
   }
+  const { user } = res
+
+  await updateProfile(user, {
+    displayName: data.displayName
+  })
+
+  if(user) {
+      localStorage.setItem('user', JSON.stringify(user))
+  }
+
+  return user
 }
 
 // Sign in an user
