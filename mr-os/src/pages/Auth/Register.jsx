@@ -34,7 +34,6 @@ const Register = () => {
 
   useEffect(() => {
     dispatch(reset())
-    console.log(error)
   }, [dispatch])
 
   return (

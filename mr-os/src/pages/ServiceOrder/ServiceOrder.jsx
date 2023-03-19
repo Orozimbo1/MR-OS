@@ -1,11 +1,11 @@
 import './ServiceOrder.css'
-import  CostumerData  from '../../components/OS/costumerData.jsx'
-import  DeviceData  from '../../components/OS/DeviceData.jsx'
+
+import { CustomData, DeviceData } from '../../components'
 
 const ServiceOrder = () => {
   return (
     <div>
-      <CostumerData />
+      <CustomData />
       <DeviceData />
     </div>
   )
