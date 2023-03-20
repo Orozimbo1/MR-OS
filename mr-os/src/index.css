@@ -39,17 +39,21 @@ label span {
   font-weight: bold;
   color: #aaa;
   font-size: 1em;
-  margin: .7em 0;
+  margin: .7em .2em;
 }
 
 input {
   background-color: #f7f4f4;
   color: #aaa;
-  border: 1px solid #555;
+  border: none;
   border-radius: 2px;
   padding: 10px 8px;
   outline: none;
   margin-bottom: .7em;
+}
+
+textarea {
+  margin: .2em;
 }
 
 input::placeholder {
