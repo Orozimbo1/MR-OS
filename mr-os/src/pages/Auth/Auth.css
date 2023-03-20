@@ -1,19 +1,19 @@
 
 #auth {
     background-color: pink;
-    margin: auto;
+    width: 50%;
+    margin: 10px auto;
     border-radius: 10px;
     box-shadow: 2px 2px 5px gray;
+    text-align: center;
 }
 
 #auth h2 {
-    text-align: center;
     font-size: 2em;
-    padding: 1.5em;
+    padding: 0;
 }
 
-#auth p {
-    text-align: center;
+#auth  {
     padding: 1.5em;
 }
 

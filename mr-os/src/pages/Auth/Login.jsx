@@ -5,11 +5,11 @@ import { Link } from 'react-router-dom'
 import { Message } from '../../components'
 
 // Hooks
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 
 // Redux
-import { login } from '../../slices/authSlice'
+import { login, reset } from '../../slices/authSlice'
 
 const Login = () => {
   const { loading, error } = useSelector((state) => state.auth)
@@ -29,6 +29,11 @@ const Login = () => {
 
     dispatch(login(user))
   }
+
+  // Clean all states
+  useEffect(() => {
+    dispatch(reset())
+  }, [dispatch])
 
   return (
     <div id='auth'>
