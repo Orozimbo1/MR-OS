@@ -4,24 +4,22 @@ import { DeviceData } from '../../components'
 const ServiceOrder = () => {
   return (
     <div>
+      <h2>Nova ordem de serviço</h2>
       <form>
           <label>
             <span>Nome:</span> 
-            <input type="text" />
+            <input type="text" placeholder='Nome do cliente' />
           </label>
           <label>
             <span>Telefone:</span>
-            <input type="text" />
+            <input type="tel" placeholder='(XX)X XXXX-XXXX' />
           </label>
           <label>
             <span>Endereço:</span>
-            <input type="text" />
+            <input type="text" placeholder='Ex: Av Brasil' />
           </label>
           <DeviceData />
-          <div id='botoes'>
-            <input type="submit" value="Adicionar outro aparelho" className='add' />
-            <input type="submit" value="Finalizar" className='finalizar' />
-          </div>
+            <input type="submit" value="Finalizar" />
       </form>
     </div>
   )

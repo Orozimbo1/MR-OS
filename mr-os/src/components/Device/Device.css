@@ -1,27 +1,42 @@
 #dados {
+    box-sizing: border-box;
     width: 100%;
     border: solid 1px #ece7e7;  
     border-radius: 4px;
     margin: 5px auto;
+    padding: .4em;
 }
 
 .tec-data {
     display: flex;
     flex-wrap: wrap;
     margin: 0 auto;
+    width: 100%;
 }
 
 .tec-data label {
    width: 48%;
-   padding: .2em;
+   margin-right: 10px;
 }
 
 textarea{
-    background-color:#f7f4f4; 
-    border: none;
     height: 5em;
 }
 
-label {
-    margin: 0em;
+.new-section {
+    display: flex;
+    justify-content: end;
+}
+
+.new-section button {
+    display: flex;
+    align-items: center;
+    border: none;
+    background-color: transparent;
+    color: #0094f6;
+    font-size: .8em;
+}
+
+.new-section button svg {
+    font-size: 1.5em;
 }
