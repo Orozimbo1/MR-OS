@@ -1,5 +1,5 @@
 import './ServiceOrder.css'
-import  DeviceData  from '../../components/Device/DeviceData.jsx'
+import { DeviceData } from '../../components'
 
 const ServiceOrder = () => {
   return (
