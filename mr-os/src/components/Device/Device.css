@@ -1,42 +1,27 @@
 #dados {
     width: 100%;
-    border-bottom: solid 1px #C7C5C5;
+    border: solid 1px #ece7e7;  
+    border-radius: 4px;
+    margin: 5px auto;
 }
 
-#dados form {
-    align-items: center;
-    margin: 20px 0px 20px 70px;
-}
-
-#dados input  {
-    width: 100%;
-    border: none;
-    background-color:#C7C5C5;
-    color: black;
-}
-
-#dados textarea {
-    background-color:#C7C5C5; color: black;
-    border: none;
-
-}
-
-#botoes {
+.tec-data {
     display: flex;
-    width: 100%;
-    justify-content: center;
-    flex-direction: row;
+    flex-wrap: wrap;
+    margin: 0 auto;
 }
 
-#botoes input {
-    margin: 10px;
-    width: 30%;
+.tec-data label {
+   width: 48%;
+   padding: .2em;
 }
 
-#botoes  .finalizar {
-    background-color:#5081AC ;
+textarea{
+    background-color:#f7f4f4; 
+    border: none;
+    height: 5em;
 }
 
-#botoes .add {
-    background-color: #49D631;
+label {
+    margin: 0em;
 }
