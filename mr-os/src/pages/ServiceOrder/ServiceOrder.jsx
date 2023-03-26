@@ -55,8 +55,8 @@ const ServiceOrder = () => {
             <input type="text" placeholder='Ex: Av Brasil' />
           </label>
           {devices && devices.map((device) => (
-              <div key={device.id} onDoubleClick={() => removeDevice(device.id)}>
-                <DeviceData />
+              <div key={device.id}>
+                <DeviceData handleDelete={() => removeDevice(device.id)} />
               </div>
             ))
           }

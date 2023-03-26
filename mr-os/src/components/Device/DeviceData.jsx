@@ -1,8 +1,12 @@
 import './Device.css'
 
-function DeviceData() {
+// Icons
+import { BsTrash } from 'react-icons/bs'
+
+function DeviceData({ handleDelete }) {
   return (
       <div id='data'>
+        <BsTrash className='trash' onClick={handleDelete}/>
         <div className="tec-data">
           <label>
             <span>Tipo do dispositvo:</span> 

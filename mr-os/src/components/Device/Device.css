@@ -1,4 +1,5 @@
 #data {
+    position: relative;
     box-sizing: border-box;
     width: 100%;
     border: solid 1px #ece7e7;  
@@ -21,4 +22,20 @@
 
 textarea{
     height: 5em;
+}
+
+.trash {
+    position: absolute;
+    top: 3%;
+    right: 2%;
+    font-size: 1.5em;
+    color: #000;
+    border-radius: 5px;
+    padding: .1em;
+    cursor: pointer;
+    transition: .5s;
+}
+
+.trash:hover {
+    color: #f06262;
 }
