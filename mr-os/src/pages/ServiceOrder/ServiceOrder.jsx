@@ -6,6 +6,7 @@ import { BsPlus } from 'react-icons/bs'
 
 // Hooks
 import { useReducer } from 'react'
+import { Link } from 'react-router-dom'
 
 const ServiceOrder = () => {
   const initialDevices = []
@@ -66,7 +67,10 @@ const ServiceOrder = () => {
               Add dispositivo
             </button>
           </div>
+          <div className='finalize-or-cancel'>
+            <Link className='cancel-btn' to='/'>Cancelar</Link>
             <input type="submit" value="Finalizar" />
+          </div>
       </form>
     </div>
   )

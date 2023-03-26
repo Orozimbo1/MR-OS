@@ -94,5 +94,18 @@ input[type="submit"]:hover {
 }
 
 .cancel-btn {
-  background-color: #ccc;
+  background-color: #e21414;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  padding: 10px 8px;
+  font-weight: bold;
+  cursor: pointer;
+  opacity: .8;
+  font-size: 1em;
+  margin-top: 1em;
+}
+
+.cancel-btn:hover {
+  opacity: 1;
 }
