@@ -1,7 +1,14 @@
 import './ServiceOrder.css'
 import { DeviceData } from '../../components'
 
+// Icons
+import { BsPlus } from 'react-icons/bs'
+
 const ServiceOrder = () => {
+  const handleNewDevice = () => {
+
+  }
+
   return (
     <div>
       <h2>Nova ordem de serviço</h2>
@@ -19,6 +26,12 @@ const ServiceOrder = () => {
             <input type="text" placeholder='Ex: Av Brasil' />
           </label>
           <DeviceData />
+          <div className='new-section'>
+            <button onClick={handleNewDevice}>
+              <BsPlus />
+              Add dispositivo
+            </button>
+          </div>
             <input type="submit" value="Finalizar" />
       </form>
     </div>

@@ -1,14 +1,8 @@
 import './Device.css'
 
-import { BsPlus } from 'react-icons/bs'
-
 function DeviceData() {
-  const handleNewDevice = (e) => {
-    e.preventDefault()
-  }
-
   return (
-      <form id='dados'>
+      <div id='data'>
         <div className="tec-data">
           <label>
             <span>Tipo do dispositvo:</span> 
@@ -28,13 +22,7 @@ function DeviceData() {
           <textarea placeholder='Descreva o problema do dispositivo'>
           </textarea>
         </label>
-        <div className='new-section'>
-          <button onClick={handleNewDevice}>
-            <BsPlus />
-            Add dispositivo
-          </button>
-        </div>
-      </form>
+      </div>
   )
 }
 

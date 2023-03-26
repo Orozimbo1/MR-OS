@@ -1,6 +1,6 @@
-import { app } from '../firebase/config'
+// import { app } from '../firebase/config'
 
-const auth = getAuth(app)
+// const auth = getAuth(app)
 
 const orderService = {
 

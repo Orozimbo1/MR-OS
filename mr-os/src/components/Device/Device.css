@@ -1,4 +1,4 @@
-#dados {
+#data {
     box-sizing: border-box;
     width: 100%;
     border: solid 1px #ece7e7;  
@@ -15,28 +15,10 @@
 }
 
 .tec-data label {
-   width: 48%;
+   width: 45%;
    margin-right: 10px;
 }
 
 textarea{
     height: 5em;
-}
-
-.new-section {
-    display: flex;
-    justify-content: end;
-}
-
-.new-section button {
-    display: flex;
-    align-items: center;
-    border: none;
-    background-color: transparent;
-    color: #0094f6;
-    font-size: .8em;
-}
-
-.new-section button svg {
-    font-size: 1.5em;
 }

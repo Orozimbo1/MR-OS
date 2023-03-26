@@ -1,10 +1,8 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import orderService from "../services/orderService";
 
-const order = JSON.parse(localStorage.getItem('order'))
-
 const initialState = {
-  order: order ? order : null,
+  order: {},
   error: false,
   loading: false,
   success: false,

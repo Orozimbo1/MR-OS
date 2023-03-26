@@ -43,7 +43,7 @@ label {
 
 label span {
   font-weight: bold;
-  color: #aaa;
+  color: #000;
   font-size: 1em;
   margin: .7em .2em;
 }
@@ -62,7 +62,7 @@ textarea {
 
 input::placeholder,
 textarea::placeholder {
-  color: #aaa;
+  color: #646161;
 }
 
 .btn,
