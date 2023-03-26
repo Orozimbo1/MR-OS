@@ -4,9 +4,38 @@ import { DeviceData } from '../../components'
 // Icons
 import { BsPlus } from 'react-icons/bs'
 
-const ServiceOrder = () => {
-  const handleNewDevice = () => {
+// Hooks
+import { useReducer } from 'react'
 
+const ServiceOrder = () => {
+  const initialDevices = []
+
+  const deviceReducer = (state, action) => {
+    switch (action.type) {
+      case 'ADD':
+        const newDevice = {
+          id: Math.random()
+        }
+
+        return [...state, newDevice]
+      case 'REMOVE':
+        return state.filter((device) => device.id !== action.id) 
+      default:
+        return state 
+    }
+  }
+
+  const [devices, dispatchDevices] = useReducer(deviceReducer, initialDevices)
+
+  const handleNewDevice = (e) => {
+    e.preventDefault()
+
+    dispatchDevices({type: 'ADD'})
+  }
+
+  const removeDevice = (id) => {
+    
+    dispatchDevices({type: 'REMOVE', id})
   }
 
   return (
@@ -25,7 +54,12 @@ const ServiceOrder = () => {
             <span>Endereço:</span>
             <input type="text" placeholder='Ex: Av Brasil' />
           </label>
-          <DeviceData />
+          {devices && devices.map((device) => (
+              <div key={device.id} onDoubleClick={() => removeDevice(device.id)}>
+                <DeviceData />
+              </div>
+            ))
+          }
           <div className='new-section'>
             <button onClick={handleNewDevice}>
               <BsPlus />
