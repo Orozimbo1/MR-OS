@@ -41,8 +41,8 @@ const ServiceOrder = () => {
 
   return (
     <div>
-      <h2>Nova ordem de serviço</h2>
-      <form>
+      <h2 className='w-100 text-center sm:text-sm md:text-3xl lg:text-3xl'>Nova ordem de serviço</h2>
+      <form className='w-100 sm:w-10 sm:h-52 md:w-52 md:h-52 lg:w-100 lg:w-52'>
           <label>
             <span>Nome:</span> 
             <input type="text" placeholder='Nome do cliente' />
@@ -67,7 +67,7 @@ const ServiceOrder = () => {
               Add dispositivo
             </button>
           </div>
-          <div className='finalize-or-cancel'>
+          <div className='finish-or-cancel w-100 sm:align-middle md:align-middle lg:align-middle'>
             <Link className='cancel-btn' to='/'>Cancelar</Link>
             <input type="submit" value="Finalizar" />
           </div>

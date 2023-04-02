@@ -1,10 +1,14 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 h2 {
-  text-align: center;
+  text-align:center;
 }
 
 .new-section {
   display: flex;
-  justify-content: end;
+  justify-content: flex-end;
 }
 
 .new-section button {
@@ -20,8 +24,7 @@ h2 {
   font-size: 1.5em;
 }
 
-.finalize-or-cancel {
+.finish-or-cancel {
   display: flex;
   justify-content: space-between;
-  align-items: center;
 }

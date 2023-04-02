@@ -60,7 +60,7 @@ textarea {
   border-radius: 2px;
   padding: 10px 8px;
   outline: none;
-  margin-bottom: .7em;
+  /* margin-bottom: .7em; */
   font-family: "Roboto", sans-serif;
 }
 
