@@ -13,8 +13,12 @@ function DeviceData({ handleDelete }) {
             <input type="text" placeholder='Ex: Celular, televisão, computador' />
           </label>
           <label>
+            <span>Marca:</span>
+            <input type="text" placeholder='Ex: LG, Samsung' />
+          </label>
+          <label>
             <span>Modelo:</span>
-            <input type="text" placeholder='Ex: LG smart' />
+            <input type="text" placeholder='Ex: Smart Tv L180' />
           </label>
           <label>
             <span>Cor:</span>
