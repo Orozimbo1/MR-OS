@@ -5,10 +5,24 @@ import { DeviceData } from '../../components'
 import { BsPlus } from 'react-icons/bs'
 
 // Hooks
-import { useReducer } from 'react'
+import { useReducer, useState } from 'react'
 import { Link } from 'react-router-dom'
+import { useSelector, useDispatch } from 'react-redux'
+
+// Redux
+import { newOrder, reset } from '../../slices/orderSlice'
 
 const ServiceOrder = () => {
+  const { loading, error } = useSelector((state) => state.order)
+  const { user } = useSelector((state) => state.auth)
+  console.log(user)
+
+  const dispatch = useDispatch()
+
+  const [name, setName] = useState('')
+  const [phoneNumber, setPhoneNumber] = useState('')
+  const [address, setAddress] = useState('')
+
   const initialDevices = []
 
   const deviceReducer = (state, action) => {
@@ -39,21 +53,47 @@ const ServiceOrder = () => {
     dispatchDevices({type: 'REMOVE', id})
   }
 
+  const handleSubmit = (e) => {
+    e.preventDefault()
+
+    const serviceOrder = {
+      name,
+      phoneNumber,
+      address,
+      userId: user.uid
+    }
+  }
+
   return (
     <div>
       <h2>Nova ordem de serviço</h2>
-      <form>
+      <form onSubmit={handleSubmit}>
           <label>
             <span>Nome:</span> 
-            <input type="text" placeholder='Nome do cliente' />
+            <input 
+              type="text" 
+              placeholder='Nome do cliente'
+              onChange={(e) => setName(e.target.value)}
+              value={name} 
+            />
           </label>
           <label>
             <span>Telefone:</span>
-            <input type="tel" placeholder='(XX)X XXXX-XXXX' />
+            <input 
+              type="tel" 
+              placeholder='(XX)X XXXX-XXXX'
+              onChange={(e) => setPhoneNumber(e.target.value)}
+              value={phoneNumber} 
+            />
           </label>
           <label>
             <span>Endereço:</span>
-            <input type="text" placeholder='Ex: Av Brasil' />
+            <input 
+              type="text" 
+              placeholder='Ex: Av Brasil'
+              onChange={(e) => setAddress(e.target.value)}
+              value={address} 
+            />
           </label>
           {devices && devices.map((device) => (
               <div key={device.id}>
