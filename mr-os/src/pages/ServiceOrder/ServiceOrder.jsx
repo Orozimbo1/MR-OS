@@ -15,7 +15,6 @@ import { newOrder, reset } from '../../slices/orderSlice'
 const ServiceOrder = () => {
   const { loading, error } = useSelector((state) => state.order)
   const { user } = useSelector((state) => state.auth)
-  console.log(user)
 
   const dispatch = useDispatch()
 
@@ -60,8 +59,12 @@ const ServiceOrder = () => {
       name,
       phoneNumber,
       address,
-      userId: user.uid
+      userId: user.uid,
+      createdBy: user.displayName
     }
+
+    dispatch(newOrder(serviceOrder))
+    // console.log(serviceOrder)
   }
 
   return (
@@ -109,7 +112,9 @@ const ServiceOrder = () => {
           </div>
           <div className='finalize-or-cancel'>
             <Link className='cancel-btn' to='/'>Cancelar</Link>
-            <input type="submit" value="Finalizar" />
+            {!loading && <input type="submit" value="Finalizar" />}
+            {loading && <input type="submit" value="Aguarde.." disabled />}
+            {error && <Message msg={error} type='error' />}
           </div>
       </form>
     </div>

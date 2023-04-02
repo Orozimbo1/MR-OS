@@ -2,6 +2,7 @@ import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import orderService from "../services/orderService";
 
 const initialState = {
+  orders: [],
   order: {},
   error: false,
   loading: false,
