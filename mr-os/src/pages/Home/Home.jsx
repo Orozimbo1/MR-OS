@@ -15,7 +15,7 @@ const Home = () => {
 
   useEffect(() => {
     dispatch(getAllServiceOrders(uid))
-  }, [uid, dispatch])
+  }, [uid])
 
   return (
     <div>
