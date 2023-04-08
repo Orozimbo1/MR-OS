@@ -20,6 +20,16 @@ export const newOrder = createAsyncThunk(
   }
 )
 
+// Get all service orders
+export const getAllServiceOrders = createAsyncThunk(
+  'order/getall',
+  async (uid, thunkAPI) => {
+    const data = await orderService.getAllServiceOrders(uid)
+
+    return data
+  }
+)
+
 export const orderSlice = createSlice({
   name: 'order',
   initialState,
@@ -42,6 +52,21 @@ export const orderSlice = createSlice({
       state.order = action.payload;
     })
     .addCase(newOrder.rejected, (state, action) => {
+      state.loading = false;
+      state.order = null;
+      state.error = action.payload;
+    })
+    .addCase(getAllServiceOrders.pending, (state) => {
+      state.loading = true;
+      state.error = false;
+    })
+    .addCase(getAllServiceOrders.fulfilled, (state, action) => {
+      state.loading = false;
+      state.error = false;
+      state.success = true;
+      state.orders = action.payload;
+    })
+    .addCase(getAllServiceOrders.rejected, (state, action) => {
       state.loading = false;
       state.order = null;
       state.error = action.payload;
