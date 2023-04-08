@@ -1,5 +1,5 @@
 import { db } from "../firebase/config";
-import { collection, addDoc, Timestamp } from "firebase/firestore";
+import { collection, addDoc, Timestamp, getDoc } from "firebase/firestore";
 
 // Register a new service order
 const newOrder = async (document) => {
@@ -20,8 +20,19 @@ const newOrder = async (document) => {
 
 }
 
+const getServiceOrders = async () => {
+  try {
+    const servicesOrdes = await collection(db, 'serviceOrders')
+
+    return servicesOrdes
+  } catch (error) {
+    console.log(error)
+  }
+}
+
 const orderService = {
   newOrder,
+  getServiceOrders
 }
 
 export default orderService;
