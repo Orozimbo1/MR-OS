@@ -8,4 +8,8 @@ export const store = configureStore({
     auth: authReducer,
     order: orderReducer,
   },
+  middleware: getDefaultMiddleware =>
+    getDefaultMiddleware({
+      serializableCheck: false,
+    }),
 })

@@ -5,7 +5,7 @@ import { collection, addDoc, Timestamp, getDocs, onSnapshot, query, where, order
 const newOrder = async (document) => {
 
   try {
-    
+
     const newDocument = { ...document, createdAt: Timestamp.now() }
     const addDocument = await addDoc(
       collection(db, 'serviceOrders'),
