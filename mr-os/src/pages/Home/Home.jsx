@@ -1,7 +1,7 @@
 import './Home.css'
 
 // Hooks
-import { useEffect, useState } from 'react'
+import { useEffect, useCallback } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 
 // Redux
@@ -19,8 +19,19 @@ const Home = () => {
 
   return (
     <div>
-      {orders && orders.map((order) => <p key={order.id}>{order.name}</p>)}
-      <p>ola</p>
+      {orders && orders.map((order) => (
+        <div key={order.id}>
+          <br />
+          <p>Nome: {order.name}</p>
+          <p>Endereço: {order.address}</p>
+          {/* <p>Criado em: {order.createdAt}</p> */}
+          <p>Criado por: {order.createdBy}</p>
+          <p>Telefone: {order.phoneNumber}</p>
+          <p>Id do usuário: {order.userId}</p>
+          <br />
+          <hr />
+        </div>
+      ))}
     </div>
   )
 }
