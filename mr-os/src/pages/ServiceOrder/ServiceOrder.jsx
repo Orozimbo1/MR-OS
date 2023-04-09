@@ -70,7 +70,7 @@ const ServiceOrder = () => {
   return (
     <div>
       <h2 className='w-100 text-center sm:text-sm md:text-3xl lg:text-3xl'>Nova ordem de serviço</h2>
-      <form onSubmit={handleSubmit} className='w-100 sm:w-10 sm:h-52 md:w-52 md:h-52 lg:w-100 lg:w-52'>
+      <form onSubmit={handleSubmit} className='w-100 sm:w-30  md:w-12/12  lg:w-100 '>
           <label>
             <span>Nome:</span> 
             <input 

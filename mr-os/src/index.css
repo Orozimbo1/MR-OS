@@ -29,9 +29,7 @@ h3 {
 }
 
 .active {
-  background: #7560FF;
-  border-radius: 5px;
-  color: #FFF;
+  border-bottom: 2px solid black;
 }
 
 ul {

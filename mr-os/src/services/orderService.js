@@ -11,7 +11,6 @@ const newOrder = async (document) => {
       collection(db, 'serviceOrders'),
       newDocument
     )
-    console.log(addDocument)
 
     return newDocument
   } catch (error) {
