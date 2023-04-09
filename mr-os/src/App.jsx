@@ -4,7 +4,7 @@ import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom'
 import './App.css'
 
 // Components
-import { Navbar, Footer } from './components'
+import { Navbar, Footer, SideMenu } from './components'
 
 // Pages
 import { Home, ServiceOrder, Dashboard, Login, Register, Order } from './pages'
@@ -22,6 +22,7 @@ function App() {
   return (
     <BrowserRouter>
       <Navbar />
+      {/* <SideMenu /> */}
       <div className="container">
         <Routes>
           <Route path='/' element={auth ? <Home /> : <Navigate to='/login' />} /> 
