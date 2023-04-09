@@ -14,14 +14,17 @@ const Order = () => {
   const dispatch = useDispatch()
 
   const { id } = useParams()
-  // console.log(id)
 
   useEffect(() => {
     dispatch(getServiceOrder(id))
-  }, [id])
+  },[id])
 
-  const date = order.createdAt.toDate().toDateString()
+  const date = order.createdAt && order.createdAt.toDate() && order.createdAt.toDate().toLocaleString('pt-BR', { timezone: 'UTC' })
+
+  // Isso vai sair
   const devices = ['celular', 'tv', 'computador']
+  
+  {loading && <p>Carregando...</p>}
 
   return (
     <div>

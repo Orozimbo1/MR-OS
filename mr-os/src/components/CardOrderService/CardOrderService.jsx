@@ -4,7 +4,7 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 
 const CardOrderService = ({ name, address, phoneNumber, createdAt, id }) => {
-  const date = createdAt.toDate().toDateString()
+  const date = createdAt && createdAt.toDate() && createdAt.toDate().toLocaleString('pt-BR', { timezone: 'UTC' })
 
   return (
     <div >
