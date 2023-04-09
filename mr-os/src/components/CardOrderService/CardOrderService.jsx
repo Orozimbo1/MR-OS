@@ -8,7 +8,7 @@ const CardOrderService = ({ name, address, phoneNumber, createdAt, id }) => {
 
   return (
     <div >
-      <Link to={`/order/${id}`} className='card-order-service'>
+      <Link to={`/order-service/${id}`} className='card-order-service'>
         <div>
           <h3>{name}</h3>
           <p>{address}</p>
