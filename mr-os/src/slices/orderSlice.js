@@ -24,7 +24,7 @@ export const newOrder = createAsyncThunk(
 export const getServiceOrder = createAsyncThunk(
   'order/get',
   async (id, thunkAPI) => {
-    const data = await orderService.getAllServiceOrders(id)
+    const data = await orderService.getServiceOrder(id)
 
     return data
   }

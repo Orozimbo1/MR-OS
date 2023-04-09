@@ -26,7 +26,7 @@ const getServiceOrder = async (id) => {
     const docRef = await doc(db, 'serviceOrders', id)
     const docSnap = await getDoc(docRef)
 
-    return docSnap
+    return docSnap.data()
   } catch (error) {
     console.log(error)
   }
