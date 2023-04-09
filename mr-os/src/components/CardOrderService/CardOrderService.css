@@ -1,3 +1,22 @@
 .card-order-service {
+  padding: 20px;
+  text-align: justify;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid #aaa;
+  transition: .3s;
+}
 
+.card-order-service p {
+  padding-top: 1em;
+}
+
+.card-order-service:hover {
+  background-color: rgb(184, 130, 235);
+}
+
+.date {
+  font-size: .8em;
+  color: gray;
 }
