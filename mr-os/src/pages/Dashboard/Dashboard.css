@@ -1,5 +1,6 @@
 .dashboard {
   display: flex;
+  position: relative;
 }
 
 .menu {

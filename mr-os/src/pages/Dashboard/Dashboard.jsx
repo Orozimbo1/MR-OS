@@ -5,41 +5,21 @@ import { Routes, Route, Link, Outlet } from 'react-router-dom'
 // Pages
 import { Home, Login } from '../index'
 
+// Components
+import { SideMenu } from '../../components'
+
+const array = [
+  {name: 'Minhas Ordens', path: '/dashboard'},
+  {name: 'Faturamento', path: '/dashboard/serv'}
+]
+
 const Dashboard = () => {
   return (
     <div className='dashboard'>
-      {/* Isso vai ser um comoponente */}
-       <div className='menu'>
-        <ul>
-          <li>
-            <Link to='/'>
-              Ordens de Serviço
-            </Link>
-          </li>
-          <li>
-            <Link to='/'>
-              Faturamento
-            </Link>
-          </li>
-          <li>
-            <Link to='/'>
-              O que você quiser
-            </Link>
-          </li>
-          <li>
-            <Link to='/'>
-              Outra coisa que voce quiser
-            </Link>
-          </li>
-        </ul>
-       </div>
-       <div className='pages'>
-        <Routes>
-          {/* Subistituir por outras rotas são só demonstrativas */}
-          <Route path='/' element={<Home />} /> 
-        </Routes>
+      <SideMenu array={array} direction={'left'} />
+      <div className='pages'>
         <Outlet />
-       </div>
+      </div>
     </div>
   )
 }
