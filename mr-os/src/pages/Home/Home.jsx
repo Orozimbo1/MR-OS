@@ -21,7 +21,7 @@ const Home = () => {
   }, [uid])
 
   return (
-    <div>
+    <div className='container'>
       {loading && <p>Carregando...</p>}
       {orders && orders.map((order) => (
         <CardOrderService 

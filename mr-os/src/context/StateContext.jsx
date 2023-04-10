@@ -3,12 +3,21 @@ import { createContext, useContext, useState } from "react";
 const Context = createContext()
 
 export const StateContext = ({ children }) => {
+  const [showNavMenu, setShowNavMenu] = useState(false)
   const [showMenu, setShowMenu] = useState(false)
+
+  const reset = () => {
+    setShowMenu(false)
+    setShowNavMenu(false)
+  }
 
   return (
     <Context.Provider value={{
       showMenu, 
-      setShowMenu
+      setShowMenu,
+      showNavMenu, 
+      setShowNavMenu,
+      reset
     }}>
       {children}
     </Context.Provider>

@@ -37,7 +37,7 @@ const Register = () => {
   }, [dispatch])
 
   return (
-    <div id='auth'>
+    <div id='auth' className='container'>
       <h2>Cadastre-se</h2>
       <form onSubmit={handleSubmit}>
         <label>

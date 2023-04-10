@@ -36,7 +36,7 @@ const Login = () => {
   }, [dispatch])
 
   return (
-    <div id='auth'>
+    <div id='auth' className='container'>
       <h2><span>Login</span></h2>
       <form onSubmit={handleSubmit}>
         <label>

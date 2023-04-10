@@ -1,22 +1,30 @@
 import './Dashboard.css'
 
-import { Routes, Route, Link, Outlet } from 'react-router-dom'
+import { Outlet } from 'react-router-dom'
 
-// Pages
-import { Home, Login } from '../index'
+// Icons
+import { RxHamburgerMenu } from 'react-icons/rx'
 
 // Components
 import { SideMenu } from '../../components'
 
+// Context
+import { useStateContext } from '../../context/StateContext'
+
 const array = [
   {name: 'Minhas Ordens', path: '/dashboard'},
-  {name: 'Faturamento', path: '/dashboard/serv'}
+  {name: 'Financeiro', path: '/dashboard/financial'}
 ]
 
 const Dashboard = () => {
+  const { showMenu, setShowMenu } = useStateContext()
+
   return (
     <div className='dashboard'>
-      <SideMenu array={array} direction={'left'} />
+      <div className='topics'>
+        <RxHamburgerMenu onClick={() => setShowMenu(true)}/>
+      </div>
+      {showMenu && <SideMenu array={array} direction={'left'} />}
       <div className='pages'>
         <Outlet />
       </div>

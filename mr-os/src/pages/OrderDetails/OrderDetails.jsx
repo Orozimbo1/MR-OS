@@ -27,7 +27,7 @@ const Order = () => {
   {loading && <p>Carregando...</p>}
 
   return (
-    <div>
+    <div className='container'>
       {order && (
         <div>
           <h2>Nome: {order.name}</h2>

@@ -19,7 +19,7 @@ import { useStateContext } from '../../context/StateContext'
 import SideMenu from '../SideMenu/SideMenu'
 
 const Navbar = () => {
-  const { showMenu, setShowMenu } = useStateContext()
+  const { showNavMenu, setShowNavMenu } = useStateContext()
 
   const { auth } = useAuth()
 
@@ -45,28 +45,13 @@ const Navbar = () => {
         <span>MR Os</span>
       </Link>
       <ul id='nav-links'>
-        {/* <li>
-          <NavLink to='/'>
-            <BsHouse />
-          </NavLink>
-        </li>
-        <li>
-          <NavLink to='/dashboard'>
-            <AiOutlineDashboard />
-          </NavLink>
-        </li>
-        <li>
-          <NavLink to='/order-service'>
-            <BiTask />
-          </NavLink>
-        </li> */}
         {auth && (
           <li>
             <span onClick={handleLogout}>Sair</span>
           </li>
         )}
-        {showMenu && <SideMenu array={array} direction={'rigth'} /> }
-        <li onClick={() => setShowMenu(true)}>
+        {showNavMenu && <SideMenu array={array} direction={'rigth'} /> }
+        <li onClick={() => setShowNavMenu(true)}>
           <RxHamburgerMenu />
         </li>
       </ul>

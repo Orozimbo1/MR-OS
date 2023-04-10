@@ -29,10 +29,6 @@ h3 {
   font-weight: bold;
 }
 
-.active {
-  border-bottom: 2px solid black;
-}
-
 ul {
   list-style: none;
 }
