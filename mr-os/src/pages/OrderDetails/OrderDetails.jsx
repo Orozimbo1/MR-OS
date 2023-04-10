@@ -1,4 +1,4 @@
-import './Order.css'
+import './OrderDetails.css'
 
 // Hooks
 import { useEffect } from 'react'

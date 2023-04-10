@@ -7,7 +7,7 @@ import './App.css'
 import { Navbar, Footer, SideMenu } from './components'
 
 // Pages
-import { Home, ServiceOrder, Dashboard, Login, Register, Order } from './pages'
+import { Home, ServiceOrder, Dashboard, Login, Register, OrderDetails } from './pages'
 
 // Hooks
 import { useAuth } from './hooks'
@@ -28,7 +28,7 @@ function App() {
           <Route path='/' element={auth ? <Home /> : <Navigate to='/login' />} /> 
           <Route path='/dashboard' element={auth ? <Dashboard /> : <Navigate to='/login' />} />
           <Route path='/order-service' element={auth ? <ServiceOrder /> : <Navigate to='/login' />} /> 
-          <Route path='/order-service/:id' element={auth ? <Order /> : <Navigate to='/login' />} /> 
+          <Route path='/order-service/:id' element={auth ? <OrderDetails /> : <Navigate to='/login' />} /> 
           <Route path='/login' element={!auth ? <Login /> : <Navigate to='/' />} /> 
           <Route path='/register' element={!auth ? <Register /> : <Navigate to='/' />} /> 
         </Routes>
