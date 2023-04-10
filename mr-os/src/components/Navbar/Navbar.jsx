@@ -1,7 +1,7 @@
 import './Navbar.css'
 
 // Components
-import { Link, NavLink } from 'react-router-dom'
+import { Link} from 'react-router-dom'
 
 // Hooks
 import { useAuth } from '../../hooks'
@@ -9,14 +9,18 @@ import { useSelector, useDispatch } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 
 // Icons
-import { AiOutlineDashboard } from 'react-icons/ai'
-import { BsHouse, BsPerson } from 'react-icons/bs'
-import { BiTask } from 'react-icons/bi'
+import { RxHamburgerMenu } from 'react-icons/rx'
 
 // Redux
 import { logout, reset } from '../../slices/authSlice'
 
+// Context
+import { useStateContext } from '../../context/StateContext'
+import SideMenu from '../SideMenu/SideMenu'
+
 const Navbar = () => {
+  const { showMenu, setShowMenu } = useStateContext()
+
   const { auth } = useAuth()
 
   const navigate = useNavigate()
@@ -30,13 +34,18 @@ const Navbar = () => {
     navigate('/login')
   }
 
+  const array = [
+    {name: 'Dashboard', path: '/dashboard'},
+    {name: 'Nova ordem de serviço', path: '/order-service'},
+  ]
+
   return (
     <nav id='nav'>
       <Link to='/'>
         <span>MR Os</span>
       </Link>
       <ul id='nav-links'>
-        <li>
+        {/* <li>
           <NavLink to='/'>
             <BsHouse />
           </NavLink>
@@ -50,19 +59,16 @@ const Navbar = () => {
           <NavLink to='/order-service'>
             <BiTask />
           </NavLink>
-        </li>
-        {!auth && (
-          <li>
-            <NavLink to='/login'>
-              <BsPerson />
-            </NavLink>
-          </li>
-        )}
+        </li> */}
         {auth && (
           <li>
             <span onClick={handleLogout}>Sair</span>
           </li>
         )}
+        {showMenu && <SideMenu array={array} direction={'rigth'} /> }
+        <li onClick={() => setShowMenu(true)}>
+          <RxHamburgerMenu />
+        </li>
       </ul>
     </nav>
   )
