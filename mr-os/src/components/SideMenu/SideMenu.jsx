@@ -6,14 +6,14 @@ import { Link } from 'react-router-dom'
 import { useStateContext } from '../../context/StateContext'
 
 const SideMenu = ({ array, direction }) => {
-  const { setShowNavMenu, setShowMenu, reset } = useStateContext()
+  const { reset } = useStateContext()
 
   return (
     <div>
       <div className='blackout' onClick={() => reset()}></div>
       <div className={`side-menu ${direction}`}>
         <div className='back'>
-          <span className={direction === 'rigth' ? 'left' : 'rigth'}>Voltar</span>
+          <span className={direction === 'rigth' ? 'left' : 'rigth'} onClick={() => reset()}>Voltar</span>
         </div>  
         <ul >
         {array && array.map((item, i) => (

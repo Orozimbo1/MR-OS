@@ -42,6 +42,10 @@
   cursor: pointer;
 }
 
+.side-menu ul li a {
+  width: 100%;
+}
+
 .rigth {
   position: absolute;
   right: 0;

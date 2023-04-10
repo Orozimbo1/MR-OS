@@ -4,7 +4,7 @@ import { BrowserRouter, Routes, Route, Navigate, Outlet } from 'react-router-dom
 import './App.css'
 
 // Components
-import { Navbar, Footer, Financial } from './components'
+import { Navbar, Footer, Financial, Orders } from './components'
 
 // Pages
 import { Home, ServiceOrder, Dashboard, Login, Register, OrderDetails } from './pages'
@@ -33,7 +33,7 @@ function App() {
           <Route path='/login' element={!auth ? <Login /> : <Navigate to='/' />} /> 
           <Route path='/register' element={!auth ? <Register /> : <Navigate to='/' />} /> 
           <Route element={auth ? <Dashboard /> : <Navigate to='/login' />} >
-            <Route path='/dashboard' element={auth ? <Home /> : <Navigate to='/login' />} />
+            <Route path='/dashboard' element={auth ? <Orders /> : <Navigate to='/login' />} />
             <Route path='/dashboard/financial' element={auth ? <Financial /> : <Navigate to='/login' />} />
             <Route path='/dashboard/login' element={auth ? <Login /> : <Navigate to='/login' />} />
           </Route>
