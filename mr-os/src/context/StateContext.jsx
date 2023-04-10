@@ -6,6 +6,8 @@ export const StateContext = ({ children }) => {
   const [showNavMenu, setShowNavMenu] = useState(false)
   const [showMenu, setShowMenu] = useState(false)
 
+  const arrayDevices = []
+
   const reset = () => {
     setShowMenu(false)
     setShowNavMenu(false)
@@ -17,7 +19,8 @@ export const StateContext = ({ children }) => {
       setShowMenu,
       showNavMenu, 
       setShowNavMenu,
-      reset
+      reset,
+      arrayDevices
     }}>
       {children}
     </Context.Provider>

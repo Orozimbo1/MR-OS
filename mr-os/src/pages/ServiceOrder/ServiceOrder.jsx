@@ -10,11 +10,16 @@ import { Link } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
 
 // Redux
-import { newOrder, reset } from '../../slices/orderSlice'
+import { newOrder } from '../../slices/orderSlice'
+
+// Context
+import { useStateContext } from '../../context/StateContext'
 
 const ServiceOrder = () => {
   const { loading, error } = useSelector((state) => state.order)
   const { user } = useSelector((state) => state.auth)
+
+  const { arrayDevices } = useStateContext()
 
   const dispatch = useDispatch()
 
@@ -28,7 +33,7 @@ const ServiceOrder = () => {
     switch (action.type) {
       case 'ADD':
         const newDevice = {
-          id: Math.random()
+          id: Math.floor(Math.random() * 1000000)
         }
 
         return [...state, newDevice]
@@ -55,16 +60,17 @@ const ServiceOrder = () => {
   const handleSubmit = (e) => {
     e.preventDefault()
 
-    const serviceOrder = {
-      name,
-      phoneNumber,
-      address,
-      userId: user.uid,
-      createdBy: user.displayName
-    }
+    // const serviceOrder = {
+    //   name,
+    //   phoneNumber,
+    //   address,
+    //   userId: user.uid,
+    //   createdBy: user.displayName
+    // }
 
-    dispatch(newOrder(serviceOrder))
-    // console.log(serviceOrder)
+    // dispatch(newOrder(serviceOrder))
+    devices.map((device) => arrayDevices.push(device))
+    console.log(arrayDevices)
   }
 
   return (
