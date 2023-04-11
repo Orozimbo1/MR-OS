@@ -2,12 +2,10 @@
 #auth {
     background-color:#fff;
     width: 40%;
-    margin: 10px auto;
-    /* border-radius: 10px; */
+    height: 80vh;
+    /* margin: 10px auto; */
     box-shadow: 0px 2px 5px gray;
     text-align: center;
-    flex-direction: column;
-    justify-content: flex-start;
 }
 
 #auth h2 {
@@ -25,8 +23,8 @@
 
 #imagem {
     width: 60%;
+    height: 80vh;
     background-color: transparent;
-    margin: 10px 0px;
+    /* margin: 10px 0px; */
     box-shadow: 2px 2px 5px gray;
-
 }

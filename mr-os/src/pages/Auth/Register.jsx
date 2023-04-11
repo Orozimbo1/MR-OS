@@ -39,43 +39,42 @@ const Register = () => {
   return (
     <div className='container'>
         <div id='auth'>
-        <h2>Cadastre-se</h2>
-        <form onSubmit={handleSubmit}>
-          <label>
-            <span>Nome:</span>
-            <input 
-              type="text" 
-              placeholder='Digite seu nome'
-              onChange={(e) => setDisplayName(e.target.value)}
-              value={displayName}
-            />
-          </label>
-          <label>
-            <span>Email:</span>
-            <input 
-              type="email" 
-              placeholder='Digite seu email'
-              onChange={(e) => setEmail(e.target.value)}
-              value={email}
-            />
-          </label>
-          <label>
-            <span>Senha:</span>
-            <input 
-              type="password" 
-              placeholder='Digite sua senha'
-              onChange={(e) => setPassword(e.target.value)}
-              value={password}
-            />
-          </label>
-          {!loading && <input type="submit" value="Cadastrar" />}
-          {loading && <input type="submit" value="Aguarde.." disabled />}
-          {error && <Message msg={error} type='error' />}
-        </form>
-        <p>Já tem conta? <Link to='/login'>Clique aqui</Link> </p>
+          <h2>Cadastre-se</h2>
+          <form onSubmit={handleSubmit}>
+            <label>
+              <span>Nome:</span>
+              <input 
+                type="text" 
+                placeholder='Digite seu nome'
+                onChange={(e) => setDisplayName(e.target.value)}
+                value={displayName}
+              />
+            </label>
+            <label>
+              <span>Email:</span>
+              <input 
+                type="email" 
+                placeholder='Digite seu email'
+                onChange={(e) => setEmail(e.target.value)}
+                value={email}
+              />
+            </label>
+            <label>
+              <span>Senha:</span>
+              <input 
+                type="password" 
+                placeholder='Digite sua senha'
+                onChange={(e) => setPassword(e.target.value)}
+                value={password}
+              />
+            </label>
+            {!loading && <input type="submit" value="Cadastrar" />}
+            {loading && <input type="submit" value="Aguarde.." disabled />}
+            {error && <Message msg={error} type='error' />}
+          </form>
+          <p>Já tem conta? <Link to='/login'>Clique aqui</Link> </p>
       </div>
       <div id='imagem'>
-
       </div>
     </div>
    
