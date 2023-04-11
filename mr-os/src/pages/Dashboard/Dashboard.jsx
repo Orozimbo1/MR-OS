@@ -17,7 +17,7 @@ const array = [
 ]
 
 const Dashboard = () => {
-  const { showMenu, setShowMenu } = useStateContext()
+  const { showMenu, setShowMenu } = useStateContext(true)
 
   return (
     <div className='dashboard'>

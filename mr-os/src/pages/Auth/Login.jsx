@@ -36,7 +36,8 @@ const Login = () => {
   }, [dispatch])
 
   return (
-    <div id='auth' className='container'>
+    <div className='container'>
+      <div id='auth'>
       <h2><span>Login</span></h2>
       <form onSubmit={handleSubmit}>
         <label>
@@ -63,6 +64,11 @@ const Login = () => {
       </form>
       <p>Não tem conta? <Link to='/register'>Clique aqui</Link> </p>
     </div>
+      <div id='imagem'>
+
+      </div>
+    </div>
+    
   )
 }
 
