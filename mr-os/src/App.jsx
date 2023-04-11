@@ -25,7 +25,7 @@ function App() {
   return (
     <BrowserRouter>
       <StateContext>
-        <Navbar />
+        {auth && <Navbar />}
         <Routes>
           <Route path='/' element={auth ? <Home /> : <Navigate to='/login' />} /> 
           <Route path='/order-service' element={auth ? <ServiceOrder /> : <Navigate to='/login' />} /> 
@@ -39,7 +39,7 @@ function App() {
           </Route>
         </Routes>
         <Outlet />
-        <Footer />
+        {auth && <Footer />}
       </StateContext>
     </BrowserRouter>
   )
