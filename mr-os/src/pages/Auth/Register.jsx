@@ -37,7 +37,7 @@ const Register = () => {
   }, [dispatch])
 
   return (
-    <div className='ventania'>
+    <div className='formulario'>
         <div id='auth'>
           <h2>Cadastre-se</h2>
           <form onSubmit={handleSubmit}>

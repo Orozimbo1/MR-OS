@@ -36,7 +36,7 @@ const Login = () => {
   }, [dispatch])
 
   return (
-    <div className='ventania'>
+    <div className='formulario'>
       <div id='auth'>
       <h2><span>Login</span></h2>
       <form onSubmit={handleSubmit}>
