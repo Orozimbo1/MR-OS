@@ -30,10 +30,21 @@
     color: #878787;
 }
 
-#imagem {
+.imagem {
     width: 60%;
     height: 80vh;
     background-color: transparent;
     /* margin: 10px 0px; */
     box-shadow: 2px 2px 5px gray;
+}
+
+@media screen and (max-width:400px){
+    #auth{
+        width: 100vh;
+    }
+
+    .imagem {
+        display: none;
+    }
+    
 }

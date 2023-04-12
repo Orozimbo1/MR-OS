@@ -74,7 +74,7 @@ const Register = () => {
           </form>
           <p>Já tem conta? <Link to='/login'>Clique aqui</Link> </p>
       </div>
-      <div id='imagem'>
+      <div className='imagem'>
       </div>
     </div>
    

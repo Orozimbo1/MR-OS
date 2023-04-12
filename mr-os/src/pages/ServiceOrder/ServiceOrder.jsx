@@ -74,16 +74,16 @@ const ServiceOrder = () => {
   }
 
   return (
-    <div className='container'>
+    <div>
       <h2 className='w-100 text-center sm:text-sm md:text-3xl lg:text-3xl'>Nova ordem de serviço</h2>
-      <form onSubmit={handleSubmit} className='w-100 sm:w-30  md:w-12/12  lg:w-100 '>
+      <form onSubmit={handleSubmit} className='w-100 sm:w-12/12 md:w-12/12'>
           <label>
             <span>Nome:</span> 
             <input 
               type="text" 
               placeholder='Nome do cliente'
               onChange={(e) => setName(e.target.value)}
-              value={name} 
+              value={name}
             />
           </label>
           <label>

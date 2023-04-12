@@ -39,3 +39,10 @@ textarea{
 .trash:hover {
     color: #f06262;
 }
+
+@media screen and (max-width:400px){
+    .tec-data label {
+        width: 100%;
+        flex-direction: column;
+    }
+}
