@@ -1,5 +1,5 @@
 import './ServiceOrder.css'
-import { DeviceData } from '../../components'
+import { DeviceData, ModalDevice } from '../../components'
 
 // Icons
 import { BsPlus } from 'react-icons/bs'
@@ -96,56 +96,57 @@ const ServiceOrder = () => {
   }, [arrayDevices])
 
   return (
-    <div>
-      <h2 className='w-100 text-center sm:text-sm md:text-3xl lg:text-3xl'>Nova ordem de serviço</h2>
-      <form onSubmit={handleSubmit} className='w-100 sm:w-12/12 md:w-12/12'>
-          <label>
-            <span>Nome:</span> 
-            <input 
-              type="text" 
-              placeholder='Nome do cliente'
-              onChange={(e) => setName(e.target.value)}
-              value={name}
-            />
-          </label>
-          <label>
-            <span>Telefone:</span>
-            <input 
-              type="tel" 
-              placeholder='(XX)X XXXX-XXXX'
-              onChange={(e) => setPhoneNumber(e.target.value)}
-              value={phoneNumber} 
-            />
-          </label>
-          <label>
-            <span>Endereço:</span>
-            <input 
-              type="text" 
-              placeholder='Ex: Av Brasil'
-              onChange={(e) => setAddress(e.target.value)}
-              value={address} 
-            />
-          </label>
-          {devices && devices.map((device) =>(
-              <div key={device.id}>
-                <DeviceData handleDelete={() => removeDevice(device.id)} device={device} />
-              </div>
-            )
-          )}
-          <div className='new-section'>
-            <button onClick={handleNewDevice}>
-              <BsPlus />
-              Add dispositivo
-            </button>
-          </div>
-          <div className='finish-or-cancel w-100 sm:align-middle md:align-middle lg:align-middle'>
-            <Link className='cancel-btn' to='/'>Cancelar</Link>
-            {!loading && <input type="submit" value="Finalizar" />}
-            {loading && <input type="submit" value="Aguarde.." disabled />}
-            {error && <Message msg={error} type='error' />}
-          </div>
-      </form>
-    </div>
+    <ModalDevice />
+    // <div>
+    //   <h2 className='w-100 text-center sm:text-sm md:text-3xl lg:text-3xl'>Nova ordem de serviço</h2>
+    //   <form onSubmit={handleSubmit} className='w-100 sm:w-12/12 md:w-12/12'>
+    //       <label>
+    //         <span>Nome:</span> 
+    //         <input 
+    //           type="text" 
+    //           placeholder='Nome do cliente'
+    //           onChange={(e) => setName(e.target.value)}
+    //           value={name}
+    //         />
+    //       </label>
+    //       <label>
+    //         <span>Telefone:</span>
+    //         <input 
+    //           type="tel" 
+    //           placeholder='(XX)X XXXX-XXXX'
+    //           onChange={(e) => setPhoneNumber(e.target.value)}
+    //           value={phoneNumber} 
+    //         />
+    //       </label>
+    //       <label>
+    //         <span>Endereço:</span>
+    //         <input 
+    //           type="text" 
+    //           placeholder='Ex: Av Brasil'
+    //           onChange={(e) => setAddress(e.target.value)}
+    //           value={address} 
+    //         />
+    //       </label>
+    //       {devices && devices.map((device) =>(
+    //           <div key={device.id}>
+    //             <DeviceData handleDelete={() => removeDevice(device.id)} device={device} />
+    //           </div>
+    //         )
+    //       )}
+    //       <div className='new-section'>
+    //         <button onClick={handleNewDevice}>
+    //           <BsPlus />
+    //           Add dispositivo
+    //         </button>
+    //       </div>
+    //       <div className='finish-or-cancel w-100 sm:align-middle md:align-middle lg:align-middle'>
+    //         <Link className='cancel-btn' to='/'>Cancelar</Link>
+    //         {!loading && <input type="submit" value="Finalizar" />}
+    //         {loading && <input type="submit" value="Aguarde.." disabled />}
+    //         {error && <Message msg={error} type='error' />}
+    //       </div>
+    //   </form>
+    // </div>
   )
 }
 

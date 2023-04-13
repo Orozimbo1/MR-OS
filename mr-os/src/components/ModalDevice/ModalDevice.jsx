@@ -9,45 +9,41 @@ const ModalDevice = () => {
   const [problemDesc, setProblemDesc] = useState('')
 
   return (
-    <>
-      <div></div>
-      <form id='data' onBlur={formatObj}>
-        <BsTrash className='trash' onClick={handleDelete}/>
+    <div className='modal-container'>
+      <div className='blackout'></div>
+      <form className='modal'>
+        {/* <BsTrash className='trash' onClick={handleDelete}/> */}
         <div className="tec-data">
             <label>
               <span>Tipo do dispositvo:</span> 
               <input 
                 type="text" placeholder='Ex: Celular, televisão, computador' 
-                // onChange={(e) => setDeviceType(e.target.value)}
-                // value={deviceType}
-                onBlur={(e) => setDeviceType(e.target.value)}
+                onChange={(e) => setDeviceType(e.target.value)}
+                value={deviceType}
               />
             </label>
             <label>
               <span>Marca:</span>
               <input 
                 type="text" placeholder='Ex: LG, Samsung' 
-                // onChange={(e) => setBrand(e.target.value)}
-                // value={brand}
-                onBlur={(e) => setBrand(e.target.value)}
+                onChange={(e) => setBrand(e.target.value)}
+                value={brand}
               />
             </label>
             <label>
               <span>Modelo:</span>
               <input 
                 type="text" placeholder='Ex: Smart Tv L180' 
-                // onChange={(e) => setModel(e.target.value)}
-                // value={model}
-                onBlur={(e) => setModel(e.target.value)}
+                onChange={(e) => setModel(e.target.value)}
+                value={model}
               />
             </label>
             <label>
               <span>Cor:</span>
               <input 
                 type="text" placeholder='Cor do dispositivo' 
-                // onChange={(e) => setColor(e.target.value)}
-                // value={color}
-                onBlur={(e) => setColor(e.target.value)}
+                onChange={(e) => setColor(e.target.value)}
+                value={color}
               />
             </label>
           </div>
@@ -55,14 +51,13 @@ const ModalDevice = () => {
             <span>Descrição do problema:</span>
             <textarea 
               placeholder='Descreva o problema do dispositivo'
-              // onChange={(e) => setProblemDesc(e.target.value)}
-              // value={problemDesc}
-              onBlur={(e) => setProblemDesc(e.target.value)}
+              onChange={(e) => setProblemDesc(e.target.value)}
+              value={problemDesc}
             >
             </textarea>
           </label>
       </form>
-    </>
+    </div>
   )
 }
 
