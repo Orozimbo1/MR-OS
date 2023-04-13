@@ -1,51 +1,17 @@
-import './Device.css'
-
+import './ModalDevice.css'
 import { useState } from 'react'
-import { useSelector, useDispatch } from 'react-redux'
 
-// Icons
-import { BsTrash } from 'react-icons/bs'
-
-function DeviceData({ handleDelete, device }) {
-  const { arrayDevices, } = useSelector((state) => state.order)
-
-  const dispatch = useDispatch()
-
+const ModalDevice = () => {
   const [deviceType, setDeviceType] = useState('')
   const [brand, setBrand] = useState('')
   const [model, setModel] = useState('')
   const [color, setColor] = useState('')
   const [problemDesc, setProblemDesc] = useState('')
 
-  const formatObj = () => {
-
-    if(!deviceType) {
-      return
-    } else if (!brand) {
-      return
-    } else if (!model) {
-      return
-    } else if (!color) {
-      return
-    } else if (problemDesc) {
-      return
-    } else {
-      device = {
-        ...device,
-        deviceType,
-        brand,
-        model,
-        color,
-        problemDesc
-      }
-    
-      dispatch(addDevice(device))
-      console.log(arrayDevices)
-    }
-  }
-
   return (
-      <div id='data' onBlur={formatObj}>
+    <>
+      <div></div>
+      <form id='data' onBlur={formatObj}>
         <BsTrash className='trash' onClick={handleDelete}/>
         <div className="tec-data">
             <label>
@@ -95,8 +61,9 @@ function DeviceData({ handleDelete, device }) {
             >
             </textarea>
           </label>
-      </div>
+      </form>
+    </>
   )
 }
 
-export default DeviceData
+export default ModalDevice
