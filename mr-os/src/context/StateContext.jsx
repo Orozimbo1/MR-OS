@@ -5,6 +5,7 @@ const Context = createContext()
 export const StateContext = ({ children }) => {
   const [showNavMenu, setShowNavMenu] = useState(false)
   const [showMenu, setShowMenu] = useState(false)
+  const [showModalDevice, setShowModalDevice] = useState(false)
 
   let arrayDevices = []
 
@@ -20,6 +21,8 @@ export const StateContext = ({ children }) => {
       showNavMenu, 
       setShowNavMenu,
       reset,
+      showModalDevice,
+      setShowModalDevice,
       arrayDevices
     }}>
       {children}

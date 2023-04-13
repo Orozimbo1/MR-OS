@@ -1,7 +1,11 @@
 import './ModalDevice.css'
 import { useState } from 'react'
 
+import { useStateContext } from '../../context/StateContext'
+
 const ModalDevice = () => {
+  const { setShowModalDevice } = useStateContext()
+
   const [deviceType, setDeviceType] = useState('')
   const [brand, setBrand] = useState('')
   const [model, setModel] = useState('')
@@ -10,7 +14,7 @@ const ModalDevice = () => {
 
   return (
     <div className='modal-container'>
-      <div className='blackout'></div>
+      <div className='blackout' onClick={() => setShowModalDevice(false)}></div>
       <form className='modal'>
         {/* <BsTrash className='trash' onClick={handleDelete}/> */}
         <div className="tec-data">
