@@ -6,7 +6,7 @@ export const StateContext = ({ children }) => {
   const [showNavMenu, setShowNavMenu] = useState(false)
   const [showMenu, setShowMenu] = useState(false)
 
-  const arrayDevices = []
+  let arrayDevices = []
 
   const reset = () => {
     setShowMenu(false)

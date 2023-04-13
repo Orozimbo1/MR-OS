@@ -5,7 +5,7 @@ import { DeviceData } from '../../components'
 import { BsPlus } from 'react-icons/bs'
 
 // Hooks
-import { useReducer, useState } from 'react'
+import { useEffect, useReducer, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
 
@@ -19,7 +19,7 @@ const ServiceOrder = () => {
   const { loading, error } = useSelector((state) => state.order)
   const { user } = useSelector((state) => state.auth)
 
-  const { arrayDevices } = useStateContext()
+  let { arrayDevices } = useStateContext()
 
   const dispatch = useDispatch()
 
@@ -27,7 +27,7 @@ const ServiceOrder = () => {
   const [phoneNumber, setPhoneNumber] = useState('')
   const [address, setAddress] = useState('')
 
-  const initialDevices = []
+  const initialDevices = [{ id: Math.floor(Math.random() * 1000000) }]
 
   const deviceReducer = (state, action) => {
     switch (action.type) {
@@ -57,6 +57,19 @@ const ServiceOrder = () => {
     dispatchDevices({type: 'REMOVE', id})
   }
 
+  // const formatObj = (obj) => {
+  //   const device = {
+  //     deviceType: obj.deviceType,
+  //     brand: obj.brand,
+  //     model: obj.model,
+  //     color: obj.color,
+  //     problemDesc: obj.problemDesc
+  //   }
+  //   console.log(device)
+  // }
+
+  // formatObj(devices[0])
+
   const handleSubmit = (e) => {
     e.preventDefault()
 
@@ -67,11 +80,20 @@ const ServiceOrder = () => {
     //   userId: user.uid,
     //   createdBy: user.displayName
     // }
+    console.log(devices)
 
     // dispatch(newOrder(serviceOrder))
-    devices.map((device) => arrayDevices.push(device))
-    console.log(arrayDevices)
+    // devices.map((device) => arrayDevices.push(device))
+    // console.log(arrayDevices)
   }
+
+  // useEffect(() => {
+  //   arrayDevices = [...devices]
+  //   console.log(arrayDevices)
+  // }, [devices])
+  useEffect(() => {
+    console.log(arrayDevices)
+  }, [arrayDevices])
 
   return (
     <div>
@@ -104,12 +126,12 @@ const ServiceOrder = () => {
               value={address} 
             />
           </label>
-          {devices && devices.map((device) => (
+          {devices && devices.map((device) =>(
               <div key={device.id}>
-                <DeviceData handleDelete={() => removeDevice(device.id)} />
+                <DeviceData handleDelete={() => removeDevice(device.id)} device={device} />
               </div>
-            ))
-          }
+            )
+          )}
           <div className='new-section'>
             <button onClick={handleNewDevice}>
               <BsPlus />
