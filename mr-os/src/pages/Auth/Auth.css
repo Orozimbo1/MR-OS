@@ -38,9 +38,10 @@
     box-shadow: 2px 2px 5px gray;
 }
 
-@media screen and (max-width:400px){
+@media screen and (max-width:800px){
     #auth{
         width: 100vh;
+        padding: auto;
     }
 
     .imagem {
