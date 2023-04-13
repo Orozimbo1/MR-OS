@@ -3,7 +3,7 @@ import { useState } from 'react'
 
 import { useStateContext } from '../../context/StateContext'
 
-const ModalDevice = () => {
+const ModalDevice = ({ handleNewDevice }) => {
   const { setShowModalDevice } = useStateContext()
 
   const [deviceType, setDeviceType] = useState('')
@@ -12,11 +12,25 @@ const ModalDevice = () => {
   const [color, setColor] = useState('')
   const [problemDesc, setProblemDesc] = useState('')
 
+  const handleSubmit = (e) => {
+    e.preventDefault()
+
+    const device = {
+      deviceType,
+      brand,
+      model,
+      color,
+      problemDesc
+    }
+
+    handleNewDevice({type: 'ADD-DEVICE', device})
+    setShowModalDevice(false)
+  }
+
   return (
     <div className='modal-container'>
       <div className='blackout' onClick={() => setShowModalDevice(false)}></div>
-      <form className='modal'>
-        {/* <BsTrash className='trash' onClick={handleDelete}/> */}
+      <div className='modal'>
         <div className="tec-data">
             <label>
               <span>Tipo do dispositvo:</span> 
@@ -60,7 +74,11 @@ const ModalDevice = () => {
             >
             </textarea>
           </label>
-      </form>
+          <div className='finish-or-cancel'>
+            <button className='cancel-btn' onClick={() => setShowModalDevice(false)}>Cancelar</button>
+            <input type="submit" value="Adicionar" onClick={handleSubmit}/>
+          </div>
+      </div>
     </div>
   )
 }

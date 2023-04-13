@@ -27,13 +27,18 @@ const ServiceOrder = () => {
   const [phoneNumber, setPhoneNumber] = useState('')
   const [address, setAddress] = useState('')
 
-  const initialDevices = [{ id: Math.floor(Math.random() * 1000000) }]
+  const initialDevices = []
 
   const deviceReducer = (state, action) => {
     switch (action.type) {
-      case 'ADD':
+      case 'ADD-DEVICE':
         const newDevice = {
-          id: Math.floor(Math.random() * 1000000)
+          id: Math.floor(Math.random() * 1000000),
+          deviceType: action.device.deviceType,
+          brand: action.device.brand,
+          model: action.device.model,
+          color: action.device.color,
+          problemDesc: action.device.problemDesc
         }
 
         return [...state, newDevice]
@@ -46,14 +51,7 @@ const ServiceOrder = () => {
 
   const [devices, dispatchDevices] = useReducer(deviceReducer, initialDevices)
 
-  const handleNewDevice = (e) => {
-    e.preventDefault()
-
-    dispatchDevices({type: 'ADD'})
-  }
-
   const removeDevice = (id) => {
-    
     dispatchDevices({type: 'REMOVE', id})
   }
 
@@ -69,6 +67,10 @@ const ServiceOrder = () => {
   // }
 
   // formatObj(devices[0])
+
+  useEffect(() => {
+    console.log(devices)
+  }, [devices])
 
   const handleSubmit = (e) => {
     e.preventDefault()
@@ -87,17 +89,9 @@ const ServiceOrder = () => {
     // console.log(arrayDevices)
   }
 
-  // useEffect(() => {
-  //   arrayDevices = [...devices]
-  //   console.log(arrayDevices)
-  // }, [devices])
-  // useEffect(() => {
-  //   console.log(arrayDevices)
-  // }, [arrayDevices])
-
   return (
     <div>
-      {showModalDevice && <ModalDevice />}
+      {showModalDevice && <ModalDevice handleNewDevice={dispatchDevices} />}
       <h2 className='w-100 text-center sm:text-sm md:text-3xl lg:text-3xl'>Nova ordem de serviço</h2>
       <form onSubmit={handleSubmit} className='w-100 sm:w-12/12 md:w-12/12'>
           <label>
