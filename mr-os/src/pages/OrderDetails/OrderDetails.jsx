@@ -7,6 +7,7 @@ import { useParams, Link } from 'react-router-dom'
 
 // Redux
 import { getServiceOrder } from '../../slices/orderSlice'
+import { DeviceData } from '../../components'
 
 const Order = () => {
   const { order, loading } = useSelector((state) => state.order)
@@ -14,7 +15,9 @@ const Order = () => {
   const dispatch = useDispatch()
 
   const { id } = useParams()
-
+  
+  let status
+  
   useEffect(() => {
     dispatch(getServiceOrder(id))
   },[id])
@@ -22,6 +25,8 @@ const Order = () => {
   const date = order.createdAt && order.createdAt.toDate() && order.createdAt.toDate().toLocaleString('pt-BR', { timezone: 'UTC' })
   
   {loading && <p>Carregando...</p>}
+
+
 
   return (
     <div className='container'>
@@ -31,16 +36,17 @@ const Order = () => {
           <h3>Endereço: {order.address}</h3>
           <h3>Telefone: {order.phoneNumber}</h3>
           <h3>Data de criação: {date}</h3>
+          <div className='status-container'>Status: 
+            <div className={`status ${order.status.status}`}></div> 
+            {order.status.text}
+          </div>
           <h3>Dispositivos:</h3>
-          {order.devices.map((device,i) => (
+          {order.devices && order.devices.map((device,i) => (
             <div key={i}>
-              <br />
-              <h3>{device.deviceType}</h3>
-              <p>{device.brand}</p>
-              <p>{device.model}</p>
-              <p>{device.color}</p>
-              <p>{device.problemDesc}</p>
-              <hr />
+              <DeviceData 
+                showActions={false}
+                device={device} 
+              />
             </div>
           ))}
           <Link>Gerar PDF</Link>

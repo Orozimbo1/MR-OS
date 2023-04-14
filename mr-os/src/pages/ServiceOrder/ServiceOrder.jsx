@@ -97,7 +97,8 @@ const ServiceOrder = () => {
       devices,
       address,
       userId: user.uid,
-      createdBy: user.displayName
+      createdBy: user.displayName,
+      status: {status: 'pending', text: 'Em andamento'}
     }
 
     dispatch(newOrder(serviceOrder))
@@ -146,6 +147,7 @@ const ServiceOrder = () => {
           {devices && devices.map((device) =>(
               <div key={device.id}>
                 <DeviceData 
+                  showActions={true}
                   handleDelete={() => removeDevice(device.id)} 
                   device={device} 
                   setDevice={setDevice}

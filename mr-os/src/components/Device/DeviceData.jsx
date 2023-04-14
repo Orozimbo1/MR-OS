@@ -6,7 +6,7 @@ import { BsTrash, BsPenFill } from 'react-icons/bs'
 // Context
 import { useStateContext } from '../../context/StateContext'
 
-function DeviceData({ handleDelete, device, setDevice }) {
+function DeviceData({ showActions, handleDelete, device, setDevice }) {
   const { setShowModalDevice } = useStateContext()
 
   const { id, deviceType, brand, model, color, problemDesc } = device
@@ -19,8 +19,12 @@ function DeviceData({ handleDelete, device, setDevice }) {
 
   return (
       <div id='data'>
-        <BsTrash className='trash' onClick={handleDelete}/>
-        <BsPenFill className='' onClick={editDevice} />
+        {showActions && (
+          <>
+            <BsTrash className='trash' onClick={handleDelete}/>
+            <BsPenFill className='' onClick={editDevice} />
+          </>
+        )}
         <div className="tec-data">
             <label>
               <span>Tipo do dispositvo:</span> 
