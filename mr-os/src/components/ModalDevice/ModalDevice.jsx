@@ -3,14 +3,18 @@ import { useState } from 'react'
 
 import { useStateContext } from '../../context/StateContext'
 
-const ModalDevice = ({ handleNewDevice }) => {
+const ModalDevice = ({ handleNewDevice, device, handleEditDevice, setDevice }) => {
   const { setShowModalDevice } = useStateContext()
 
-  const [deviceType, setDeviceType] = useState('')
-  const [brand, setBrand] = useState('')
-  const [model, setModel] = useState('')
-  const [color, setColor] = useState('')
-  const [problemDesc, setProblemDesc] = useState('')
+  const [deviceType, setDeviceType] = useState(device.deviceType || '')
+  const [brand, setBrand] = useState(device.brand || '')
+  const [model, setModel] = useState(device.model || '')
+  const [color, setColor] = useState(device.color || '')
+  const [problemDesc, setProblemDesc] = useState(device.problemDesc || '')
+
+  // if(device) {
+  //   console.log(device)
+  // }
 
   const handleSubmit = (e) => {
     e.preventDefault()
@@ -23,7 +27,21 @@ const ModalDevice = ({ handleNewDevice }) => {
       problemDesc
     }
 
-    handleNewDevice({type: 'ADD-DEVICE', device})
+    handleNewDevice({type: 'ADD-DEVICE', device: device})
+    setShowModalDevice(false)
+  }
+
+  const handleEdit = () => {
+    const deviceEdited = {
+      deviceType,
+      brand,
+      model,
+      color,
+      problemDesc
+    }
+
+    handleEditDevice({type: 'EDIT', device: deviceEdited})
+    setDevice({})
     setShowModalDevice(false)
   }
 
@@ -76,7 +94,8 @@ const ModalDevice = ({ handleNewDevice }) => {
           </label>
           <div className='finish-or-cancel'>
             <button className='cancel-btn' onClick={() => setShowModalDevice(false)}>Cancelar</button>
-            <input type="submit" value="Adicionar" onClick={handleSubmit}/>
+            {!device.id && <input type="submit" value="Adicionar" onClick={handleSubmit}/>}
+            {device.id && <input type="submit" value="Editar" onClick={handleEdit}/>}
           </div>
       </div>
     </div>

@@ -19,13 +19,14 @@ const ServiceOrder = () => {
   const { loading, error } = useSelector((state) => state.order)
   const { user } = useSelector((state) => state.auth)
 
-  let { arrayDevices, setShowModalDevice, showModalDevice } = useStateContext()
+  let { setShowModalDevice, showModalDevice } = useStateContext()
 
   const dispatch = useDispatch()
 
   const [name, setName] = useState('')
   const [phoneNumber, setPhoneNumber] = useState('')
   const [address, setAddress] = useState('')
+  const [device, setDevice] = useState({})
 
   const initialDevices = []
 
@@ -34,16 +35,22 @@ const ServiceOrder = () => {
       case 'ADD-DEVICE':
         const newDevice = {
           id: Math.floor(Math.random() * 1000000),
-          deviceType: action.device.deviceType,
-          brand: action.device.brand,
-          model: action.device.model,
-          color: action.device.color,
-          problemDesc: action.device.problemDesc
+          deviceType: action.device.device.deviceType,
+          brand: action.device.device.brand,
+          model: action.device.device.model,
+          color: action.device.device.color,
+          problemDesc: action.device.device.problemDesc
         }
 
         return [...state, newDevice]
+        // console.log(action.device.device)
       case 'REMOVE':
         return state.filter((device) => device.id !== action.id) 
+      case 'EDIT':
+        let deviceEdit = state.find((device) => device.id !== action.id)
+        deviceEdit = [...action.device.device]
+        console.log(state)
+        return
       default:
         return state 
     }
@@ -55,22 +62,23 @@ const ServiceOrder = () => {
     dispatchDevices({type: 'REMOVE', id})
   }
 
-  // const formatObj = (obj) => {
-  //   const device = {
-  //     deviceType: obj.deviceType,
-  //     brand: obj.brand,
-  //     model: obj.model,
-  //     color: obj.color,
-  //     problemDesc: obj.problemDesc
-  //   }
-  //   console.log(device)
-  // }
-
-  // formatObj(devices[0])
-
-  useEffect(() => {
+  const addDevice = (device) => {
+    dispatchDevices({type: 'ADD-DEVICE', device})
     console.log(devices)
-  }, [devices])
+  }
+
+  const editDevice = (id) => {
+    dispatchDevices({type: 'EDIT', id})
+  }
+
+  // useEffect(() => {
+  //   console.log(devices)
+  // }, [devices])
+
+  // useEffect(() => {
+  //   // setDevice({ol: 'ola'})
+  //   console.log(device)
+  // }, [])
 
   const handleSubmit = (e) => {
     e.preventDefault()
@@ -91,7 +99,13 @@ const ServiceOrder = () => {
 
   return (
     <div>
-      {showModalDevice && <ModalDevice handleNewDevice={dispatchDevices} />}
+      {showModalDevice && 
+        <ModalDevice 
+          handleNewDevice={addDevice} 
+          device={device} 
+          handleEditDevice={editDevice} 
+          setDevice={setDevice}
+      />}
       <h2 className='w-100 text-center sm:text-sm md:text-3xl lg:text-3xl'>Nova ordem de serviço</h2>
       <form onSubmit={handleSubmit} className='w-100 sm:w-12/12 md:w-12/12'>
           <label>
@@ -123,7 +137,11 @@ const ServiceOrder = () => {
           </label>
           {devices && devices.map((device) =>(
               <div key={device.id}>
-                <DeviceData handleDelete={() => removeDevice(device.id)} device={device} />
+                <DeviceData 
+                  handleDelete={() => removeDevice(device.id)} 
+                  device={device} 
+                  setDevice={setDevice}
+                  />
               </div>
             )
           )}
