@@ -3,7 +3,14 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    background-color: #C6E2FA;
-    height: 150px;
+    background-color: #fff;
+    height: 50px;
+    border-top: 1px solid #abaaaa;
     font-weight: bolder;
 }
+@media screen and (max-width:800px){
+    #footer {
+      margin-top: 50px;
+      height: fit-content;
+    }
+  }

@@ -1,11 +1,13 @@
 .card-order-service {
   padding: 20px;
-  text-align: justify;
+  width: 20%;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  border-bottom: 1px solid #aaa;
-  transition: .6s;
+  text-align: justify;
+  border: 1px solid #aaaaaa84;
+  border-radius: 3px;
+  transition: .8s;
 }
 
 .card-order-service p {
@@ -13,10 +15,20 @@
 }
 
 .card-order-service:hover {
-  background-color: rgb(184, 130, 235);
+  background-color: rgba(22, 168, 230, 0.294);
+  /* width: 120%;
+  height: 120%; */
 }
+
 
 .date {
   font-size: .8em;
   color: gray;
+}
+@media screen and (max-width:800px){
+  .card-order-service {
+   width: 100vw;
+   display : flex;
+   transition: .4s;
+  }
 }

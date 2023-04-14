@@ -4,6 +4,8 @@ import { Outlet } from 'react-router-dom'
 
 // Icons
 import { RxHamburgerMenu } from 'react-icons/rx'
+import { BsCashStack } from 'react-icons/bs'
+import { MdListAlt } from 'react-icons/md'
 
 // Components
 import { SideMenu } from '../../components'
@@ -12,8 +14,8 @@ import { SideMenu } from '../../components'
 import { useStateContext } from '../../context/StateContext'
 
 const array = [
-  {name: 'Minhas Ordens', path: '/dashboard'},
-  {name: 'Financeiro', path: '/dashboard/financial'}
+  {name:'Minhas ordens', path: '/dashboard'},
+  {name: 'Finanças', path: '/dashboard/financial'}
 ]
 
 const Dashboard = () => {

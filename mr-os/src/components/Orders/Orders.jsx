@@ -22,18 +22,20 @@ const Orders = () => {
 
   return (
     <div className='container'>
-      {loading && <p>Carregando...</p>}
-      <h2>Histórico de ordens:</h2>
-      {orders && orders.map((order) => (
-        <CardOrderService 
-          key={order.id} 
-          name={order.name}  
-          address={order.address} 
-          phoneNumber={order.phoneNumber} 
-          createdAt={order.createdAt}
-          id={order.id}
-        />
-      ))}
+        <h2>Histórico de ordens:</h2>
+      <div className='order-service-cards'>
+          {loading && <p>Carregando...</p>}
+          {orders && orders.map((order) => (
+            <CardOrderService 
+              key={order.id} 
+              name={order.name}  
+              address={order.address} 
+              phoneNumber={order.phoneNumber} 
+              createdAt={order.createdAt}
+              id={order.id}
+            />
+          ))}
+      </div>
     </div>
   )
 }

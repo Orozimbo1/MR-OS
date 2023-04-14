@@ -7,8 +7,8 @@ const CardOrderService = ({ name, address, phoneNumber, createdAt, id }) => {
   const date = createdAt && createdAt.toDate() && createdAt.toDate().toLocaleString('pt-BR', { timezone: 'UTC' })
 
   return (
-    <div >
-      <Link to={`/order-service/${id}`} className='card-order-service'>
+    <div className='card-order-service'>
+      <Link to={`/order-service/${id}`}>
         <div>
           <h3>{name}</h3>
           <p>{address}</p>
