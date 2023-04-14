@@ -1,0 +1,19 @@
+h2{
+    width: 100vw;
+    border-bottom: 1px solid rgba(107, 116, 125, 0.41);
+    margin-bottom: 2px;
+}
+
+.order-service-cards {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    padding: 10px;
+}
+
+@media screen and (max-width:500px) {
+    .order-service-cards{
+        display: flex;
+        width: 100vw;
+    }
+}

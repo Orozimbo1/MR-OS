@@ -49,22 +49,22 @@ const Navbar = () => {
     
     <nav id='nav'>
       <Link to='/'>
-        <span id='Sair'>MR Os</span>
+        <span id='logo'>MR Os</span>
       </Link>
       <ul id='nav-links'>
         {auth && (
           <li>
-            <span id="Sair" onClick={handleLogout}><FiLogOut /></span>
+            <span id='Sair' onClick={handleLogout}><FiLogOut /></span>
           </li>)}
+        {showNavMenu && <SideMenu array={array} direction={'rigth'} /> }
+        <li onClick={() => setShowNavMenu(true)}>
+          <RxHamburgerMenu />
+        </li>
         <ReactTooltip
         anchorId="Sair"
         place="bottom"
         content="Sair"
         />
-        {showNavMenu && <SideMenu array={array} direction={'rigth'} /> }
-        <li onClick={() => setShowNavMenu(true)}>
-          <RxHamburgerMenu />
-        </li>
       </ul>
     </nav>
   )

@@ -28,3 +28,8 @@ h2 {
   display: flex;
   justify-content: space-between;
 }
+@media screen and (max-width:800px){
+  .new-section {
+    height: 30vh;
+  }
+}

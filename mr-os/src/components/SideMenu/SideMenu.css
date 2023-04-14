@@ -37,7 +37,7 @@
 }
 
 .side-menu ul li {
-  background-color: blue;
+  font-size: 2em;
   margin: .4em;
   cursor: pointer;
 }

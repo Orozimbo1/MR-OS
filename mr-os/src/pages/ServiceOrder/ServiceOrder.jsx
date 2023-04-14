@@ -60,15 +60,15 @@ const ServiceOrder = () => {
   const handleSubmit = (e) => {
     e.preventDefault()
 
-    // const serviceOrder = {
-    //   name,
-    //   phoneNumber,
-    //   address,
-    //   userId: user.uid,
-    //   createdBy: user.displayName
-    // }
+    const serviceOrder = {
+      name,
+      phoneNumber,
+      address,
+      userId: user.uid,
+      createdBy: user.displayName
+    }
 
-    // dispatch(newOrder(serviceOrder))
+    dispatch(newOrder(serviceOrder))
     devices.map((device) => arrayDevices.push(device))
     console.log(arrayDevices)
   }
