@@ -20,9 +20,6 @@ const Order = () => {
   },[id])
 
   const date = order.createdAt && order.createdAt.toDate() && order.createdAt.toDate().toLocaleString('pt-BR', { timezone: 'UTC' })
-
-  // Isso vai sair
-  const devices = ['celular', 'tv', 'computador']
   
   {loading && <p>Carregando...</p>}
 
@@ -35,10 +32,14 @@ const Order = () => {
           <h3>Telefone: {order.phoneNumber}</h3>
           <h3>Data de criação: {date}</h3>
           <h3>Dispositivos:</h3>
-          {devices.map((device,i) => (
+          {order.devices.map((device,i) => (
             <div key={i}>
               <br />
-              <h1>{device}</h1>
+              <h3>{device.deviceType}</h3>
+              <p>{device.brand}</p>
+              <p>{device.model}</p>
+              <p>{device.color}</p>
+              <p>{device.problemDesc}</p>
               <hr />
             </div>
           ))}
