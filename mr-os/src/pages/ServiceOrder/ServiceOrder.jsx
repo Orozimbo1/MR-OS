@@ -5,8 +5,8 @@ import { DeviceData, ModalDevice } from '../../components'
 import { BsPlus } from 'react-icons/bs'
 
 // Hooks
-import { useEffect, useReducer, useState } from 'react'
-import { Link } from 'react-router-dom'
+import { useReducer, useState } from 'react'
+import { Link, useNavigate } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
 
 // Redux
@@ -21,6 +21,7 @@ const ServiceOrder = () => {
 
   let { setShowModalDevice, showModalDevice } = useStateContext()
 
+  const navigate = useNavigate()
   const dispatch = useDispatch()
 
   const [name, setName] = useState('')
@@ -57,6 +58,8 @@ const ServiceOrder = () => {
         let index = state.findIndex(element => element.id === action.device.id)
         state[index] = {...updatedDevice}
         return [...state]
+      case 'RESET': 
+        return [...initialDevices]
       default:
         return state 
     }
@@ -64,13 +67,21 @@ const ServiceOrder = () => {
 
   const [devices, dispatchDevices] = useReducer(deviceReducer, initialDevices)
 
+  const reset = () => {
+    setName('')
+    setAddress('')
+    setDevice('')
+    setPhoneNumber('')
+
+    dispatchDevices({type: 'RESET'})
+  }
+
   const removeDevice = (id) => {
     dispatchDevices({type: 'REMOVE', id})
   }
 
   const addDevice = (device) => {
     dispatchDevices({type: 'ADD-DEVICE', ...device})
-    console.log(devices)
   }
 
   const editDevice = (device) => {
@@ -88,9 +99,10 @@ const ServiceOrder = () => {
       userId: user.uid,
       createdBy: user.displayName
     }
-    console.log(devices)
 
     dispatch(newOrder(serviceOrder))
+    reset()
+    navigate('/')
   }
 
   return (
@@ -142,7 +154,7 @@ const ServiceOrder = () => {
             )
           )}
           <div className='new-section'>
-            <button onClick={() => setShowModalDevice(true)}>
+            <button type='button' onClick={() => setShowModalDevice(true)}>
               <BsPlus />
               Add dispositivo
             </button>
