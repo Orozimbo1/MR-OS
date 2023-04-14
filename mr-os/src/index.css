@@ -73,6 +73,7 @@ textarea::placeholder {
 .btn,
 button,
 input[type="submit"] {
+  width: 30%;
   background-color: #0094f6;
   color: #fff;
   border: none;
@@ -82,10 +83,7 @@ input[type="submit"] {
   cursor: pointer;
   opacity: .8;
   font-size: 1em;
-}
-
-input[type="submit"] {
-  margin-top: 1em;
+  margin: 1em;
 }
 
 input:disabled {
@@ -99,6 +97,7 @@ input[type="submit"]:hover {
 }
 
 .cancel-btn {
+  width: 30%;
   background-color: #e21414;
   color: #fff;
   border: none;
@@ -113,4 +112,10 @@ input[type="submit"]:hover {
 
 .cancel-btn:hover {
   opacity: 1;
+}
+
+.finish-or-cancel {
+  display: flex;
+  justify-content: space-between;
+  padding: 0 3em;
 }

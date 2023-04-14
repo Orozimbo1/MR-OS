@@ -16,8 +16,6 @@ const Order = () => {
 
   const { id } = useParams()
   
-  let status
-  
   useEffect(() => {
     dispatch(getServiceOrder(id))
   },[id])
@@ -26,12 +24,10 @@ const Order = () => {
   
   {loading && <p>Carregando...</p>}
 
-
-
   return (
-    <div className='container'>
+    <div>
       {order && (
-        <div>
+        <div className='container'>
           <h2>Nome: {order.name}</h2>
           <h3>Endereço: {order.address}</h3>
           <h3>Telefone: {order.phoneNumber}</h3>
@@ -49,7 +45,12 @@ const Order = () => {
               />
             </div>
           ))}
-          <Link>Gerar PDF</Link>
+          {order.status.status === 'pending' && (
+            <div className='finish-or-cancel'>
+              <button className='cancel-btn'>Rejeitar</button>
+              <button className='btn'>Finalizar</button>
+            </div>
+          )}
         </div>
       )}
     </div>
