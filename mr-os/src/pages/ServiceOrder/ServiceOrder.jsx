@@ -35,22 +35,28 @@ const ServiceOrder = () => {
       case 'ADD-DEVICE':
         const newDevice = {
           id: Math.floor(Math.random() * 1000000),
-          deviceType: action.device.device.deviceType,
-          brand: action.device.device.brand,
-          model: action.device.device.model,
-          color: action.device.device.color,
-          problemDesc: action.device.device.problemDesc
+          deviceType: action.device.deviceType,
+          brand: action.device.brand,
+          model: action.device.model,
+          color: action.device.color,
+          problemDesc: action.device.problemDesc
         }
 
         return [...state, newDevice]
-        // console.log(action.device.device)
       case 'REMOVE':
         return state.filter((device) => device.id !== action.id) 
       case 'EDIT':
-        let deviceEdit = state.find((device) => device.id !== action.id)
-        deviceEdit = [...action.device.device]
-        console.log(state)
-        return
+        const updatedDevice = {
+          id: action.device.id,
+          deviceType: action.device.deviceType,
+          brand: action.device.brand,
+          model: action.device.model,
+          color: action.device.color,
+          problemDesc: action.device.problemDesc
+        }
+        let index = state.findIndex(element => element.id === action.device.id)
+        state[index] = {...updatedDevice}
+        return [...state]
       default:
         return state 
     }
@@ -63,38 +69,28 @@ const ServiceOrder = () => {
   }
 
   const addDevice = (device) => {
-    dispatchDevices({type: 'ADD-DEVICE', device})
+    dispatchDevices({type: 'ADD-DEVICE', ...device})
     console.log(devices)
   }
 
-  const editDevice = (id) => {
-    dispatchDevices({type: 'EDIT', id})
+  const editDevice = (device) => {
+    dispatchDevices({type: 'EDIT', ...device})
   }
-
-  // useEffect(() => {
-  //   console.log(devices)
-  // }, [devices])
-
-  // useEffect(() => {
-  //   // setDevice({ol: 'ola'})
-  //   console.log(device)
-  // }, [])
 
   const handleSubmit = (e) => {
     e.preventDefault()
 
-    // const serviceOrder = {
-    //   name,
-    //   phoneNumber,
-    //   address,
-    //   userId: user.uid,
-    //   createdBy: user.displayName
-    // }
-    // console.log(devices)
+    const serviceOrder = {
+      name,
+      phoneNumber,
+      devices,
+      address,
+      userId: user.uid,
+      createdBy: user.displayName
+    }
+    console.log(devices)
 
-    // dispatch(newOrder(serviceOrder))
-    // devices.map((device) => arrayDevices.push(device))
-    // console.log(arrayDevices)
+    dispatch(newOrder(serviceOrder))
   }
 
   return (

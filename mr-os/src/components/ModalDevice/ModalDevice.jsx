@@ -12,10 +12,6 @@ const ModalDevice = ({ handleNewDevice, device, handleEditDevice, setDevice }) =
   const [color, setColor] = useState(device.color || '')
   const [problemDesc, setProblemDesc] = useState(device.problemDesc || '')
 
-  // if(device) {
-  //   console.log(device)
-  // }
-
   const handleSubmit = (e) => {
     e.preventDefault()
 
@@ -33,6 +29,7 @@ const ModalDevice = ({ handleNewDevice, device, handleEditDevice, setDevice }) =
 
   const handleEdit = () => {
     const deviceEdited = {
+      id: device.id,
       deviceType,
       brand,
       model,
