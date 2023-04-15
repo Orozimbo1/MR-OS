@@ -1,5 +1,5 @@
 import { db } from "../firebase/config";
-import { collection, addDoc, Timestamp, getDocs, getDoc, query, where, orderBy, doc } from "firebase/firestore";
+import { collection, addDoc, Timestamp, getDocs, getDoc, query, where, orderBy, doc, updateDoc } from "firebase/firestore";
 
 // Register a new service order
 const newOrder = async (document) => {
@@ -14,7 +14,7 @@ const newOrder = async (document) => {
 
     return newDocument
   } catch (error) {
-    console.log(error)
+    console.log(error.message)
   }
 
 }
@@ -28,7 +28,7 @@ const getServiceOrder = async (id) => {
 
     return docSnap.data()
   } catch (error) {
-    console.log(error)
+    console.log(error.message)
   }
 }
 
@@ -50,14 +50,30 @@ const getAllServiceOrders = async (uid) => {
     return documents
     
   } catch (error) {
-    console.log(error)
+    console.log(error.message)
+  }
+}
+
+// Update the order status 
+const updateOrderStatus = async (id, status) => {
+  try {
+      
+    const docRef = await doc(db, 'serviceOrders', id)
+
+    // const updatedDocument = await updateDoc(docRef,  )
+    console.log(docRef)
+
+  } catch (error) {
+
+    console.log(error.message)
   }
 }
 
 const orderService = {
   newOrder,
   getAllServiceOrders,
-  getServiceOrder
+  getServiceOrder,
+  updateOrderStatus
 }
 
 export default orderService;

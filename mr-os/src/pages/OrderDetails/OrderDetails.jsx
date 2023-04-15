@@ -19,6 +19,7 @@ const Order = () => {
   useEffect(() => {
     dispatch(getServiceOrder(id))
   },[id])
+  // console.log(order)
 
   const date = order.createdAt && order.createdAt.toDate() && order.createdAt.toDate().toLocaleString('pt-BR', { timezone: 'UTC' })
   
@@ -33,8 +34,8 @@ const Order = () => {
           <h3>Telefone: {order.phoneNumber}</h3>
           <h3>Data de criação: {date}</h3>
           <div className='status-container'>Status: 
-            <div className={`status ${order.status.status}`}></div> 
-            {order.status.text}
+            <div className={`status ${order.status && order.status.status}`}></div> 
+            {order.status && order.status.text}
           </div>
           <h3>Dispositivos:</h3>
           {order.devices && order.devices.map((device,i) => (
