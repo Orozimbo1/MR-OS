@@ -10,7 +10,7 @@ import { getAllServiceOrders } from '../../slices/orderSlice'
 // Components
 import { CardOrderService } from '../../components'
 
-const Orders = () => {
+const Orders = ({ status }) => {
   const { orders, loading } = useSelector((state) => state.order)
   const { user: { uid } } = useSelector((state) => state.auth)
 
@@ -20,12 +20,14 @@ const Orders = () => {
     dispatch(getAllServiceOrders(uid))
   }, [uid])
 
+  const ordersFilter = orders && orders.filter((order) => order.status.status === status)
+
   return (
     <div className='container'>
-        <h2>Histórico de ordens:</h2>
+        <h2>Ordens pendentes:</h2>
       <div className='order-service-cards'>
           {loading && <p>Carregando...</p>}
-          {orders && orders.map((order) => (
+          {ordersFilter && ordersFilter.map((order) => (
             <CardOrderService 
               key={order.id} 
               name={order.name}  

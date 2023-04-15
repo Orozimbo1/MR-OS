@@ -6,7 +6,7 @@ import { Orders } from '../../components'
 const Home = () => {
   return (
     <div className='container'>
-      <Orders />
+      <Orders status={'pending'}/>
     </div>
   )
 }
