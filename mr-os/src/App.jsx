@@ -22,6 +22,12 @@ function App() {
     return <p>Carregando ...</p>
   }
 
+  const arrayInfo = [
+    {status: 'pending', title: 'Em andamento'},
+    {status: 'finished', title: 'Concluídas'},
+    {status: 'rejected', title: 'Rejeitadas'}
+  ]
+
   return (
     <BrowserRouter>
       <StateContext>
@@ -33,7 +39,11 @@ function App() {
           <Route path='/login' element={!auth ? <Login /> : <Navigate to='/' />} /> 
           <Route path='/register' element={!auth ? <Register /> : <Navigate to='/' />} /> 
           <Route element={auth ? <Dashboard /> : <Navigate to='/login' />} >
-            <Route path='/dashboard' element={auth ? <Orders /> : <Navigate to='/login' />} />
+            {/* Gambiarra, vai sair */}
+            <Route path='/dashboard' element={auth ? arrayInfo.map((item, i) => (
+              <Orders key={i} status={item.status} title={item.title} />
+            )) : <Navigate to='/login' />} />
+            {/*  */}
             <Route path='/dashboard/financial' element={auth ? <Financial /> : <Navigate to='/login' />} />
             <Route path='/dashboard/login' element={auth ? <Login /> : <Navigate to='/login' />} />
           </Route>

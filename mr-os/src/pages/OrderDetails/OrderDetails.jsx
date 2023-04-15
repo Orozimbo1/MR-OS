@@ -52,7 +52,7 @@ const Order = () => {
               />
             </div>
           ))}
-          {order.status.status !== 'pending' && (
+          {order.status.status === 'pending' && (
             <div className='finish-or-cancel'>
               <button 
                 className='cancel-btn' 
