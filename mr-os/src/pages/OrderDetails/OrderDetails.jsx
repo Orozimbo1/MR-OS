@@ -3,31 +3,37 @@ import './OrderDetails.css'
 // Hooks
 import { useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
-import { useParams, Link } from 'react-router-dom'
+import { useParams, useNavigate } from 'react-router-dom'
 
 // Redux
-import { getServiceOrder } from '../../slices/orderSlice'
+import { getServiceOrder, updateOrderStatus } from '../../slices/orderSlice'
 import { DeviceData } from '../../components'
 
 const Order = () => {
   const { order, loading } = useSelector((state) => state.order)
 
   const dispatch = useDispatch()
+  const navigate = useNavigate()
 
   const { id } = useParams()
   
   useEffect(() => {
     dispatch(getServiceOrder(id))
-  },[id])
-  // console.log(order)
+  },[id, dispatch])
 
-  const date = order.createdAt && order.createdAt.toDate() && order.createdAt.toDate().toLocaleString('pt-BR', { timezone: 'UTC' })
+  const date = order && order.createdAt && order.createdAt.toDate() && order.createdAt.toDate().toLocaleString('pt-BR', { timezone: 'UTC' })
   
   {loading && <p>Carregando...</p>}
 
+  const handleUpdateStatusOrder = (status, text) => {
+    dispatch(updateOrderStatus({id, status: {status: status, text: text}}))
+
+    navigate('/')
+  }
+
   return (
     <div>
-      {order && (
+      {order && order.status && (
         <div className='container'>
           <h2>Nome: {order.name}</h2>
           <h3>Endereço: {order.address}</h3>
@@ -46,10 +52,18 @@ const Order = () => {
               />
             </div>
           ))}
-          {order.status.status === 'pending' && (
+          {order.status.status !== 'pending' && (
             <div className='finish-or-cancel'>
-              <button className='cancel-btn'>Rejeitar</button>
-              <button className='btn'>Finalizar</button>
+              <button 
+                className='cancel-btn' 
+                onClick={() => handleUpdateStatusOrder('rejected', 'Rejeitada')}>
+                  Cancelar
+              </button>
+              <button 
+                className='btn' 
+                onClick={() => handleUpdateStatusOrder('finished', 'Concluída')}>
+                  Finalizar
+              </button>
             </div>
           )}
         </div>

@@ -14,7 +14,7 @@ const newOrder = async (document) => {
 
     return newDocument
   } catch (error) {
-    console.log(error.message)
+    console.log(error)
   }
 
 }
@@ -28,7 +28,7 @@ const getServiceOrder = async (id) => {
 
     return docSnap.data()
   } catch (error) {
-    console.log(error.message)
+    console.log(error)
   }
 }
 
@@ -50,22 +50,23 @@ const getAllServiceOrders = async (uid) => {
     return documents
     
   } catch (error) {
-    console.log(error.message)
+    console.log(error)
   }
 }
 
 // Update the order status 
 const updateOrderStatus = async (id, status) => {
   try {
-      
     const docRef = await doc(db, 'serviceOrders', id)
 
-    // const updatedDocument = await updateDoc(docRef,  )
-    console.log(docRef)
+    await updateDoc(docRef, {'status': status})
 
+    const updatedDocument = await getServiceOrder(id)
+
+    return updatedDocument
   } catch (error) {
 
-    console.log(error.message)
+    console.log(error)
   }
 }
 

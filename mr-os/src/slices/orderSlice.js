@@ -40,6 +40,16 @@ export const getAllServiceOrders = createAsyncThunk(
   }
 )
 
+// Update the order status 
+export const updateOrderStatus = createAsyncThunk(
+  'order/updatestatus',
+  async ({id, status}, thunkAPI) => {
+    const data = await orderService.updateOrderStatus(id, status)
+
+    return data
+  }
+)
+
 export const orderSlice = createSlice({
   name: 'order',
   initialState,
@@ -92,6 +102,21 @@ export const orderSlice = createSlice({
       state.order = action.payload;
     })
     .addCase(getServiceOrder.rejected, (state, action) => {
+      state.loading = false;
+      state.order = null;
+      state.error = action.payload;
+    })
+    .addCase(updateOrderStatus.pending, (state) => {
+      state.loading = true;
+      state.error = false;
+    })
+    .addCase(updateOrderStatus.fulfilled, (state, action) => {
+      state.loading = false;
+      state.error = false;
+      state.success = true;
+      state.order = action.payload;
+    })
+    .addCase(updateOrderStatus.rejected, (state, action) => {
       state.loading = false;
       state.order = null;
       state.error = action.payload;
