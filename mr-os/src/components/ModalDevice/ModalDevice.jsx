@@ -46,6 +46,9 @@ const ModalDevice = ({ handleNewDevice, device, handleEditDevice, setDevice }) =
     <div className='modal-container'>
       <div className='blackout' onClick={() => setShowModalDevice(false)}></div>
       <div className='modal'>
+        <div className='new-device'>
+          <h2>Novo dispositivo</h2>
+        </div>
         <div className="tec-data">
             <label>
               <span>Tipo do dispositvo:</span> 
