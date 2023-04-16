@@ -11,11 +11,11 @@ const arrayInfo = [
 
 const Home = () => {
   return (
-    <div className='container'>
+    <section>
       {arrayInfo.map((item, i) => (
         <Orders key={i} status={item.status} title={item.title} />
       ))}
-    </div>
+    </section>
   )
 }
 

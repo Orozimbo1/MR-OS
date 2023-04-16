@@ -107,7 +107,7 @@ const ServiceOrder = () => {
   }
 
   return (
-    <div className='order-container'>
+    <div className='service-order-container'>
       {showModalDevice && 
         <ModalDevice 
           handleNewDevice={addDevice} 
@@ -115,7 +115,7 @@ const ServiceOrder = () => {
           handleEditDevice={editDevice} 
           setDevice={setDevice}
       />}
-      <h2 className='w-100 text-center md:text-3xl lg:text-3xl'>Nova ordem de serviço</h2>
+      <h2>Nova ordem de serviço</h2>
       <form onSubmit={handleSubmit} className='w-100 sm:w-12/12 md:w-12/12'>
           <label>
             <span>Nome:</span> 

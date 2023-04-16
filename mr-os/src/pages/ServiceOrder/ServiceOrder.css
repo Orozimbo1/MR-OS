@@ -1,11 +1,6 @@
-/* @tailwind base;
-@tailwind components;
-@tailwind utilities; */
-.order-container {
-  width: 100vw;
-}
-h2 {
-  text-align:center;
+.service-order-container {
+  width: 100%;
+  height: 100%;
 }
 
 .new-section {

@@ -34,7 +34,7 @@ const Order = () => {
   return (
     <div>
       {order && order.status && (
-        <div className='container'>
+        <div>
           <h2>Nome: {order.name}</h2>
           <h3>Endereço: {order.address}</h3>
           <h3>Telefone: {order.phoneNumber}</h3>

@@ -56,7 +56,7 @@ const Navbar = () => {
           <li>
             <span id='Sair' onClick={handleLogout}><FiLogOut /></span>
           </li>)}
-        {showNavMenu && <SideMenu array={array} direction={'rigth'} /> }
+        {showNavMenu && <SideMenu array={array} /> }
         <li onClick={() => {
             setShowNavMenu(true)
             setShowMenu(false)

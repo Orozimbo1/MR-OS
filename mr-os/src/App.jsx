@@ -1,10 +1,10 @@
 // Router
-import { BrowserRouter, Routes, Route, Navigate, Outlet } from 'react-router-dom'
+import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom'
 
 import './App.css'
 
 // Components
-import { Navbar, Footer, Financial, Orders } from './components'
+import { Navbar, Footer, SideBar } from './components'
 
 // Pages
 import { Home, ServiceOrder, Dashboard, Login, Register, OrderDetails } from './pages'
@@ -31,24 +31,18 @@ function App() {
   return (
     <BrowserRouter>
       <StateContext>
+        {auth && <SideBar />}
         {auth && <Navbar />}
-        <Routes>
-          <Route path='/' element={auth ? <Home /> : <Navigate to='/login' />} /> 
-          <Route path='/order-service' element={auth ? <ServiceOrder /> : <Navigate to='/login' />} /> 
-          <Route path='/order-service/:id' element={auth ? <OrderDetails /> : <Navigate to='/login' />} /> 
-          <Route path='/login' element={!auth ? <Login /> : <Navigate to='/' />} /> 
-          <Route path='/register' element={!auth ? <Register /> : <Navigate to='/' />} /> 
-          <Route element={auth ? <Dashboard /> : <Navigate to='/login' />} >
-            {/* Gambiarra, vai sair */}
-            <Route path='/dashboard' element={auth ? arrayInfo.map((item, i) => (
-              <Orders key={i} status={item.status} title={item.title} />
-            )) : <Navigate to='/login' />} />
-            {/*  */}
-            <Route path='/dashboard/financial' element={auth ? <Financial /> : <Navigate to='/login' />} />
-            <Route path='/dashboard/login' element={auth ? <Login /> : <Navigate to='/login' />} />
-          </Route>
-        </Routes>
-        <Outlet />
+        <div className="container">
+          <Routes>
+            <Route path='/' element={auth ? <Home /> : <Navigate to='/login' />} /> 
+            <Route path='/order-service' element={auth ? <ServiceOrder /> : <Navigate to='/login' />} /> 
+            <Route path='/order-service/:id' element={auth ? <OrderDetails /> : <Navigate to='/login' />} /> 
+            <Route path='/login' element={!auth ? <Login /> : <Navigate to='/' />} /> 
+            <Route path='/register' element={!auth ? <Register /> : <Navigate to='/' />} /> 
+            <Route path='/dashboard' element={auth ? <Dashboard /> : <Navigate to='/login' />} />
+          </Routes>
+        </div>
         {auth && <Footer />}
       </StateContext>
     </BrowserRouter>

@@ -1,0 +1,32 @@
+.side-bar {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 50px;
+  height: 100vh;
+  background-color: rgb(75, 72, 72);
+  color: white;
+  z-index: 1;
+}
+
+.side-bar ul li {
+  height: 3em;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  /* justify-content: center; */
+  width: 50px;
+  height: 50px !important;
+  font-weight: bold;
+  font-size: 2em;
+  border-bottom: 1px solid rgb(138, 135, 135);
+}
+
+.logo svg {
+  margin: 0 auto;
+}
