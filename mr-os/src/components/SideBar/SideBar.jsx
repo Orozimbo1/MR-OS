@@ -11,7 +11,7 @@ import SideMenu from '../SideMenu/SideMenu'
 
 
 const SideBar = () => {
-  const { showNavMenu } = useStateContext()
+  const { showNavMenu, setShowNavMenu } = useStateContext()
 
   const array = [
     {name: 'Dashboard', path: '/dashboard'},
@@ -19,7 +19,7 @@ const SideBar = () => {
   ]
 
   return (
-    <div className='side-bar'>
+    <div className='side-bar' onMouseEnter={() => setShowNavMenu(true)}>
       {showNavMenu && <SideMenu array={array} /> }
       <div className="logo">
         <BsStarFill />

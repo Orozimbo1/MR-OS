@@ -10,7 +10,7 @@ const SideMenu = ({ array }) => {
 
   return (
     <div>
-      <div className='blackout' onClick={() => reset()}></div>
+      <div className='blackout' onClick={() => reset()} onMouseEnter={() => reset()}></div>
       <div className={`side-menu`}>
         <div className='back'>
           <span className='right' onClick={() => reset()}>Voltar</span>
