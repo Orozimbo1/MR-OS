@@ -17,8 +17,10 @@
 .modal {
   z-index: 1;
   position: fixed;
+  padding: 20px;
   top: 100px;
-  height: 400px;
+  height: 500px;
   width: 600px;
-  background-color: burlywood;
+  border-radius: 5px;
+  background-color: #5f6063f7;
 }

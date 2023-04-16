@@ -73,7 +73,7 @@ textarea::placeholder {
 .btn,
 button,
 input[type="submit"] {
-  width: 30%;
+  width: fit-content;
   background-color: #0094f6;
   color: #fff;
   border: none;
@@ -97,7 +97,7 @@ input[type="submit"]:hover {
 }
 
 .cancel-btn {
-  width: 30%;
+  width: fit-content;
   background-color: #e21414;
   color: #fff;
   border: none;
@@ -107,7 +107,6 @@ input[type="submit"]:hover {
   cursor: pointer;
   opacity: .8;
   font-size: 1em;
-  margin-top: 1em;
 }
 
 .cancel-btn:hover {

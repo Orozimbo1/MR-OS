@@ -107,7 +107,7 @@ const ServiceOrder = () => {
   }
 
   return (
-    <div>
+    <div className='order-container'>
       {showModalDevice && 
         <ModalDevice 
           handleNewDevice={addDevice} 
@@ -115,7 +115,7 @@ const ServiceOrder = () => {
           handleEditDevice={editDevice} 
           setDevice={setDevice}
       />}
-      <h2 className='w-100 text-center sm:text-sm md:text-3xl lg:text-3xl'>Nova ordem de serviço</h2>
+      <h2 className='w-100 text-center md:text-3xl lg:text-3xl'>Nova ordem de serviço</h2>
       <form onSubmit={handleSubmit} className='w-100 sm:w-12/12 md:w-12/12'>
           <label>
             <span>Nome:</span> 
@@ -161,7 +161,7 @@ const ServiceOrder = () => {
               Add dispositivo
             </button>
           </div>
-          <div className='finish-or-cancel w-100 sm:align-middle md:align-middle lg:align-middle'>
+          <div className='finish-or-cancel'>
             <Link className='cancel-btn' to='/'>Cancelar</Link>
             {!loading && <input type="submit" value="Finalizar" />}
             {loading && <input type="submit" value="Aguarde.." disabled />}
