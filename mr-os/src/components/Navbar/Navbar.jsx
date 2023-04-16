@@ -25,7 +25,7 @@ import { Tooltip as ReactTooltip } from "react-tooltip";
 
 
 const Navbar = () => {
-  const { showNavMenu, setShowNavMenu } = useStateContext()
+  const { showNavMenu, setShowNavMenu, setShowMenu } = useStateContext()
 
   const { auth } = useAuth()
 
@@ -57,7 +57,10 @@ const Navbar = () => {
             <span id='Sair' onClick={handleLogout}><FiLogOut /></span>
           </li>)}
         {showNavMenu && <SideMenu array={array} direction={'rigth'} /> }
-        <li onClick={() => setShowNavMenu(true)}>
+        <li onClick={() => {
+            setShowNavMenu(true)
+            setShowMenu(false)
+          }}>
           <RxHamburgerMenu />
         </li>
         <ReactTooltip

@@ -20,7 +20,6 @@ const newOrder = async (document) => {
 }
 
 // Get a service order
-
 const getServiceOrder = async (id) => {
   try {
     const docRef = await doc(db, 'serviceOrders', id)
