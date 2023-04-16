@@ -1,7 +1,7 @@
 import './SideBar.css'
 
 // Icons
-import { BsStarFill } from 'react-icons/bs'
+import { BsStar } from 'react-icons/bs'
 
 // Context
 import { useStateContext } from '../../context/StateContext'
@@ -22,7 +22,7 @@ const SideBar = () => {
     <div className='side-bar' onMouseEnter={() => setShowNavMenu(true)}>
       {showNavMenu && <SideMenu array={array} /> }
       <div className="logo">
-        <BsStarFill />
+        <BsStar />
       </div>
       <ul>
         <li>oi</li>
