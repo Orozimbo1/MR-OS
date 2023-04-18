@@ -12,8 +12,14 @@
   z-index: 1;
 }
 
+.side-bar ul {
+  display: flex;
+  flex-direction: column;
+}
 .side-bar ul li {
   height: 3em;
+  margin: .4em;
+  padding: 40px;
 }
 
 .logo {
