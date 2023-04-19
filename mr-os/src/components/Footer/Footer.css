@@ -4,7 +4,8 @@
     justify-content: center;
     align-items: center;
     background-color: #fff;
-    height: 20vh;
+    width: 100%;
+    height: 20%;
     border-top: 1px solid #abaaaa;
     font-weight: bolder;
 }
