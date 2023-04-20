@@ -31,7 +31,7 @@ const SideBar = () => {
         <BsStar />
       </div>
       <ul>
-        <li><AiOutlineDashboard size={30}/></li>
+        <li><AiOutlineDashboard size={30} /></li>
         <li><BsCashStack size={30} /></li>
         <li><BsCardChecklist size={30} /></li>
         <li><AiOutlineSetting size={30}/></li>
