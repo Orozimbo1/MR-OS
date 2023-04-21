@@ -113,3 +113,28 @@ input[type="submit"]:hover {
   justify-content: space-between;
   padding: 0 3em;
 }
+
+.blackout {
+  position: fixed;
+  top: 0;
+  left: 50px;
+  height: 100vh;
+  width: 100vw;
+  background-color: rgba(0, 0, 0, 0.295);
+}
+
+@media screen and (max-width:800px) {
+  body{
+    width: 100vw;
+    height: 100vh;
+  }
+
+  div .blackout {
+    position: fixed;
+    top: 0;
+    left: 50px;
+    height: 100vh;
+    width: 100vw;
+    background-color: rgba(0, 0, 0, 0.295);
+  }
+}

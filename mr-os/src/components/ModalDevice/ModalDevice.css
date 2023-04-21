@@ -29,3 +29,19 @@
   color: black;
   align-items: center;
 }
+/* @media screen and (max-width:800px) {
+  .new-device {
+    width: 70%;
+    height: 60%;
+  }
+} */
+
+@media screen and (max-width: 800px) {
+  .modal {
+    width: 80vw;
+    height: fit-content;
+    left: 50px;
+    top: 50px;
+    bottom: 50px;
+  }
+}

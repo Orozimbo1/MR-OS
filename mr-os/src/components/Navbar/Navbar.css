@@ -43,4 +43,9 @@
 #nav-links svg {
   font-size: 1.5em;
 }
+@media  screen and (max-width:800px) {
+  #nav {
+    width: 100vw;
+  }
+}
 

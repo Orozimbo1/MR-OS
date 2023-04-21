@@ -8,7 +8,8 @@ import { useSelector, useDispatch } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 
 // Icons
-import { FiLogOut} from 'react-icons/fi'
+import { FiLogOut } from 'react-icons/fi'
+import { RxHamburgerMenu } from 'react-icons/rx'
 
 // Redux
 import { logout, reset } from '../../slices/authSlice'
@@ -34,7 +35,7 @@ const Navbar = () => {
   }
 
   return (
-    
+   
     <nav id='nav'>
       <Link to='/'>
         <span id='logo'>MR Os</span>
@@ -45,10 +46,9 @@ const Navbar = () => {
             <span id='Sair' onClick={handleLogout}><FiLogOut /></span>
           </li>)}
         <ReactTooltip
-        anchorId="Sair"
-        place="bottom"
-        content="Sair"
-        />
+          anchorId="Sair"
+          place="bottom"
+          content="Sair" />
       </ul>
     </nav>
   )
