@@ -4,7 +4,7 @@ import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom'
 import './App.css'
 
 // Components
-import { Navbar, Footer, SideBar } from './components'
+import { Navbar, Footer, SideBar, SideMenu } from './components'
 
 // Pages
 import { Home, ServiceOrder, Dashboard, Login, Register, OrderDetails } from './pages'
@@ -13,26 +13,27 @@ import { Home, ServiceOrder, Dashboard, Login, Register, OrderDetails } from './
 import { useAuth } from './hooks'
 
 // Context
-import { StateContext } from './context/StateContext'
+import { useStateContext } from './context/StateContext'
 
 function App() {
   const { auth, loading } = useAuth()
+
+  const { showMenu } = useStateContext()
 
   if(loading) {
     return <p>Carregando ...</p>
   }
 
-  const arrayInfo = [
-    {status: 'pending', title: 'Em andamento'},
-    {status: 'finished', title: 'Concluídas'},
-    {status: 'rejected', title: 'Rejeitadas'}
+  const array = [
+    {name: 'Dashboard', path: '/dashboard'},
+    {name: 'Nova ordem de serviço', path: '/order-service'},
   ]
 
   return (
     <BrowserRouter>
-      <StateContext>
         {auth && <SideBar />}
         {auth && <Navbar />}
+        {showMenu && <SideMenu array={array} /> }
         <div className="container">
           <Routes>
             <Route path='/' element={auth ? <Home /> : <Navigate to='/login' />} /> 
@@ -44,7 +45,6 @@ function App() {
           </Routes>
         </div>
         {auth && <Footer />}
-      </StateContext>
     </BrowserRouter>
   )
 }

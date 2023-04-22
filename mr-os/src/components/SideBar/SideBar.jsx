@@ -17,16 +17,11 @@ import SideMenu from '../SideMenu/SideMenu'
 
 
 const SideBar = () => {
-  const { showNavMenu, setShowNavMenu } = useStateContext()
-
-  const array = [
-    {name: 'Dashboard', path: '/dashboard'},
-    {name: 'Nova ordem de serviço', path: '/order-service'},
-  ]
+  const { showMenu, setShowMenu } = useStateContext()
 
   return (
-    <div className='side-bar' onMouseEnter={() => setShowNavMenu(true)}>
-      {showNavMenu && <SideMenu array={array} /> }
+    <div className='side-bar' onMouseEnter={() => setShowMenu(true)}>
+      {/* {showMenu && <SideMenu array={array} /> } */}
       <div className="logo">
         <BsStar />
       </div>

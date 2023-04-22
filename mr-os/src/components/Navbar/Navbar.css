@@ -43,9 +43,23 @@
 #nav-links svg {
   font-size: 1.5em;
 }
+
+.hamburger {
+  display: none;
+  font-size: 1.5em;
+}
+
 @media  screen and (max-width:800px) {
   #nav {
-    width: 100vw;
+    padding: 0 10px 0 20px;
+  }
+
+  .hamburger {
+    display: block;
+  }
+
+  .hamburger svg {
+    height: 40px;
   }
 }
 

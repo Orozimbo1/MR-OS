@@ -6,18 +6,18 @@ import { Link } from 'react-router-dom'
 import { useStateContext } from '../../context/StateContext'
 
 const SideMenu = ({ array }) => {
-  const { reset } = useStateContext()
+  const { setShowMenu } = useStateContext()
 
   return (
     <div>
-      <div className='blackout' onClick={() => reset()} onMouseEnter={() => reset()}></div>
+      <div className='blackout' onClick={() => setShowMenu(false)} onMouseEnter={() => setShowMenu(false)}></div>
       <div className={`side-menu`}>
         <div className='back'>
-          <span className='right' onClick={() => reset()}>Voltar</span>
+          <span className='right' onClick={() => setShowMenu(false)}>Voltar</span>
         </div>  
         <ul >
         {array && array.map((item, i) => (
-          <li key={i} onClick={() => reset()}>
+          <li key={i} onClick={() => setShowMenu(false)}>
             <Link to={item.path}>
               {item.name}
             </Link>
