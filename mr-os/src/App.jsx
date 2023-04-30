@@ -37,7 +37,7 @@ function App() {
         {auth && <SideBar />}
         {auth && <Navbar />}
         {showMenu && <SideMenu array={array} /> }
-        <div className="container">
+        <div className='container'>
           <Routes>
             <Route path='/' element={auth ? <Home /> : <Navigate to='/login' />} /> 
             <Route path='/order-service' element={auth ? <ServiceOrder /> : <Navigate to='/login' />} /> 
