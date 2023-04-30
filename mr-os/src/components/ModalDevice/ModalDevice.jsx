@@ -1,11 +1,12 @@
 import './ModalDevice.css'
-import { useState } from 'react'
+import { useState, useReducer } from 'react'
 
 // Context
 import { useStateContext } from '../../context/StateContext'
 
 // Components
 import { Message } from '../../components'
+import { BsCheck, BsCheck2All, BsTrash } from 'react-icons/bs'
 
 const ModalDevice = ({ handleNewDevice, device, handleEditDevice, setDevice }) => {
   const { setShowModalDevice } = useStateContext()
@@ -16,6 +17,69 @@ const ModalDevice = ({ handleNewDevice, device, handleEditDevice, setDevice }) =
   const [color, setColor] = useState(device.color || '')
   const [problemDesc, setProblemDesc] = useState(device.problemDesc || '')
   const [error, setError] = useState('')
+  const [part, setPart] = useState('')
+  const [partPrice, setPartPrice] = useState(0)
+
+  const initialParts = []
+
+  const partsReducer = (state, action) => {
+    switch (action.type) {
+      case 'ADD-PART':
+        const newPart = {id: 2}
+        return [...state, newPart]
+      case 'REMOVE':
+        return state.filter((device) => device.id !== action.id) 
+      case 'EDIT':
+        const updatedDevice = {
+        }
+        let index = state.findIndex(element => element.id === action.device.id)
+        state[index] = {...updatedDevice}
+        return [...state]
+      case 'RESET': 
+        return [...initialDevices]
+      default:
+        return state 
+    }
+  }
+
+  const [parts, dispatchParts] = useReducer(partsReducer, initialParts)
+
+  const initialAllParts = []
+
+  const allPartsReducer = (state, action) => {
+    switch (action.type) {
+      case 'ADD-IN-ALL-PARTS':
+        const newPart = {part: action.part, price: action.price}
+        return [...state, newPart]
+      case 'REMOVE':
+        return state.filter((part) => part.id !== action.id) 
+      case 'EDIT':
+        const updatedDevice = {
+        }
+        let index = state.findIndex(element => element.id === action.device.id)
+        state[index] = {...updatedDevice}
+        return [...state]
+      case 'RESET': 
+        return [...initialDevices]
+      default:
+        return state 
+    }
+  }
+
+  const [allParts, dispatchAllParts] = useReducer(allPartsReducer, initialAllParts)
+
+  const addPart = () => {
+    dispatchParts({type: 'ADD-PART'})
+  }
+
+  const removePart = (id) => {
+    dispatchParts({type: 'REMOVE', id})
+  }
+
+  const addInAllParts = (part) => {
+    dispatchAllParts({type: 'ADD-IN-ALL-PARTS', part})
+    console.log(allParts)
+  }
 
   const validateInputs = () => {
     if(!deviceType) {
@@ -125,6 +189,36 @@ const ModalDevice = ({ handleNewDevice, device, handleEditDevice, setDevice }) =
               value={problemDesc}
             >
             </textarea>
+          </label>
+          {allParts.length > 0 && allParts.map((part, i) => (
+            <div key={i}>
+              <p>{part.part}</p>
+              <p>{part.price}</p>
+            </div>
+          ))}
+          {parts.length > 0 && parts.map((partInd, i) => (
+            <div className="parts" key={i}>
+              <label>
+                <span>Peça:</span>
+                <input type="text" value={part} onChange={(e) => setPart(e.target.value)}/>
+              </label>
+              <label>
+                <span>Valor:</span>
+                <input type="number" value={partPrice} onChange={(e) => setPartPrice(e.target.value)}/>
+              </label>
+              <div className="icons">
+                <BsCheck2All onClick={() => {
+                  addInAllParts({part: part, price: partPrice})
+                  removePart(partInd.id)
+                }} />
+                <BsTrash />
+              </div>
+            </div>
+          ))}
+          {parts.length === 0 && <button onClick={() => addPart()}>+Add peça</button>}
+          <label>
+            <span>Mão de obra:</span>
+            <input type="number" placeholder='R$: 99,99' />
           </label>
           <div className='finish-or-cancel'>
             <button className='cancel-btn' onClick={() => setShowModalDevice(false)}>Cancelar</button>
