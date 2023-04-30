@@ -21,14 +21,12 @@ const SideBar = () => {
 
   return (
     <div className='side-bar' onMouseEnter={() => setShowMenu(true)}>
-      {/* {showMenu && <SideMenu array={array} /> } */}
       <div className="logo">
         <BsStar />
       </div>
       <ul>
-        <li><AiOutlineDashboard size={30} /></li>
-        <li><BsCashStack size={30} /></li>
         <li><BsCardChecklist size={30} /></li>
+        <li><AiOutlineDashboard size={30} /></li>
         <li><AiOutlineSetting size={30}/></li>
         <li><MdOutlineContactSupport size={30}/></li>
         <li><AiFillGithub size={30}/></li>

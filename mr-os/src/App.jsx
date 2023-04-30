@@ -25,8 +25,11 @@ function App() {
   }
 
   const array = [
-    {name: 'Dashboard', path: '/dashboard'},
     {name: 'Nova ordem de serviço', path: '/order-service'},
+    {name: 'Dashboard', path: '/dashboard'},
+    {name: 'Configurações', path: '/settings'},
+    {name: 'Tutorial', path: '/tutorial'},
+    {name: 'Relatório de bugs', path: 'https://github.com/Orozimbo1/MR-OS/pulls'},
   ]
 
   return (
