@@ -15,8 +15,11 @@ import { newOrder } from '../../slices/orderSlice'
 // Context
 import { useStateContext } from '../../context/StateContext'
 
+// Components
+import { Message } from '../../components'
+
 const ServiceOrder = () => {
-  const { loading, error } = useSelector((state) => state.order)
+  const { loading } = useSelector((state) => state.order)
   const { user } = useSelector((state) => state.auth)
 
   let { setShowModalDevice, showModalDevice } = useStateContext()
@@ -28,6 +31,7 @@ const ServiceOrder = () => {
   const [phoneNumber, setPhoneNumber] = useState('')
   const [address, setAddress] = useState('')
   const [device, setDevice] = useState({})
+  const [error, setError] = useState('') 
 
   const initialDevices = []
 
@@ -88,8 +92,23 @@ const ServiceOrder = () => {
     dispatchDevices({type: 'EDIT', ...device})
   }
 
+  const validateInputs = () => {
+    if(!name) {
+      setError('O campo nome é obrigatório')
+      return false
+    }
+    if(!phoneNumber) {
+      setError('O campo telefone é obrigatório')
+      return false
+    }
+    return true
+  }
+
   const handleSubmit = (e) => {
     e.preventDefault()
+    const validate = validateInputs()
+
+    if(!validate) return
 
     const serviceOrder = {
       name,
@@ -165,8 +184,8 @@ const ServiceOrder = () => {
             <Link className='cancel-btn' to='/'>Cancelar</Link>
             {!loading && <input type="submit" value="Finalizar" />}
             {loading && <input type="submit" value="Aguarde.." disabled />}
-            {error && <Message msg={error} type='error' />}
           </div>
+          {error && <Message msg={error} type='error' />}
       </form>
     </div>
   )
