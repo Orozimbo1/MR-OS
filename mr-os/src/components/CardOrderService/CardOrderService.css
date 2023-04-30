@@ -8,6 +8,7 @@
   border: 1px solid #aaaaaa84;
   border-radius: 3px;
   transition: .8s;
+  box-sizing: border-box;
 }
 
 .card-order-service p {

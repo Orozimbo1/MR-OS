@@ -8,6 +8,7 @@
     width: 100%;
     border-top: 1px solid #abaaaa;
     font-weight: bolder;
+    box-sizing: border-box;
 }
 @media screen and (max-width:800px){
     #footer {
