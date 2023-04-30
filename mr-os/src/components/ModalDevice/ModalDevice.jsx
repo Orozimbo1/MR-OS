@@ -1,7 +1,11 @@
 import './ModalDevice.css'
 import { useState } from 'react'
 
+// Context
 import { useStateContext } from '../../context/StateContext'
+
+// Components
+import { Message } from '../../components'
 
 const ModalDevice = ({ handleNewDevice, device, handleEditDevice, setDevice }) => {
   const { setShowModalDevice } = useStateContext()
@@ -11,9 +15,39 @@ const ModalDevice = ({ handleNewDevice, device, handleEditDevice, setDevice }) =
   const [model, setModel] = useState(device.model || '')
   const [color, setColor] = useState(device.color || '')
   const [problemDesc, setProblemDesc] = useState(device.problemDesc || '')
+  const [error, setError] = useState('')
+
+  const validateInputs = () => {
+    if(!deviceType) {
+      setError('O campo tipo de dispositivo é obrigatório')
+      return false
+    }
+    if(!brand) {
+      setError('O campo marca é obrigatório')
+      return false
+    }
+    if(!model) {
+      setError('O campo modelo é obrigatório')
+      return false
+    }
+    if(!color) {
+      setError('O campo cor é obrigatório')
+      return false
+    }
+    if(!problemDesc) {
+      setError('O campo descrição do problema é obrigatório')
+      return false
+    }
+
+    return true
+  }
 
   const handleSubmit = (e) => {
     e.preventDefault()
+
+    const validate = validateInputs()
+
+    if(!validate) return
 
     const device = {
       deviceType,
@@ -97,6 +131,7 @@ const ModalDevice = ({ handleNewDevice, device, handleEditDevice, setDevice }) =
             {!device.id && <input type="submit" value="Adicionar" onClick={handleSubmit}/>}
             {device.id && <input type="submit" value="Editar" onClick={handleEdit}/>}
           </div>
+          {error && <Message msg={error} type='error' />}
       </div>
     </div>
   )
