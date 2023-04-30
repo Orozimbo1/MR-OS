@@ -1,3 +1,8 @@
+.customer-data{
+  width: 100vw;
+  display: flex;
+  flex-direction: column;
+}
 .status-container {
   display: flex;
   align-items: center;
@@ -29,5 +34,18 @@
     width: 100%;
     height: fit-content;
     padding: 10px 0 10px 30px;
+  }
+}
+
+@media screen and (min-width: 800px) {
+  .customer-data {
+    width: 100vw;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    height: 20vh;
+  }
+  .customer-data h2, h3 {
+    text-align: center;
   }
 }

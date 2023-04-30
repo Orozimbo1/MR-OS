@@ -1,4 +1,4 @@
-import './Device.css'
+import './DeviceData.css'
 
 // Icons
 import { BsTrash, BsPenFill } from 'react-icons/bs'

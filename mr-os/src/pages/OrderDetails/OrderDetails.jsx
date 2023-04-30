@@ -35,10 +35,12 @@ const Order = () => {
     <div>
       {order && order.status && (
         <div>
-          <h2>Nome: {order.name}</h2>
-          <h3>Endereço: {order.address}</h3>
-          <h3>Telefone: {order.phoneNumber}</h3>
-          <h3>Data de criação: {date}</h3>
+          <div className="customer-data">
+            <h2>Nome: {order.name}</h2>
+            <h3>Endereço: {order.address}</h3>
+            <h3>Telefone: {order.phoneNumber}</h3>
+            <h3>Data de criação: {date}</h3>
+          </div>
           <div className='status-container'>Status: 
             <div className={`status ${order.status && order.status.status}`}></div> 
             {order.status && order.status.text}
