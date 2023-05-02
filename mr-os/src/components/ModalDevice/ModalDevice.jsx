@@ -6,7 +6,7 @@ import { useStateContext } from '../../context/StateContext'
 
 // Components
 import { Message } from '../../components'
-import { BsCheck, BsCheck2All, BsPenFill, BsTrash } from 'react-icons/bs'
+import { BsCheck, BsCheck2All, BsExclamationCircle, BsPenFill, BsTrash } from 'react-icons/bs'
 
 const ModalDevice = ({ handleNewDevice, device, handleEditDevice, setDevice }) => {
   const { setShowModalDevice } = useStateContext()
@@ -19,6 +19,7 @@ const ModalDevice = ({ handleNewDevice, device, handleEditDevice, setDevice }) =
   const [error, setError] = useState('')
   const [partName, setPartName] = useState('')
   const [partPrice, setPartPrice] = useState('')
+  const [edit, setEdit] = useState(false)
 
   const initialParts = []
 
@@ -26,7 +27,6 @@ const ModalDevice = ({ handleNewDevice, device, handleEditDevice, setDevice }) =
     switch (action.type) {
       case 'ADD':
         const newPart = {
-          id: Math.random(),
           part: partName,
           price: partPrice
         }
@@ -34,16 +34,22 @@ const ModalDevice = ({ handleNewDevice, device, handleEditDevice, setDevice }) =
         setPartName('')
         setPartPrice('')
 
-        console.log(newPart)
-
         return [...state, newPart]
       case 'REMOVE':
         return state.filter((part) => part.id !== action.id) 
       case 'EDIT':
-        const updatedDevice = {
+        const updatedPart = {
+          part: action.part.part,
+          price: action.part.price
         }
-        let index = state.findIndex(element => element.id === action.device.id)
-        state[index] = {...updatedDevice}
+
+        setPartName('')
+        setPartPrice('')
+        setEdit(false)
+
+        let index = state.findIndex(element => element.id === action.part.id)
+        state[index] = {...updatedPart}
+        
         return [...state]
       case 'RESET': 
         return [...initialDevices]
@@ -60,6 +66,10 @@ const ModalDevice = ({ handleNewDevice, device, handleEditDevice, setDevice }) =
 
   const removePart = (id) => {
     dispatchParts({type: 'REMOVE', id})
+  }
+
+  const editPart = (part) => {
+    dispatchParts({type: 'EDIT', part})
   }
 
   const validateInputs = () => {
@@ -180,15 +190,29 @@ const ModalDevice = ({ handleNewDevice, device, handleEditDevice, setDevice }) =
               <span>Valor:</span>
               <input type="number" value={partPrice} onChange={(e) => setPartPrice(e.target.value)}/>
             </label>
-            <button onClick={() => addPart()}>+Add peça</button>
+            {!edit 
+              ? <button onClick={() => addPart()}>+Add peça</button>
+              : <button onClick={() => editPart( {part: partName, price: partPrice} )}>Editar</button>
+            }
           </div>
-          {parts.length > 0 && parts.map((part) => (
-            <div key={part.id} className='parts'>
-              <input type="text" value={part.part} disabled />
-              <input type="number" value={part.price} disabled />
+          {parts.length > 0 && parts.map((part, i) => (
+            <div key={i} className='parts'>
+              <input type="text" value={part.part} onChange={(e) => setPartName(e.target.value)} />
+              <input type="number" value={part.price} onChange={(e) => setPartName(e.target.value)}  />
               <div className="icons">
                 <BsTrash onClick={() => removePart(part.id)}/>
-                <BsPenFill />   
+                {!edit 
+                ? <BsPenFill onClick={() => {
+                  setEdit(true)
+                  setPartName(part.part)
+                  setPartPrice(part.price)
+                }} /> 
+                : <BsExclamationCircle onClick={() => {
+                  setEdit(false)
+                  setPartName('')
+                  setPartPrice('')
+                }} />
+                }   
               </div> 
             </div>
           ))}
