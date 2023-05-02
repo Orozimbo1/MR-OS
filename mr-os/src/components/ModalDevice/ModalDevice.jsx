@@ -6,7 +6,7 @@ import { useStateContext } from '../../context/StateContext'
 
 // Components
 import { Message } from '../../components'
-import { BsCheck, BsCheck2All, BsTrash } from 'react-icons/bs'
+import { BsCheck, BsCheck2All, BsPenFill, BsTrash } from 'react-icons/bs'
 
 const ModalDevice = ({ handleNewDevice, device, handleEditDevice, setDevice }) => {
   const { setShowModalDevice } = useStateContext()
@@ -17,15 +17,25 @@ const ModalDevice = ({ handleNewDevice, device, handleEditDevice, setDevice }) =
   const [color, setColor] = useState(device.color || '')
   const [problemDesc, setProblemDesc] = useState(device.problemDesc || '')
   const [error, setError] = useState('')
-  const [part, setPart] = useState('')
-  const [partPrice, setPartPrice] = useState(0)
+  const [partName, setPartName] = useState('')
+  const [partPrice, setPartPrice] = useState('')
 
   const initialParts = []
 
   const partsReducer = (state, action) => {
     switch (action.type) {
-      case 'ADD-PART':
-        const newPart = {id: 2}
+      case 'ADD':
+        const newPart = {
+          id: Math.random(),
+          part: partName,
+          price: partPrice
+        }
+
+        setPartName('')
+        setPartPrice('')
+
+        console.log(newPart)
+
         return [...state, newPart]
       case 'REMOVE':
         return state.filter((device) => device.id !== action.id) 
@@ -44,41 +54,12 @@ const ModalDevice = ({ handleNewDevice, device, handleEditDevice, setDevice }) =
 
   const [parts, dispatchParts] = useReducer(partsReducer, initialParts)
 
-  const initialAllParts = []
-
-  const allPartsReducer = (state, action) => {
-    switch (action.type) {
-      case 'ADD-IN-ALL-PARTS':
-        const newPart = {part: action.part, price: action.price}
-        return [...state, newPart]
-      case 'REMOVE':
-        return state.filter((part) => part.id !== action.id) 
-      case 'EDIT':
-        const updatedDevice = {
-        }
-        let index = state.findIndex(element => element.id === action.device.id)
-        state[index] = {...updatedDevice}
-        return [...state]
-      case 'RESET': 
-        return [...initialDevices]
-      default:
-        return state 
-    }
-  }
-
-  const [allParts, dispatchAllParts] = useReducer(allPartsReducer, initialAllParts)
-
   const addPart = () => {
-    dispatchParts({type: 'ADD-PART'})
+    dispatchParts({type: 'ADD'})
   }
 
   const removePart = (id) => {
     dispatchParts({type: 'REMOVE', id})
-  }
-
-  const addInAllParts = (part) => {
-    dispatchAllParts({type: 'ADD-IN-ALL-PARTS', part})
-    console.log(allParts)
   }
 
   const validateInputs = () => {
@@ -190,32 +171,26 @@ const ModalDevice = ({ handleNewDevice, device, handleEditDevice, setDevice }) =
             >
             </textarea>
           </label>
-          {allParts.length > 0 && allParts.map((part, i) => (
-            <div key={i}>
-              <p>{part.part}</p>
-              <p>{part.price}</p>
-            </div>
-          ))}
-          {parts.length > 0 && parts.map((partInd, i) => (
-            <div className="parts" key={i}>
-              <label>
-                <span>Peça:</span>
-                <input type="text" value={part} onChange={(e) => setPart(e.target.value)}/>
-              </label>
-              <label>
-                <span>Valor:</span>
-                <input type="number" value={partPrice} onChange={(e) => setPartPrice(e.target.value)}/>
-              </label>
+          <div className="todo">
+            <label>
+              <span>Peça:</span>
+              <input type="text" value={partName} onChange={(e) => setPartName(e.target.value)}/>
+            </label>
+            <label>
+              <span>Valor:</span>
+              <input type="number" value={partPrice} onChange={(e) => setPartPrice(e.target.value)}/>
+            </label>
+            <button onClick={() => addPart()}>+Add peça</button>
+          </div>
+          {parts.length > 0 && parts.map((part) => (
+            <div key={part.id} className='parts'>
+              <p>{part.part} - {part.price}</p>
               <div className="icons">
-                <BsCheck2All onClick={() => {
-                  addInAllParts({part: part, price: partPrice})
-                  removePart(partInd.id)
-                }} />
                 <BsTrash />
-              </div>
+                <BsPenFill />   
+              </div> 
             </div>
           ))}
-          {parts.length === 0 && <button onClick={() => addPart()}>+Add peça</button>}
           <label>
             <span>Mão de obra:</span>
             <input type="number" placeholder='R$: 99,99' />
