@@ -13,7 +13,6 @@ function DeviceData({ showActions, handleDelete, device, setDevice }) {
 
   const editDevice = () => {
     setDevice(device)
-    console.log(device)
     setShowModalDevice(true)
   }
 

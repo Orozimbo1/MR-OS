@@ -16,14 +16,17 @@ const ModalDevice = ({ handleNewDevice, device, handleEditDevice, setDevice }) =
   const [model, setModel] = useState(device.model || '')
   const [color, setColor] = useState(device.color || '')
   const [problemDesc, setProblemDesc] = useState(device.problemDesc || '')
-  const [labor, setLabor] = useState(0)
-  const [total, setTotal] = useState(0)
+  const [labor, setLabor] = useState(device.labor || 0)
+  const [total, setTotal] = useState(device.total || 0)
+  const [initialReducer] = useState(parseInt(device.labor) || 0)
   const [error, setError] = useState('')
   const [partName, setPartName] = useState('')
   const [partPrice, setPartPrice] = useState('')
   const [edit, setEdit] = useState(false)
 
   const initialParts = []
+
+  
 
   const partsReducer = (state, action) => {
     switch (action.type) {
@@ -54,7 +57,7 @@ const ModalDevice = ({ handleNewDevice, device, handleEditDevice, setDevice }) =
         
         return [...state]
       case 'RESET': 
-        return [...initialDevices]
+        return [...initialParts]
       default:
         return state 
     }
@@ -72,6 +75,12 @@ const ModalDevice = ({ handleNewDevice, device, handleEditDevice, setDevice }) =
 
   const editPart = (part) => {
     dispatchParts({type: 'EDIT', part})
+  }
+
+  const reset = () => {
+    dispatchParts({type: 'RESET'})
+
+    setShowModalDevice(false)
   }
 
   const validateInputs = () => {
@@ -118,21 +127,27 @@ const ModalDevice = ({ handleNewDevice, device, handleEditDevice, setDevice }) =
       problemDesc,
       parts: parts,
       labor,
-      total
+      total: total
     }
+
+    console.log(device)
 
     handleNewDevice({type: 'ADD-DEVICE', device: device})
     setShowModalDevice(false)
   }
 
   const handleEdit = () => {
+    console.log(total)
     const deviceEdited = {
       id: device.id,
       deviceType,
       brand,
       model,
       color,
-      problemDesc
+      problemDesc,
+      parts: parts,
+      labor,
+      total
     }
 
     handleEditDevice({type: 'EDIT', device: deviceEdited})
@@ -141,12 +156,16 @@ const ModalDevice = ({ handleNewDevice, device, handleEditDevice, setDevice }) =
   }
 
   useEffect(() => {  
-    setTotal(parts.reduce((acc, val) => acc + val.price , 0))
+    if(labor) {
+      setTotal(parseInt(labor) + parts.reduce((acc, val) => acc + val.price , initialReducer))
+    } else {
+      setTotal(0 + parts.reduce((acc, val) => acc + val.price , initialReducer))
+    }
   }, [parts, labor])
 
   return (
     <div className='modal-container'>
-      <div className='blackout' onClick={() => setShowModalDevice(false)}></div>
+      <div className='blackout' onClick={reset}></div>
       <div className='modal'>
         <div className='new-device'>
           <h2>Novo dispositivo</h2>
@@ -229,15 +248,43 @@ const ModalDevice = ({ handleNewDevice, device, handleEditDevice, setDevice }) =
               </div> 
             </div>
           ))}
+          {device.parts && device.parts.map((part, i) => (
+            <div key={i} className='parts'>
+              <input type="text" value={part.part} disabled />
+              <input type="number" value={part.price} disabled />
+              <div className="icons">
+                <BsTrash onClick={() => removePart(part.id)}/>
+                {!edit 
+                ? <BsPenFill onClick={() => {
+                  setEdit(true)
+                  setPartName(part.part)
+                  setPartPrice(part.price)
+                }} /> 
+                : <BsExclamationCircle onClick={() => {
+                  setEdit(false)
+                  setPartName('')
+                  setPartPrice('')
+                }} />
+                }   
+              </div> 
+            </div>
+          ))}
           <label>
             <span>Mão de obra:</span>
             <input type="number" placeholder='R$: 99,99' value={labor} onChange={(e) => setLabor(e.target.value)} />
           </label>
-          <h3>
-            Total: R$: {!labor ? total : total + parseInt(labor)}
-          </h3>
+          {device.total ? (
+            <h3>
+              Total: R$: {total}
+            </h3>
+          ) : (
+            <h3>
+              {/* Total: R$: {!labor ? total : total + parseInt(labor)} */}
+              Total: R$: {total}
+            </h3>
+          )}
           <div className='finish-or-cancel'>
-            <button className='cancel-btn' onClick={() => setShowModalDevice(false)}>Cancelar</button>
+            <button className='cancel-btn' onClick={reset}>Cancelar</button>
             {!device.id && <input type="submit" value="Adicionar" onClick={handleSubmit}/>}
             {device.id && <input type="submit" value="Editar" onClick={handleEdit}/>}
           </div>
