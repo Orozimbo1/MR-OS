@@ -38,7 +38,7 @@ const ModalDevice = ({ handleNewDevice, device, handleEditDevice, setDevice }) =
 
         return [...state, newPart]
       case 'REMOVE':
-        return state.filter((device) => device.id !== action.id) 
+        return state.filter((part) => part.id !== action.id) 
       case 'EDIT':
         const updatedDevice = {
         }
@@ -184,9 +184,10 @@ const ModalDevice = ({ handleNewDevice, device, handleEditDevice, setDevice }) =
           </div>
           {parts.length > 0 && parts.map((part) => (
             <div key={part.id} className='parts'>
-              <p>{part.part} - {part.price}</p>
+              <input type="text" value={part.part} disabled />
+              <input type="number" value={part.price} disabled />
               <div className="icons">
-                <BsTrash />
+                <BsTrash onClick={() => removePart(part.id)}/>
                 <BsPenFill />   
               </div> 
             </div>
