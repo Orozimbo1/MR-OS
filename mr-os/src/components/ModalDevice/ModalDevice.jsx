@@ -22,6 +22,7 @@ const ModalDevice = ({ handleNewDevice, device, handleEditDevice, setDevice }) =
   const [partName, setPartName] = useState('')
   const [partPrice, setPartPrice] = useState('')
   const [edit, setEdit] = useState(false)
+  const [partId, setPartId] = useState('')
 
   const initialParts = []
 
@@ -35,10 +36,11 @@ const ModalDevice = ({ handleNewDevice, device, handleEditDevice, setDevice }) =
     switch (action.type) {
       case 'ADD':
         const newPart = {
+          id: Math.random(),
           part: partName,
           price: parseInt(partPrice)
         }
-
+        console.log(newPart)
         setPartName('')
         setPartPrice('')
 
@@ -138,7 +140,6 @@ const ModalDevice = ({ handleNewDevice, device, handleEditDevice, setDevice }) =
   }
 
   const handleEdit = () => {
-    console.log(total)
     const deviceEdited = {
       id: device.id,
       deviceType,
@@ -225,17 +226,19 @@ const ModalDevice = ({ handleNewDevice, device, handleEditDevice, setDevice }) =
             </label>
             {!edit 
               ? <button onClick={() => addPart()}>+Add peça</button>
-              : <button onClick={() => editPart( {part: partName, price: partPrice} )}>Editar</button>
+              : <button onClick={() => editPart( {id: partId, part: partName, price: partPrice} )}>Editar</button>
             }
           </div>
           {parts.length > 0 && parts.map((part, i) => (
-            <div key={i} className='parts'>
-              <input type="text" value={part.part} disabled />
-              <input type="number" value={part.price} disabled />
+            <li key={part.id} className='parts'>
+              <span>{i + 1} -</span>
+              <p className='part-name'>{part.part}</p>
+              <p className='part-price'>R$: {part.price}</p>
               <div className="icons">
                 <BsTrash onClick={() => removePart(part.id)}/>
                 {!edit 
                 ? <BsPenFill onClick={() => {
+                  setPartId(part.id)
                   setEdit(true)
                   setPartName(part.part)
                   setPartPrice(part.price)
@@ -247,7 +250,7 @@ const ModalDevice = ({ handleNewDevice, device, handleEditDevice, setDevice }) =
                 }} />
                 }   
               </div> 
-            </div>
+            </li>
           ))}
           <label>
             <span>Mão de obra:</span>

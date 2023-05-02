@@ -45,13 +45,36 @@ button {
   display: flex;
   height: 50px;
   align-items: center;
-  justify-content: space-between;
   text-align: left;
+}
+
+.parts span {
+  font-weight: bold;
+  width: 10%;
+}
+
+.parts .part-name {
+  font-weight: bold;
+  width: 25%;
+  margin-right: 5%;
+  overflow: auto;
+  text-overflow: ''
+}
+
+.part-name::-webkit-scrollbar {
+  width: 0px;
+  height: 0px;
+}
+
+.parts .part-price {
+  font-weight: bold;
+  margin-right: 10%;
+  width: 25%;
 }
 
 .icons {
   display: flex;
-  width: 30%;
+  width: 25%;
   justify-content: space-evenly;
 }
 
