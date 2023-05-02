@@ -1,5 +1,5 @@
 import './ModalDevice.css'
-import { useState, useReducer } from 'react'
+import { useState, useReducer, useEffect } from 'react'
 
 // Context
 import { useStateContext } from '../../context/StateContext'
@@ -16,6 +16,8 @@ const ModalDevice = ({ handleNewDevice, device, handleEditDevice, setDevice }) =
   const [model, setModel] = useState(device.model || '')
   const [color, setColor] = useState(device.color || '')
   const [problemDesc, setProblemDesc] = useState(device.problemDesc || '')
+  const [labor, setLabor] = useState(0)
+  const [total, setTotal] = useState(0)
   const [error, setError] = useState('')
   const [partName, setPartName] = useState('')
   const [partPrice, setPartPrice] = useState('')
@@ -28,7 +30,7 @@ const ModalDevice = ({ handleNewDevice, device, handleEditDevice, setDevice }) =
       case 'ADD':
         const newPart = {
           part: partName,
-          price: partPrice
+          price: parseInt(partPrice)
         }
 
         setPartName('')
@@ -40,7 +42,7 @@ const ModalDevice = ({ handleNewDevice, device, handleEditDevice, setDevice }) =
       case 'EDIT':
         const updatedPart = {
           part: action.part.part,
-          price: action.part.price
+          price: parseInt(action.part.price)
         }
 
         setPartName('')
@@ -93,6 +95,10 @@ const ModalDevice = ({ handleNewDevice, device, handleEditDevice, setDevice }) =
       setError('O campo descrição do problema é obrigatório')
       return false
     }
+    if(!labor) {
+      setError('O campo mão de obra é obrigatório')
+      return false
+    }
 
     return true
   }
@@ -109,7 +115,10 @@ const ModalDevice = ({ handleNewDevice, device, handleEditDevice, setDevice }) =
       brand,
       model,
       color,
-      problemDesc
+      problemDesc,
+      parts: parts,
+      labor,
+      total
     }
 
     handleNewDevice({type: 'ADD-DEVICE', device: device})
@@ -130,6 +139,10 @@ const ModalDevice = ({ handleNewDevice, device, handleEditDevice, setDevice }) =
     setDevice({})
     setShowModalDevice(false)
   }
+
+  useEffect(() => {  
+    setTotal(parts.reduce((acc, val) => acc + val.price , 0))
+  }, [parts, labor])
 
   return (
     <div className='modal-container'>
@@ -197,8 +210,8 @@ const ModalDevice = ({ handleNewDevice, device, handleEditDevice, setDevice }) =
           </div>
           {parts.length > 0 && parts.map((part, i) => (
             <div key={i} className='parts'>
-              <input type="text" value={part.part} onChange={(e) => setPartName(e.target.value)} />
-              <input type="number" value={part.price} onChange={(e) => setPartName(e.target.value)}  />
+              <input type="text" value={part.part} disabled />
+              <input type="number" value={part.price} disabled />
               <div className="icons">
                 <BsTrash onClick={() => removePart(part.id)}/>
                 {!edit 
@@ -218,8 +231,11 @@ const ModalDevice = ({ handleNewDevice, device, handleEditDevice, setDevice }) =
           ))}
           <label>
             <span>Mão de obra:</span>
-            <input type="number" placeholder='R$: 99,99' />
+            <input type="number" placeholder='R$: 99,99' value={labor} onChange={(e) => setLabor(e.target.value)} />
           </label>
+          <h3>
+            Total: R$: {!labor ? total : total + parseInt(labor)}
+          </h3>
           <div className='finish-or-cancel'>
             <button className='cancel-btn' onClick={() => setShowModalDevice(false)}>Cancelar</button>
             {!device.id && <input type="submit" value="Adicionar" onClick={handleSubmit}/>}
