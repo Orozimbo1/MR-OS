@@ -16,6 +16,18 @@
   overflow: auto;
 }
 
+.tec-data-modal {
+  display: flex;
+  flex-wrap: wrap;
+  margin: 0 auto;
+  width: 100%;
+}
+
+.tec-data-modal label {
+  width: 45%;
+  margin-right: 10px;
+}
+
 .modal h2 {
   display: flex;
   width: 100%;

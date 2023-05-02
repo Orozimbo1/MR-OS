@@ -5,7 +5,7 @@
     border: solid 1px #ece7e7;  
     border-radius: 4px;
     margin: 5px auto;
-    padding: .4em;
+    padding: 1em;
 }
 
 svg {
@@ -19,9 +19,31 @@ svg {
     width: 100%;
 }
 
-.tec-data label {
-   width: 45%;
-   margin-right: 10px;
+.tec-data p {
+    width: 49.3%;
+    display: flex;
+    flex-direction: column;
+    padding: 1em 0;
+    text-align: left;
+}
+
+span {
+    font-size: 1.2em;
+    font-weight: bold;
+}
+
+.problem-desc {
+    width: 70%;
+    text-align: left;
+}
+
+.subtotal {
+    margin: 0 auto;
+}
+
+.subtotal p {
+    display: inline-block;
+    font-size: 1.2em;
 }
 
 textarea{

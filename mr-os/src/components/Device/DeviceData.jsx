@@ -9,7 +9,7 @@ import { useStateContext } from '../../context/StateContext'
 function DeviceData({ showActions, handleDelete, device, setDevice }) {
   const { setShowModalDevice } = useStateContext()
 
-  const { id, deviceType, brand, model, color, problemDesc } = device
+  const { deviceType, brand, model, color, problemDesc, total } = device
 
   const editDevice = () => {
     setDevice(device)
@@ -25,27 +25,19 @@ function DeviceData({ showActions, handleDelete, device, setDevice }) {
           </>
         )}
         <div className="tec-data">
-            <label>
-              <span>Tipo do dispositvo:</span> 
-              <p>{deviceType}</p>
-            </label>
-            <label>
-              <span>Marca:</span>
-              <p>{brand}</p>
-            </label>
-            <label>
-              <span>Modelo:</span>
-              <p>{model}</p>
-            </label>
-            <label>
-              <span>Cor:</span>
-              <p>{color}</p>
-            </label>
-          </div>
-          <label>
+          <p><span>Tipo do dispositvo:</span> {deviceType}</p>
+          <p><span>Marca:</span> {brand}</p>
+          <p><span>Modelo:</span> {model}</p>
+          <p><span>Cor:</span> {color}</p>
+          <div className='problem-desc'>
             <span>Descrição do problema:</span>
             <p>{problemDesc}</p>
-          </label>
+          </div>
+          <div className='subtotal'>
+            <span>Subtotal</span>
+            <p><strong>R$: </strong>{total}</p>
+          </div>
+        </div>
       </div>
   )
 }

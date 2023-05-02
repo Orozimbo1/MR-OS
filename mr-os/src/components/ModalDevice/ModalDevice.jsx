@@ -40,7 +40,6 @@ const ModalDevice = ({ handleNewDevice, device, handleEditDevice, setDevice }) =
           part: partName,
           price: parseInt(partPrice)
         }
-        console.log(newPart)
         setPartName('')
         setPartPrice('')
 
@@ -61,8 +60,6 @@ const ModalDevice = ({ handleNewDevice, device, handleEditDevice, setDevice }) =
         state[index] = {...updatedPart}
         
         return [...state]
-      case 'RESET': 
-        return [...initialParts]
       default:
         return state 
     }
@@ -83,8 +80,7 @@ const ModalDevice = ({ handleNewDevice, device, handleEditDevice, setDevice }) =
   }
 
   const reset = () => {
-    dispatchParts({type: 'RESET'})
-
+    setDevice({})
     setShowModalDevice(false)
   }
 
@@ -172,7 +168,7 @@ const ModalDevice = ({ handleNewDevice, device, handleEditDevice, setDevice }) =
         <div className='new-device'>
           <h2>Novo dispositivo</h2>
         </div>
-        <div className="tec-data">
+        <div className="tec-data-modal">
             <label>
               <span>Tipo do dispositvo:</span> 
               <input 
