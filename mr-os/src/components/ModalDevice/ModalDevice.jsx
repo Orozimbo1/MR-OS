@@ -6,7 +6,7 @@ import { useStateContext } from '../../context/StateContext'
 
 // Components
 import { Message } from '../../components'
-import { BsCheck, BsCheck2All, BsExclamationCircle, BsPenFill, BsTrash } from 'react-icons/bs'
+import { BsExclamationCircle, BsPenFill, BsTrash } from 'react-icons/bs'
 
 const ModalDevice = ({ handleNewDevice, device, handleEditDevice, setDevice }) => {
   const { setShowModalDevice } = useStateContext()
@@ -16,9 +16,8 @@ const ModalDevice = ({ handleNewDevice, device, handleEditDevice, setDevice }) =
   const [model, setModel] = useState(device.model || '')
   const [color, setColor] = useState(device.color || '')
   const [problemDesc, setProblemDesc] = useState(device.problemDesc || '')
-  const [labor, setLabor] = useState(device.labor || 0)
-  const [total, setTotal] = useState(device.total || 0)
-  const [initialReducer] = useState(parseInt(device.labor) || 0)
+  const [labor, setLabor] = useState(device.labor || '')
+  const [total, setTotal] = useState(0)
   const [error, setError] = useState('')
   const [partName, setPartName] = useState('')
   const [partPrice, setPartPrice] = useState('')
@@ -26,7 +25,11 @@ const ModalDevice = ({ handleNewDevice, device, handleEditDevice, setDevice }) =
 
   const initialParts = []
 
-  
+  useEffect(() => {
+    if(device.parts) {
+      device.parts.map((part) => initialParts.push(part))
+    }
+  }, [])
 
   const partsReducer = (state, action) => {
     switch (action.type) {
@@ -130,8 +133,6 @@ const ModalDevice = ({ handleNewDevice, device, handleEditDevice, setDevice }) =
       total: total
     }
 
-    console.log(device)
-
     handleNewDevice({type: 'ADD-DEVICE', device: device})
     setShowModalDevice(false)
   }
@@ -157,9 +158,9 @@ const ModalDevice = ({ handleNewDevice, device, handleEditDevice, setDevice }) =
 
   useEffect(() => {  
     if(labor) {
-      setTotal(parseInt(labor) + parts.reduce((acc, val) => acc + val.price , initialReducer))
+      setTotal(parseInt(labor) + parts.reduce((acc, val) => acc + val.price , 0))
     } else {
-      setTotal(0 + parts.reduce((acc, val) => acc + val.price , initialReducer))
+      setTotal(0 + parts.reduce((acc, val) => acc + val.price , 0))
     }
   }, [parts, labor])
 
@@ -248,41 +249,13 @@ const ModalDevice = ({ handleNewDevice, device, handleEditDevice, setDevice }) =
               </div> 
             </div>
           ))}
-          {device.parts && device.parts.map((part, i) => (
-            <div key={i} className='parts'>
-              <input type="text" value={part.part} disabled />
-              <input type="number" value={part.price} disabled />
-              <div className="icons">
-                <BsTrash onClick={() => removePart(part.id)}/>
-                {!edit 
-                ? <BsPenFill onClick={() => {
-                  setEdit(true)
-                  setPartName(part.part)
-                  setPartPrice(part.price)
-                }} /> 
-                : <BsExclamationCircle onClick={() => {
-                  setEdit(false)
-                  setPartName('')
-                  setPartPrice('')
-                }} />
-                }   
-              </div> 
-            </div>
-          ))}
           <label>
             <span>Mão de obra:</span>
             <input type="number" placeholder='R$: 99,99' value={labor} onChange={(e) => setLabor(e.target.value)} />
           </label>
-          {device.total ? (
-            <h3>
-              Total: R$: {total}
-            </h3>
-          ) : (
-            <h3>
-              {/* Total: R$: {!labor ? total : total + parseInt(labor)} */}
-              Total: R$: {total}
-            </h3>
-          )}
+          <h3>
+            Total: R$: {total}
+          </h3>
           <div className='finish-or-cancel'>
             <button className='cancel-btn' onClick={reset}>Cancelar</button>
             {!device.id && <input type="submit" value="Adicionar" onClick={handleSubmit}/>}
