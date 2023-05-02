@@ -1,11 +1,12 @@
 import './ModalDevice.css'
-import { useState } from 'react'
+import { useState, useReducer, useEffect } from 'react'
 
 // Context
 import { useStateContext } from '../../context/StateContext'
 
 // Components
 import { Message } from '../../components'
+import { BsCheck, BsCheck2All, BsExclamationCircle, BsPenFill, BsTrash } from 'react-icons/bs'
 
 const ModalDevice = ({ handleNewDevice, device, handleEditDevice, setDevice }) => {
   const { setShowModalDevice } = useStateContext()
@@ -15,7 +16,72 @@ const ModalDevice = ({ handleNewDevice, device, handleEditDevice, setDevice }) =
   const [model, setModel] = useState(device.model || '')
   const [color, setColor] = useState(device.color || '')
   const [problemDesc, setProblemDesc] = useState(device.problemDesc || '')
+  const [labor, setLabor] = useState(device.labor || 0)
+  const [total, setTotal] = useState(device.total || 0)
+  const [initialReducer] = useState(parseInt(device.labor) || 0)
   const [error, setError] = useState('')
+  const [partName, setPartName] = useState('')
+  const [partPrice, setPartPrice] = useState('')
+  const [edit, setEdit] = useState(false)
+
+  const initialParts = []
+
+  
+
+  const partsReducer = (state, action) => {
+    switch (action.type) {
+      case 'ADD':
+        const newPart = {
+          part: partName,
+          price: parseInt(partPrice)
+        }
+
+        setPartName('')
+        setPartPrice('')
+
+        return [...state, newPart]
+      case 'REMOVE':
+        return state.filter((part) => part.id !== action.id) 
+      case 'EDIT':
+        const updatedPart = {
+          part: action.part.part,
+          price: parseInt(action.part.price)
+        }
+
+        setPartName('')
+        setPartPrice('')
+        setEdit(false)
+
+        let index = state.findIndex(element => element.id === action.part.id)
+        state[index] = {...updatedPart}
+        
+        return [...state]
+      case 'RESET': 
+        return [...initialParts]
+      default:
+        return state 
+    }
+  }
+
+  const [parts, dispatchParts] = useReducer(partsReducer, initialParts)
+
+  const addPart = () => {
+    dispatchParts({type: 'ADD'})
+  }
+
+  const removePart = (id) => {
+    dispatchParts({type: 'REMOVE', id})
+  }
+
+  const editPart = (part) => {
+    dispatchParts({type: 'EDIT', part})
+  }
+
+  const reset = () => {
+    dispatchParts({type: 'RESET'})
+
+    setShowModalDevice(false)
+  }
 
   const validateInputs = () => {
     if(!deviceType) {
@@ -38,6 +104,10 @@ const ModalDevice = ({ handleNewDevice, device, handleEditDevice, setDevice }) =
       setError('O campo descrição do problema é obrigatório')
       return false
     }
+    if(!labor) {
+      setError('O campo mão de obra é obrigatório')
+      return false
+    }
 
     return true
   }
@@ -54,21 +124,30 @@ const ModalDevice = ({ handleNewDevice, device, handleEditDevice, setDevice }) =
       brand,
       model,
       color,
-      problemDesc
+      problemDesc,
+      parts: parts,
+      labor,
+      total: total
     }
+
+    console.log(device)
 
     handleNewDevice({type: 'ADD-DEVICE', device: device})
     setShowModalDevice(false)
   }
 
   const handleEdit = () => {
+    console.log(total)
     const deviceEdited = {
       id: device.id,
       deviceType,
       brand,
       model,
       color,
-      problemDesc
+      problemDesc,
+      parts: parts,
+      labor,
+      total
     }
 
     handleEditDevice({type: 'EDIT', device: deviceEdited})
@@ -76,9 +155,17 @@ const ModalDevice = ({ handleNewDevice, device, handleEditDevice, setDevice }) =
     setShowModalDevice(false)
   }
 
+  useEffect(() => {  
+    if(labor) {
+      setTotal(parseInt(labor) + parts.reduce((acc, val) => acc + val.price , initialReducer))
+    } else {
+      setTotal(0 + parts.reduce((acc, val) => acc + val.price , initialReducer))
+    }
+  }, [parts, labor])
+
   return (
     <div className='modal-container'>
-      <div className='blackout' onClick={() => setShowModalDevice(false)}></div>
+      <div className='blackout' onClick={reset}></div>
       <div className='modal'>
         <div className='new-device'>
           <h2>Novo dispositivo</h2>
@@ -126,8 +213,78 @@ const ModalDevice = ({ handleNewDevice, device, handleEditDevice, setDevice }) =
             >
             </textarea>
           </label>
+          <div className="todo">
+            <label>
+              <span>Peça:</span>
+              <input type="text" value={partName} onChange={(e) => setPartName(e.target.value)}/>
+            </label>
+            <label>
+              <span>Valor:</span>
+              <input type="number" value={partPrice} onChange={(e) => setPartPrice(e.target.value)}/>
+            </label>
+            {!edit 
+              ? <button onClick={() => addPart()}>+Add peça</button>
+              : <button onClick={() => editPart( {part: partName, price: partPrice} )}>Editar</button>
+            }
+          </div>
+          {parts.length > 0 && parts.map((part, i) => (
+            <div key={i} className='parts'>
+              <input type="text" value={part.part} disabled />
+              <input type="number" value={part.price} disabled />
+              <div className="icons">
+                <BsTrash onClick={() => removePart(part.id)}/>
+                {!edit 
+                ? <BsPenFill onClick={() => {
+                  setEdit(true)
+                  setPartName(part.part)
+                  setPartPrice(part.price)
+                }} /> 
+                : <BsExclamationCircle onClick={() => {
+                  setEdit(false)
+                  setPartName('')
+                  setPartPrice('')
+                }} />
+                }   
+              </div> 
+            </div>
+          ))}
+          {device.parts && device.parts.map((part, i) => (
+            <div key={i} className='parts'>
+              <input type="text" value={part.part} disabled />
+              <input type="number" value={part.price} disabled />
+              <div className="icons">
+                <BsTrash onClick={() => removePart(part.id)}/>
+                {!edit 
+                ? <BsPenFill onClick={() => {
+                  setEdit(true)
+                  setPartName(part.part)
+                  setPartPrice(part.price)
+                }} /> 
+                : <BsExclamationCircle onClick={() => {
+                  setEdit(false)
+                  setPartName('')
+                  setPartPrice('')
+                }} />
+                }   
+              </div> 
+            </div>
+          ))}
+          <label>
+            <span>Mão de obra:</span>
+            <input type="number" placeholder='R$: 99,99' value={labor} onChange={(e) => setLabor(e.target.value)} />
+          </label>
+          {device.total ? (
+            <h3>
+              Total: R$: {total}
+            </h3>
+          ) : (
+            <h3>
+              {/* Total: R$: {!labor ? total : total + parseInt(labor)} */}
+              Total: R$: {total}
+            </h3>
+          )}
           <div className='finish-or-cancel'>
-            <button className='cancel-btn' onClick={() => setShowModalDevice(false)}>Cancelar</button>
+            <button className='cancel-btn' onClick={reset}>Cancelar</button>
             {!device.id && <input type="submit" value="Adicionar" onClick={handleSubmit}/>}
             {device.id && <input type="submit" value="Editar" onClick={handleEdit}/>}
           </div>

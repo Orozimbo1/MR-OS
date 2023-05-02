@@ -44,7 +44,10 @@ const ServiceOrder = () => {
           brand: action.device.brand,
           model: action.device.model,
           color: action.device.color,
-          problemDesc: action.device.problemDesc
+          problemDesc: action.device.problemDesc,
+          parts: action.device.parts,
+          labor: action.device.labor,
+          total: action.device.total
         }
 
         return [...state, newDevice]
@@ -57,8 +60,13 @@ const ServiceOrder = () => {
           brand: action.device.brand,
           model: action.device.model,
           color: action.device.color,
-          problemDesc: action.device.problemDesc
+          problemDesc: action.device.problemDesc,
+          parts: action.device.parts,
+          labor: action.device.labor,
+          total: action.device.total
         }
+
+        console.log(updatedDevice)
         let index = state.findIndex(element => element.id === action.device.id)
         state[index] = {...updatedDevice}
         return [...state]
