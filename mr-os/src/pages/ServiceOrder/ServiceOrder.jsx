@@ -66,6 +66,7 @@ const ServiceOrder = () => {
           total: action.device.total
         }
 
+        console.log(updatedDevice)
         let index = state.findIndex(element => element.id === action.device.id)
         state[index] = {...updatedDevice}
         return [...state]
@@ -186,6 +187,10 @@ const ServiceOrder = () => {
               <BsPlus />
               Add dispositivo
             </button>
+          </div>
+          <div className="total">
+            <h4>Total</h4>
+            <p><span>R$:</span> {devices.reduce((acc, val) => acc + val.total, 0)}</p>
           </div>
           <div className='finish-or-cancel'>
             <Link className='cancel-btn' to='/'>Cancelar</Link>

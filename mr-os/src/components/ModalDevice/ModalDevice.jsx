@@ -159,7 +159,7 @@ const ModalDevice = ({ handleNewDevice, device, handleEditDevice, setDevice }) =
     } else {
       setTotal(0 + parts.reduce((acc, val) => acc + val.price , 0))
     }
-  }, [parts, labor])
+  }, [parts, labor]) 
 
   return (
     <div className='modal-container'>
