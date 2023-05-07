@@ -17,6 +17,22 @@
   margin: 0 .2em 0 .5em;
 }
 
+.devices h4 {
+  text-align: left;
+  font-size: 1.2em;
+  font-weight: bold;
+  margin: 1em 0 .5em;
+}
+
+.total {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: end;
+  margin: 1em 2em;
+  gap: 2em;
+}
+
 @media screen and (max-width: 800px) {
   .status-container {
     width: 100%;

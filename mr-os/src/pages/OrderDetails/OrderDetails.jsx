@@ -11,6 +11,7 @@ import { DeviceData } from '../../components'
 
 const Order = () => {
   const { order, loading } = useSelector((state) => state.order)
+  console.log(order)
 
   const dispatch = useDispatch()
   const navigate = useNavigate()
@@ -32,7 +33,7 @@ const Order = () => {
   }
 
   return (
-    <div>
+    <div className='order-details'>
       {order && order.status && (
         <div>
           <div className="customer-data">
@@ -43,17 +44,19 @@ const Order = () => {
           </div>
           <div className='status-container'>Status: 
             <div className={`status ${order.status && order.status.status}`}></div> 
-            {order.status && order.status.text}
+            <p>{order.status && order.status.text}</p>
           </div>
-          <h3>Dispositivos:</h3>
-          {order.devices && order.devices.map((device,i) => (
-            <div key={i}>
-              <DeviceData 
-                showActions={false}
-                device={device} 
-              />
-            </div>
-          ))}
+          <div className='devices'>
+          <h4>Dispositivos:</h4>
+            {order.devices && order.devices.map((device,i) => (
+              <div key={i}>
+                <DeviceData 
+                  showActions={false}
+                  device={device} 
+                />
+              </div>
+            ))}
+          </div>
           <div className="total">
             <h4>Total</h4>
             <p><span>R$:</span> {order.devices.reduce((acc, val) => acc + val.total, 0)}</p>
