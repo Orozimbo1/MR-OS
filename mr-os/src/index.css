@@ -129,6 +129,18 @@ input[type="submit"]:hover {
   background-color: rgba(0, 0, 0, 0.295);
 }
 
+.pending {
+  background-color: rgb(255, 163, 17);
+}
+
+.rejected {
+  background-color: rgb(255, 42, 42);
+}
+
+.finished {
+  background-color: rgb(2, 253, 2);
+}
+
 @media screen and (max-width:800px) {
   body{
     width: 100vw;

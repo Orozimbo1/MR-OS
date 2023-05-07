@@ -35,6 +35,8 @@ const Orders = ({ status, title }) => {
                 address={order.address} 
                 phoneNumber={order.phoneNumber} 
                 createdAt={order.createdAt}
+                devices={order.devices}
+                status={order.status.status}
                 id={order.id}
               />
             ))}
