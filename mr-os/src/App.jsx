@@ -7,7 +7,7 @@ import './App.css'
 import { Navbar, Footer, SideBar, SideMenu } from './components'
 
 // Pages
-import { Home, ServiceOrder, Dashboard, Login, Register, OrderDetails } from './pages'
+import { Home, ServiceOrder, Dashboard, Login, Register, OrderDetails, Settings, Tutorial } from './pages'
 
 // Hooks
 import { useAuth } from './hooks'
@@ -45,6 +45,8 @@ function App() {
             <Route path='/login' element={!auth ? <Login /> : <Navigate to='/' />} /> 
             <Route path='/register' element={!auth ? <Register /> : <Navigate to='/' />} /> 
             <Route path='/dashboard' element={auth ? <Dashboard /> : <Navigate to='/login' />} />
+            <Route path='/settings' element={auth ? <Settings /> : <Navigate to='/login' />} />
+            <Route path='/tutorial' element={auth ? <Tutorial /> : <Navigate to='/login' />} />
           </Routes>
         </div>
         {auth && <Footer />}
