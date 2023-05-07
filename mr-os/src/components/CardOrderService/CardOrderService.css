@@ -1,25 +1,29 @@
-.card-order-service {
-  position: relative;
-  padding: 20px;
-  width: 24%;
+.card-order-service-container {
   display: flex;
   align-items: center;
   justify-content: space-between;
+}
+
+.card-order-service {
+  position: relative;
+  padding: 20px;
   text-align: justify;
   border: 1px solid #aaaaaa84;
   border-radius: 3px;
-  transition: .8s;
   box-sizing: border-box;
+  z-index: -1;
 }
 
 .card-order-service p {
   padding-top: 1em;
 }
 
-.card-order-service:hover {
+.card-order-service-container a {
+  transition: .8s;
+}
+
+.card-order-service-container a:hover {
   background-color: rgba(22, 168, 230, 0.294);
-  /* width: 120%;
-  height: 120%; */
 }
 
 .qtd {
