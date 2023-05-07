@@ -110,11 +110,6 @@ button {
   font-size: 20px;
 }
 
-.modal-container .finish-or-cancel button,
-.modal-container .finish-or-cancel input[type="submit"] {
-  z-index: 1;
-}
-
 /* @media screen and (max-width:800px) {
   .new-device {
     width: 70%;

@@ -84,7 +84,6 @@ input[type="submit"] {
   opacity: .8;
   font-size: 1em;
   margin: 1em;
-  z-index: -1;
 }
 
 input:disabled {
@@ -108,7 +107,6 @@ input[type="submit"]:hover {
   cursor: pointer;
   opacity: .8;
   font-size: 1em;
-  z-index: -1;
 }
 
 .cancel-btn:hover {
@@ -128,6 +126,7 @@ input[type="submit"]:hover {
   height: 100vh;
   width: 100vw;
   background-color: rgba(0, 0, 0, 0.479);
+  z-index: 1;
 }
 
 .pending {
