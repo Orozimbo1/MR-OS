@@ -11,14 +11,17 @@
 .new-section button {
   display: flex;
   align-items: center;
+  margin: 20px 10px;
   border: none;
   background-color: transparent; 
   color: #0094f6;
-  font-size: .8em;
+  font-weight: bold;
+  font-size: .9em;
 }
 
 .new-section button svg {
   font-size: 1.5em;
+  font-weight: bold;
 }
 
 .total {

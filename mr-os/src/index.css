@@ -72,7 +72,6 @@ textarea::placeholder {
 }
 
 .btn,
-button,
 input[type="submit"] {
   width: fit-content;
   background-color: #0094f6;
@@ -128,7 +127,7 @@ input[type="submit"]:hover {
   left: 50px;
   height: 100vh;
   width: 100vw;
-  background-color: rgba(0, 0, 0, 0.295);
+  background-color: rgba(0, 0, 0, 0.479);
 }
 
 .pending {
