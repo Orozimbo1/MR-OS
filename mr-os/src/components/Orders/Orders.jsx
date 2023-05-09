@@ -14,7 +14,7 @@ const Orders = ({ status, title }) => {
   const { orders, loading } = useSelector((state) => state.order)
   const { user: { uid } } = useSelector((state) => state.auth)
 
-  const dispatch = useDispatch()
+  const dispatch = useDispatch()  
 
   useEffect(() => {
     dispatch(getAllServiceOrders(uid))
@@ -38,6 +38,7 @@ const Orders = ({ status, title }) => {
                 finishedAt={order.finishedAt}
                 devices={order.devices}
                 status={order.status.status}
+                total={order.total}
                 id={order.id}
               />
             ))}

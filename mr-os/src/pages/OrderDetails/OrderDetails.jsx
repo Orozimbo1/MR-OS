@@ -64,7 +64,7 @@ const Order = () => {
           </div>
           <div className="total">
             <h4>Total</h4>
-            <p><span>R$:</span> {order.devices.reduce((acc, val) => acc + val.total, 0)}</p>
+            <p><span>R$:</span> {order.total}</p>
           </div>
           {order.status.status === 'pending' && (
             <div className='finish-or-cancel'>

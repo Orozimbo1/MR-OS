@@ -5,7 +5,7 @@ import { DeviceData, ModalDevice } from '../../components'
 import { BsPlus } from 'react-icons/bs'
 
 // Hooks
-import { useReducer, useState } from 'react'
+import { useEffect, useReducer, useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
 
@@ -32,6 +32,7 @@ const ServiceOrder = () => {
   const [address, setAddress] = useState('')
   const [device, setDevice] = useState({})
   const [error, setError] = useState('') 
+  const [total, setTotal] = useState(0)
 
   const initialDevices = []
 
@@ -125,13 +126,18 @@ const ServiceOrder = () => {
       address,
       userId: user.uid,
       createdBy: user.displayName,
-      status: {status: 'pending', text: 'Em andamento'}
+      status: {status: 'pending', text: 'Em andamento'},
+      total
     }
 
     dispatch(newOrder(serviceOrder))
     reset()
     navigate('/')
   }
+
+  useEffect(() => {
+    setTotal(devices.reduce((acc, val) => acc + val.total, 0))
+  })
 
   return (
     <div className='service-order-container'>
@@ -190,7 +196,7 @@ const ServiceOrder = () => {
           </div>
           <div className="total">
             <h4>Total</h4>
-            <p><span>R$:</span> {devices.reduce((acc, val) => acc + val.total, 0)}</p>
+            <p><span>R$:</span> {total}</p>
           </div>
           <div className='finish-or-cancel'>
             <Link className='cancel-btn' to='/'>Cancelar</Link>

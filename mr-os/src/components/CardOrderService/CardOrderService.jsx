@@ -3,7 +3,7 @@ import React from 'react'
 
 import { Link } from 'react-router-dom'
 
-const CardOrderService = ({ name, address, phoneNumber, createdAt, id, devices, status, finishedAt }) => {
+const CardOrderService = ({ name, address, phoneNumber, createdAt, id, devices, status, finishedAt, total }) => {
   const date = createdAt && createdAt.toDate() && createdAt.toDate().toLocaleString('pt-BR', { timezone: 'UTC' })
   const dateFinished = finishedAt && finishedAt.toDate() && finishedAt.toDate().toLocaleString('pt-BR', { timezone: 'UTC' })
 
@@ -23,7 +23,7 @@ const CardOrderService = ({ name, address, phoneNumber, createdAt, id, devices, 
           </div>
           <div className="total">
               <h4>Total</h4>
-              <p><span>R$:</span> {devices.reduce((acc, val) => acc + val.total, 0)}</p>
+              <p><span>R$:</span> {total}</p>
             </div>
         </div>
       </Link>

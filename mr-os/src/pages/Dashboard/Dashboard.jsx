@@ -2,7 +2,18 @@ import './Dashboard.css'
 
 import { Link } from 'react-router-dom'
 
+import { useSelector } from 'react-redux'
+
 const Dashboard = () => {
+  const { orders } = useSelector((state) => state.order)
+  const { user } = useSelector((state) => state.auth)
+
+  const ordersPending = orders && orders.filter((order) => order.status.status === 'pending')
+  const ordersFinished = orders && orders.filter((order) => order.status.status === 'finished')
+  const ordersRejected = orders && orders.filter((order) => order.status.status === 'rejected')
+
+  // const totalPending = orders && orders
+  console.log(ordersFinished)
 
   return (
     <div className='dashboard'>
