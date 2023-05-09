@@ -43,8 +43,8 @@ export const getAllServiceOrders = createAsyncThunk(
 // Update the order status 
 export const updateOrderStatus = createAsyncThunk(
   'order/updatestatus',
-  async ({id, status}, thunkAPI) => {
-    const data = await orderService.updateOrderStatus(id, status)
+  async ({id, finshed}, thunkAPI) => {
+    const data = await orderService.updateOrderStatus(id, finshed)
 
     return data
   }

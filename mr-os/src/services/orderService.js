@@ -54,11 +54,11 @@ const getAllServiceOrders = async (uid) => {
 }
 
 // Update the order status 
-const updateOrderStatus = async (id, status) => {
+const updateOrderStatus = async (id, finshed) => {
   try {
     const docRef = await doc(db, 'serviceOrders', id)
 
-    await updateDoc(docRef, {'status': status})
+    await updateDoc(docRef, {'status': finshed.status, 'finishedAt': finshed.finishedAt})
 
     const updatedDocument = await getServiceOrder(id)
 

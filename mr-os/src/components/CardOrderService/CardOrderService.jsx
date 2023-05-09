@@ -3,8 +3,9 @@ import React from 'react'
 
 import { Link } from 'react-router-dom'
 
-const CardOrderService = ({ name, address, phoneNumber, createdAt, id, devices, status }) => {
+const CardOrderService = ({ name, address, phoneNumber, createdAt, id, devices, status, finishedAt }) => {
   const date = createdAt && createdAt.toDate() && createdAt.toDate().toLocaleString('pt-BR', { timezone: 'UTC' })
+  const dateFinished = finishedAt && finishedAt.toDate() && finishedAt.toDate().toLocaleString('pt-BR', { timezone: 'UTC' })
 
   return (
     <div className='card-order-service-container'>
@@ -17,7 +18,8 @@ const CardOrderService = ({ name, address, phoneNumber, createdAt, id, devices, 
           </div>
           <div>
             <p>{phoneNumber}</p>
-            <p className='date'>{date}</p>
+            <p className='date'><strong>Criado:</strong> {date}</p> 
+            {finishedAt && <p className='date'><strong>Finalizado:</strong> {dateFinished}</p> }
           </div>
           <div className="total">
               <h4>Total</h4>

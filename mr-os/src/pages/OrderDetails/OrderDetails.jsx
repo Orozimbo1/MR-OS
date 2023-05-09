@@ -1,5 +1,8 @@
 import './OrderDetails.css'
 
+// Firebase
+import { Timestamp } from 'firebase/firestore'
+
 // Hooks
 import { useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
@@ -11,6 +14,7 @@ import { DeviceData } from '../../components'
 
 const Order = () => {
   const { order, loading } = useSelector((state) => state.order)
+  console.log(order)
 
   const dispatch = useDispatch()
   const navigate = useNavigate()
@@ -21,12 +25,14 @@ const Order = () => {
     dispatch(getServiceOrder(id))
   },[id, dispatch])
 
+
   const date = order && order.createdAt && order.createdAt.toDate() && order.createdAt.toDate().toLocaleString('pt-BR', { timezone: 'UTC' })
+  const dateFinished = order && order.finishedAt && order.finishedAt.toDate() && order.finishedAt.toDate().toLocaleString('pt-BR', { timezone: 'UTC' })
   
   {loading && <p>Carregando...</p>}
 
   const handleUpdateStatusOrder = (status, text) => {
-    dispatch(updateOrderStatus({id, status: {status: status, text: text}}))
+    dispatch(updateOrderStatus({id, finshed: {status: {status: status, text: text}, finishedAt: Timestamp.now()}}))
 
     navigate('/')
   }
@@ -40,6 +46,7 @@ const Order = () => {
             <h3>Endereço: {order.address}</h3>
             <h3>Telefone: {order.phoneNumber}</h3>
             <h3>Data de criação: {date}</h3>
+            <h3>Finalizou em: {dateFinished}</h3>
           </div>
           <div className='status-container'>Status: 
             <div className={`status ${order.status && order.status.status}`}></div> 
