@@ -16,13 +16,22 @@ export const register = createAsyncThunk(
   'auth/register',
   async (user, thunkAPI) => {
 
+    //Check for errors Front
+    if(!user.displayName) {
+      return thunkAPI.rejectWithValue('O campo "nome" é obrigatório.')
+    } else if(user.displayName.length < 3) {
+      return thunkAPI.rejectWithValue('O nome precisa ter no mínimo "3" caracteres.')
+    } else if (!user.password) {
+      return thunkAPI.rejectWithValue('O campo "senha" é obrigatório.')
+    } else if (user.password.length < 6) {
+      return thunkAPI.rejectWithValue('Senha precisa conter pelo menos "6" caracteres.')
+    }
+
     const data = await authService.register(user)
 
-    //Check for errors
+    //Check for errors Firebase
     if(data.error.code.includes('already')) {
       return thunkAPI.rejectWithValue('Email já está em uso.')
-    } else if (data.error.code.includes('password')) {
-      return thunkAPI.rejectWithValue('Senha precisa conter pelo menos 6 caracteres.')
     } else if (data.error.code.includes('invalid')) {
       return thunkAPI.rejectWithValue('Por favor insira um email válido.')
     }

@@ -14,7 +14,6 @@ import { DeviceData } from '../../components'
 
 const Order = () => {
   const { order, loading } = useSelector((state) => state.order)
-  console.log(order)
 
   const dispatch = useDispatch()
   const navigate = useNavigate()
