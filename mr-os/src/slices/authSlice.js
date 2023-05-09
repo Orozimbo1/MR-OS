@@ -29,13 +29,13 @@ export const register = createAsyncThunk(
 
     const data = await authService.register(user)
 
-    //Check for errors Firebase
-    if(data.error.code.includes('already')) {
+    // Check for errors Firebase
+    if(data.error && data.error.code.includes('already')) {
       return thunkAPI.rejectWithValue('Email já está em uso.')
-    } else if (data.error.code.includes('invalid')) {
+    } else if (data.error && data.error.code.includes('invalid')) {
       return thunkAPI.rejectWithValue('Por favor insira um email válido.')
     }
-    
+
     return data
   }
 )
