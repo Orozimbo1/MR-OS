@@ -21,7 +21,7 @@ function DeviceData({ showActions, handleDelete, device, setDevice }) {
         {showActions && (
           <>
             <BsTrash className='trash' onClick={handleDelete}/>
-            <BsPenFill className='' onClick={editDevice} />
+            <BsPenFill onClick={editDevice} />
           </>
         )}
         <div className="tec-data">

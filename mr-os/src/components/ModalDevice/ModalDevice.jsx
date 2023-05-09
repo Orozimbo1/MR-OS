@@ -23,6 +23,7 @@ const ModalDevice = ({ handleNewDevice, device, handleEditDevice, setDevice }) =
   const [partPrice, setPartPrice] = useState('')
   const [edit, setEdit] = useState(false)
   const [partId, setPartId] = useState('')
+  let totalParts
 
   const initialParts = []
 
@@ -120,6 +121,8 @@ const ModalDevice = ({ handleNewDevice, device, handleEditDevice, setDevice }) =
 
     if(!validate) return
 
+    totalParts = parts.reduce((acc, val) => acc + val.price , 0)
+
     const device = {
       deviceType,
       brand,
@@ -128,7 +131,8 @@ const ModalDevice = ({ handleNewDevice, device, handleEditDevice, setDevice }) =
       problemDesc,
       parts: parts,
       labor,
-      total: total
+      total: total,
+      totalParts
     }
 
     handleNewDevice({type: 'ADD-DEVICE', device: device})
@@ -136,6 +140,12 @@ const ModalDevice = ({ handleNewDevice, device, handleEditDevice, setDevice }) =
   }
 
   const handleEdit = () => {
+    const validate = validateInputs()
+
+    if(!validate) return
+
+    totalParts = parts.reduce((acc, val) => acc + val.price , 0)
+
     const deviceEdited = {
       id: device.id,
       deviceType,
@@ -145,7 +155,8 @@ const ModalDevice = ({ handleNewDevice, device, handleEditDevice, setDevice }) =
       problemDesc,
       parts: parts,
       labor,
-      total
+      total,
+      totalParts
     }
 
     handleEditDevice({type: 'EDIT', device: deviceEdited})

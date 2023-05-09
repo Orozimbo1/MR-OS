@@ -48,7 +48,8 @@ const ServiceOrder = () => {
           problemDesc: action.device.problemDesc,
           parts: action.device.parts,
           labor: action.device.labor,
-          total: action.device.total
+          total: action.device.total,
+          totalParts: action.device.totalParts
         }
 
         return [...state, newDevice]
@@ -64,7 +65,8 @@ const ServiceOrder = () => {
           problemDesc: action.device.problemDesc,
           parts: action.device.parts,
           labor: action.device.labor,
-          total: action.device.total
+          total: action.device.total,
+          totalParts: action.device.totalParts
         }
 
         console.log(updatedDevice)
