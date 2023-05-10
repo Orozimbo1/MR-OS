@@ -15,15 +15,15 @@ const Dashboard = () => {
   // Valor de ordens em andamento
   ordersPending.reduce((acc, val) => acc + val.total, 0)
   ordersPending.reduce((acc, val) => acc + val.devices.reduce((acc, val) => acc + val.totalParts, 0), 0)
-  ordersPending.reduce((acc, val) => acc + val.devices.reduce((acc, val) => acc + val.labor, 0), 0)
+  ordersPending.reduce((acc, val) => acc + val.devices.reduce((acc, val) => acc + parseInt(val.labor), 0), 0)
   // Valor de ordens Concluídas
   ordersFinished.reduce((acc, val) => acc + val.total, 0)
   ordersFinished.reduce((acc, val) => acc + val.devices.reduce((acc, val) => acc + val.totalParts, 0), 0)
-  ordersFinished.reduce((acc, val) => acc + val.devices.reduce((acc, val) => acc + val.labor, 0), 0)
+  ordersFinished.reduce((acc, val) => acc + val.devices.reduce((acc, val) => acc + parseInt(val.labor), 0), 0)
   // Valor de ordens rejeitadas
   ordersRejected.reduce((acc, val) => acc + val.total, 0)
   ordersRejected.reduce((acc, val) => acc + val.devices.reduce((acc, val) => acc + val.totalParts, 0), 0)
-  ordersRejected.reduce((acc, val) => acc + val.devices.reduce((acc, val) => acc + val.labor, 0), 0)
+  ordersRejected.reduce((acc, val) => acc + val.devices.reduce((acc, val) => acc + parseInt(val.labor), 0), 0)
 
   // const totalPending = orders && orders
 
@@ -35,15 +35,15 @@ const Dashboard = () => {
           <div className='dash-data'>
             <div className='dash-card'>
               <h4>Em andamento</h4>
-              <p>10</p>
+              <p>{ordersPending.length}</p>
             </div>
             <div className='dash-card'>
               <h4>Rejeitadas</h4>
-              <p>20</p>
+              <p>{ordersRejected.length}</p>
             </div>
             <div className='dash-card'>
               <h4>Concluídas</h4>
-              <p>30</p>
+              <p>{ordersFinished.length}</p>
             </div>
           </div>
         </section>
@@ -51,16 +51,19 @@ const Dashboard = () => {
           <h2>Finanças</h2>
           <div className="dash-data">
             <div className='dash-card'>
-              <h4>Total</h4>
-              <p>R$:200</p>
+              <h4>Total</h4> 
+              <p>R$: {ordersFinished.reduce((acc, val) => acc + val.total, 0)}</p>                         
+              <p>100%</p>                         
             </div>
             <div className='dash-card'>
               <h4>Gastos</h4>
-              <p>R$:50</p>
+              <p>R$: {ordersFinished.reduce((acc, val) => acc + val.devices.reduce((acc, val) => acc + val.totalParts, 0), 0)}</p>
+              <p>{((ordersFinished.reduce((acc, val) => acc + val.devices.reduce((acc, val) => acc + val.totalParts, 0), 0) * 100) / ordersFinished.reduce((acc, val) => acc + val.total, 0)).toFixed(1)}%</p>
             </div>
             <div className='dash-card'>
               <h4>Lucro</h4>
-              <p>R$:150</p>
+              <p>R$: {ordersFinished.reduce((acc, val) => acc + val.devices.reduce((acc, val) => acc + parseInt(val.labor), 0), 0)}</p>
+              <p>{((ordersFinished.reduce((acc, val) => acc + val.devices.reduce((acc, val) => acc + parseInt(val.labor), 0), 0) * 100) / ordersFinished.reduce((acc, val) => acc + val.total, 0)).toFixed(1)}%</p>
             </div>
           </div>
         </section>
