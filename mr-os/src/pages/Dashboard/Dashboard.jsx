@@ -12,8 +12,20 @@ const Dashboard = () => {
   const ordersFinished = orders && orders.filter((order) => order.status.status === 'finished')
   const ordersRejected = orders && orders.filter((order) => order.status.status === 'rejected')
 
+  // Valor de ordens em andamento
+  ordersPending.reduce((acc, val) => acc + val.total, 0)
+  ordersPending.reduce((acc, val) => acc + val.devices.reduce((acc, val) => acc + val.totalParts, 0), 0)
+  ordersPending.reduce((acc, val) => acc + val.devices.reduce((acc, val) => acc + val.labor, 0), 0)
+  // Valor de ordens Concluídas
+  ordersFinished.reduce((acc, val) => acc + val.total, 0)
+  ordersFinished.reduce((acc, val) => acc + val.devices.reduce((acc, val) => acc + val.totalParts, 0), 0)
+  ordersFinished.reduce((acc, val) => acc + val.devices.reduce((acc, val) => acc + val.labor, 0), 0)
+  // Valor de ordens rejeitadas
+  ordersRejected.reduce((acc, val) => acc + val.total, 0)
+  ordersRejected.reduce((acc, val) => acc + val.devices.reduce((acc, val) => acc + val.totalParts, 0), 0)
+  ordersRejected.reduce((acc, val) => acc + val.devices.reduce((acc, val) => acc + val.labor, 0), 0)
+
   // const totalPending = orders && orders
-  console.log(ordersFinished)
 
   return (
     <div className='dashboard'>
