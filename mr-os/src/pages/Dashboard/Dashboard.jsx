@@ -13,19 +13,19 @@ const Dashboard = () => {
   const ordersRejected = orders && orders.filter((order) => order.status.status === 'rejected')
 
   // Valor de ordens em andamento
-  ordersPending.reduce((acc, val) => acc + val.total, 0)
-  ordersPending.reduce((acc, val) => acc + val.devices.reduce((acc, val) => acc + val.totalParts, 0), 0)
-  ordersPending.reduce((acc, val) => acc + val.devices.reduce((acc, val) => acc + parseInt(val.labor), 0), 0)
-  // Valor de ordens Concluídas
-  ordersFinished.reduce((acc, val) => acc + val.total, 0)
-  ordersFinished.reduce((acc, val) => acc + val.devices.reduce((acc, val) => acc + val.totalParts, 0), 0)
-  ordersFinished.reduce((acc, val) => acc + val.devices.reduce((acc, val) => acc + parseInt(val.labor), 0), 0)
-  // Valor de ordens rejeitadas
-  ordersRejected.reduce((acc, val) => acc + val.total, 0)
-  ordersRejected.reduce((acc, val) => acc + val.devices.reduce((acc, val) => acc + val.totalParts, 0), 0)
-  ordersRejected.reduce((acc, val) => acc + val.devices.reduce((acc, val) => acc + parseInt(val.labor), 0), 0)
+  const totalPending = ordersPending.reduce((acc, val) => acc + val.total, 0)
+  const totalPartsPending = ordersPending.reduce((acc, val) => acc + val.devices.reduce((acc, val) => acc + val.totalParts, 0), 0)
+  const totalLaborPending = ordersPending.reduce((acc, val) => acc + val.devices.reduce((acc, val) => acc + parseInt(val.labor), 0), 0)
 
-  // const totalPending = orders && orders
+  // Valor de ordens Concluídas
+  const totalFinished = ordersFinished.reduce((acc, val) => acc + val.total, 0)
+  const totalPartsFinished = ordersFinished.reduce((acc, val) => acc + val.devices.reduce((acc, val) => acc + val.totalParts, 0), 0)
+  const totalLaborFinished = ordersFinished.reduce((acc, val) => acc + val.devices.reduce((acc, val) => acc + parseInt(val.labor), 0), 0)
+
+  // Valor de ordens rejeitadas
+  const totalRejected = ordersRejected.reduce((acc, val) => acc + val.total, 0)
+  const totalPartsRejected = ordersRejected.reduce((acc, val) => acc + val.devices.reduce((acc, val) => acc + val.totalParts, 0), 0)
+  const totalLaborRejected = ordersRejected.reduce((acc, val) => acc + val.devices.reduce((acc, val) => acc + parseInt(val.labor), 0), 0)
 
   return (
     <div className='dashboard'>
@@ -52,18 +52,18 @@ const Dashboard = () => {
           <div className="dash-data">
             <div className='dash-card'>
               <h4>Total</h4> 
-              <p>R$: {ordersFinished.reduce((acc, val) => acc + val.total, 0)}</p>                         
+              <p>R$: {totalFinished}</p>                         
               <p>100%</p>                         
             </div>
             <div className='dash-card'>
               <h4>Gastos</h4>
-              <p>R$: {ordersFinished.reduce((acc, val) => acc + val.devices.reduce((acc, val) => acc + val.totalParts, 0), 0)}</p>
-              <p>{((ordersFinished.reduce((acc, val) => acc + val.devices.reduce((acc, val) => acc + val.totalParts, 0), 0) * 100) / ordersFinished.reduce((acc, val) => acc + val.total, 0)).toFixed(1)}%</p>
+              <p>R$: {totalPartsFinished}</p>
+              <p>{((totalPartsFinished * 100) / totalFinished).toFixed(1)}%</p>
             </div>
             <div className='dash-card'>
               <h4>Lucro</h4>
-              <p>R$: {ordersFinished.reduce((acc, val) => acc + val.devices.reduce((acc, val) => acc + parseInt(val.labor), 0), 0)}</p>
-              <p>{((ordersFinished.reduce((acc, val) => acc + val.devices.reduce((acc, val) => acc + parseInt(val.labor), 0), 0) * 100) / ordersFinished.reduce((acc, val) => acc + val.total, 0)).toFixed(1)}%</p>
+              <p>R$: {totalLaborFinished}</p>
+              <p>{((totalLaborFinished * 100) / totalFinished).toFixed(1)}%</p>
             </div>
           </div>
         </section>
