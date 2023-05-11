@@ -1,5 +1,6 @@
+import { jsPDF } from 'jspdf'
+
 import './ServiceOrder.css'
-import { DeviceData, ModalDevice } from '../../components'
 
 // Icons
 import { BsPlus } from 'react-icons/bs'
@@ -16,6 +17,7 @@ import { newOrder } from '../../slices/orderSlice'
 import { useStateContext } from '../../context/StateContext'
 
 // Components
+import { DeviceData, ModalDevice } from '../../components'
 import { Message } from '../../components'
 
 const ServiceOrder = () => {
@@ -115,8 +117,19 @@ const ServiceOrder = () => {
     return true
   }
 
+  const pdfGenerate = (msg) => {
+    const doc = new jsPDF()
+
+    doc.text(msg, 10, 10)
+    doc.save('teste.pdf')
+  }
+
   const handleSubmit = (e) => {
     e.preventDefault()
+
+    // gerador de PDF
+    // pdfGenerate('teste')
+
     const validate = validateInputs()
 
     if(!validate) return
