@@ -121,7 +121,7 @@ const ServiceOrder = () => {
     const doc = new jsPDF()
 
     doc.text(msg, 10, 10)
-    doc.save('teste.pdf')
+    doc.save(`${name}.pdf`)
   }
 
   const handleSubmit = (e) => {

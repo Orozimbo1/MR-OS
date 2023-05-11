@@ -45,7 +45,7 @@ const Order = () => {
             <h3>Endereço: {order.address}</h3>
             <h3>Telefone: {order.phoneNumber}</h3>
             <h3>Data de criação: {date}</h3>
-            <h3>Finalizou em: {dateFinished}</h3>
+            {order.status.status !== 'pending' && <h3>Finalizou em: {dateFinished}</h3>}
           </div>
           <div className='status-container'>Status: 
             <div className={`status ${order.status && order.status.status}`}></div> 
