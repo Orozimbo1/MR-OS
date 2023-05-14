@@ -1,5 +1,3 @@
-import { jsPDF } from 'jspdf'
-
 import './ServiceOrder.css'
 
 // Icons
@@ -117,18 +115,8 @@ const ServiceOrder = () => {
     return true
   }
 
-  const pdfGenerate = (msg) => {
-    const doc = new jsPDF()
-
-    doc.text(msg, 10, 10)
-    doc.save(`${name}.pdf`)
-  }
-
   const handleSubmit = (e) => {
     e.preventDefault()
-
-    // gerador de PDF
-    // pdfGenerate('teste')
 
     const validate = validateInputs()
 
