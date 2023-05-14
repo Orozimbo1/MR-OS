@@ -1,3 +1,5 @@
+import { jsPDF } from 'jspdf'
+
 import './ServiceOrder.css'
 
 // Icons
@@ -17,6 +19,7 @@ import { useStateContext } from '../../context/StateContext'
 // Components
 import { DeviceData, ModalDevice } from '../../components'
 import { Message } from '../../components'
+import Tutorial from '../Tutorial/Tutorial'
 
 const ServiceOrder = () => {
   const { loading } = useSelector((state) => state.order)
@@ -115,27 +118,40 @@ const ServiceOrder = () => {
     return true
   }
 
+  const pdfGenerate = (msg) => {
+    const doc = new jsPDF()
+
+    doc.text(20, 10, 'Ola Rafael')
+    doc.text(20, 20, 'Ola Matheus')
+    doc.text(20, 30, 'Ola Arthur')
+
+    doc.save('generate.pdf')
+  } 
+
   const handleSubmit = (e) => {
     e.preventDefault()
 
-    const validate = validateInputs()
+    // gerador de PDF
+    pdfGenerate()
 
-    if(!validate) return
+    // const validate = validateInputs()
 
-    const serviceOrder = {
-      name,
-      phoneNumber,
-      devices,
-      address,
-      userId: user.uid,
-      createdBy: user.displayName,
-      status: {status: 'pending', text: 'Em andamento'},
-      total
-    }
+    // if(!validate) return
 
-    dispatch(newOrder(serviceOrder))
-    reset()
-    navigate('/')
+    // const serviceOrder = {
+    //   name,
+    //   phoneNumber,
+    //   devices,
+    //   address,
+    //   userId: user.uid,
+    //   createdBy: user.displayName,
+    //   status: {status: 'pending', text: 'Em andamento'},
+    //   total
+    // }
+
+    // dispatch(newOrder(serviceOrder))
+    // reset()
+    // navigate('/')
   }
 
   useEffect(() => {
