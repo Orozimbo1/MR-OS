@@ -67,8 +67,7 @@ const ServiceOrder = () => {
           total: action.device.total,
           totalParts: action.device.totalParts
         }
-
-        console.log(updatedDevice)
+        
         let index = state.findIndex(element => element.id === action.device.id)
         state[index] = {...updatedDevice}
         return [...state]

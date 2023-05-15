@@ -4,6 +4,13 @@ import pdfFonts from 'pdfmake/build/vfs_fonts'
 const OrderPDF = async (order, user) => {
   pdfMake.vfs = pdfFonts.pdfMake.vfs
 
+  const parts =  order.device.parts.map((part) => {
+    console.log(part)
+    return [
+      [{text: part.part}, {text: part.price}],
+    ]
+  })
+
   const docDefinitions = {
     pageSize: 'A4',
     pageMargins: [14, 50, 15, 40],
@@ -65,6 +72,20 @@ const OrderPDF = async (order, user) => {
                 margin: [ 0, 5 ],
               }
             ],
+          },
+          parts.length > 0 && {
+            style: 'tableExample',
+            headerRows: 1,
+            widths: [200, '*'],
+            table: {
+              body: [
+                [
+                  {text: 'Peça', style: 'tableHeader', bold: true}, 
+                  {text: 'Valor', style: 'tableHeader', bold: true}
+                ],
+                ...parts
+              ]
+            }
           },
           {
             text: `Descrição do problema: ${device.problemDesc}`,
