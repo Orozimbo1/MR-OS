@@ -77,26 +77,14 @@ const OrderPDF = async (order, user) => {
               }
             ],
           },
-          device.parts.length > 0 && {
-            headerRows: 1,
-            widths: [600, '*'],
-            table: {
-              body: [
-                [
-                  {text: 'Peça', style: 'tableHeader', bold: true}, 
-                  {text: 'Valor', style: 'tableHeader', bold: true}
-                ],
-                device.parts.map((part, i) => [
-                  part.part,
-                  part.price
-              ])
-              ]
-            }
-          },
+          {text: 'Peças', fontSize: 15, bold: true, margin: [ 0, 15 ]},          
+          device.parts && device.parts.map((part, i) => {
+          return {text: `${i + 1}-  ${part.part}  -  R$: ${part.price}`, margin: [0, 5]}
+          }),
           {
             text: `Descrição do problema: ${device.problemDesc}`,
             fontSize: 12,
-            margin: [ 0, 5 ],
+            margin: [ 0, 15, 0, 5 ],
           },
           {
             text: `Mão de obra: R$: ${device.labor}`,
