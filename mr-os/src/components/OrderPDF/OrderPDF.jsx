@@ -77,7 +77,7 @@ const OrderPDF = async (order, user) => {
               }
             ],
           },
-          {text: 'Peças', fontSize: 15, bold: true, margin: [ 0, 15 ]},          
+          {text: 'Peças', fontSize: 15, bold: true, margin: [ 0, 15, 0, 10 ]},          
           device.parts && device.parts.map((part, i) => {
           return {text: `${i + 1}-  ${part.part}  -  R$: ${part.price}`, margin: [0, 5]}
           }),
@@ -95,6 +95,7 @@ const OrderPDF = async (order, user) => {
             text: `R$: ${device.total}`,
             fontSize: 12,
             margin: [ 0, 5, 20, 20 ],
+            bold: true,
             alignment: 'right'
           }
         ]
