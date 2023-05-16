@@ -4,12 +4,16 @@ import pdfFonts from 'pdfmake/build/vfs_fonts'
 const OrderPDF = async (order, user) => {
   pdfMake.vfs = pdfFonts.pdfMake.vfs
 
-  const parts =  order.device.parts.map((part) => {
-    console.log(part)
-    return [
-      [{text: part.part}, {text: part.price}],
-    ]
-  })
+  // const parts = []
+
+  // order.devices && order.devices.map((device) => {
+  //   const partsDevice = []
+  //   device.parts && device.parts.map((part) => {
+  //     partsDevice.push(part)
+  //   })
+  //   parts.push(partsDevice)
+  //   console.log(parts)
+  // })
 
   const docDefinitions = {
     pageSize: 'A4',
@@ -73,17 +77,19 @@ const OrderPDF = async (order, user) => {
               }
             ],
           },
-          parts.length > 0 && {
-            style: 'tableExample',
+          device.parts.length > 0 && {
             headerRows: 1,
-            widths: [200, '*'],
+            widths: [600, '*'],
             table: {
               body: [
                 [
                   {text: 'Peça', style: 'tableHeader', bold: true}, 
                   {text: 'Valor', style: 'tableHeader', bold: true}
                 ],
-                ...parts
+                device.parts.map((part, i) => [
+                  part.part,
+                  part.price
+              ])
               ]
             }
           },
@@ -125,11 +131,6 @@ const OrderPDF = async (order, user) => {
   }
   
   pdfMake.createPdf(docDefinitions).download()
-
-  // console.log('ola')
-  // return (
-  //   <div>PDFGenerator</div>
-  // )
 }
 
 export default OrderPDF

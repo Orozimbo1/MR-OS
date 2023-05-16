@@ -119,9 +119,9 @@ const ServiceOrder = () => {
     const displayName = user.displayName
 
     
-    const validate = validateInputs()
+    // const validate = validateInputs()
     
-    if(!validate) return
+    // if(!validate) return
     
     const serviceOrder = {
       name,
