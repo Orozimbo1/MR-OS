@@ -1,5 +1,5 @@
-import pdfFonts from "pdfmake/build/vfs_fonts"
-import pdfmake from "pdfmake/build/pdfmake" 
+import * as pdfFonts from "pdfmake/build/vfs_fonts"
+import * as  pdfmake from "pdfmake/build/pdfmake" 
 
 const OrderPDF = async (order, user) => {
   pdfmake.vfs = pdfFonts.pdfMake.vfs
