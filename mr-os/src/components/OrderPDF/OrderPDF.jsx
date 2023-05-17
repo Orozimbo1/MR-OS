@@ -1,6 +1,17 @@
 import * as pdfFonts from "pdfmake/build/vfs_fonts"
-import * as  pdfmake from "pdfmake/build/pdfmake" 
-pdfmake.vfs = pdfFonts.pdfMake.vfs
+import * as  pdfMake from "pdfmake/build/pdfmake"
+pdfMake.vfs = pdfFonts.pdfMake.vfs
+
+// const fonts = {
+//   Roboto: {
+//     normal: 'fonts/Roboto-Regular.ttf',
+//     bold: 'fonts/Roboto-Medium.ttf',
+//     italics: 'fonts/Roboto-Italic.ttf',
+//     bolditalics: 'fonts/Roboto-MediumItalic.ttf'
+//   }
+// };
+
+// const printer = new pdfmake(fonts)
 
 const OrderPDF = async (order, user) => {
 
