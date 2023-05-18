@@ -117,7 +117,7 @@ const ServiceOrder = () => {
     e.preventDefault()
 
     const displayName = user.displayName
-
+    const logo = user.logo && user.logo 
     
     // const validate = validateInputs()
     
@@ -135,7 +135,7 @@ const ServiceOrder = () => {
     }
       
     // dispatch(newOrder(serviceOrder))
-    OrderPDF(serviceOrder, displayName)
+    OrderPDF(serviceOrder, displayName, logo )
     // reset()
     // navigate('/')
   }

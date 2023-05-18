@@ -2,15 +2,20 @@ import pdfFonts from "./vfs_fonts"
 import * as  pdfMake from "pdfmake/build/pdfmake"
 pdfMake.vfs = pdfFonts
 
-const OrderPDF = async (order, user) => {
+const OrderPDF = async (order, displayName, logo) => {
 
   const docDefinitions = {
     pageSize: 'A4',
     pageMargins: [14, 50, 15, 40],
 
+    info: {
+      title: 'awesome Document',
+      author: 'john doe'
+    },
+    watermark: { text: 'test watermark', color: 'blue', opacity: 0.3, bold: true, italics: false },
     header: [
       {
-        text: user,
+        text: displayName,
         fontSize: 15,
         margin: [ 20, 20, 0, 40 ],
         bold: true,
@@ -24,6 +29,12 @@ const OrderPDF = async (order, user) => {
         margin: [ 0, 5 ],
         alignment: 'center'
       },
+      // Imagem
+      // {
+      //   image: 'https://www.google.com/maps/uv?pb=!1s0x94ccc5214c2d9ac9:0x894e09dfc1d740a9!3m1!7e131!4s!5sSSL+ASSISTENCIA+TECNICA+CELULARES+E+INFORMATICA&hl=pt-BR&imagekey=!1e10!2sAF1QipNmqeSCHuJyVwOp2eUHCwgGAQAp9LHqoTtHq3QE',
+      //   width: 150,
+      //   height: 150,
+      // },
       {
         text: order.phoneNumber,
         fontSize: 12,
