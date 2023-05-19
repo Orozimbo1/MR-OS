@@ -1,7 +1,7 @@
 import './Settings.css'
 
 // Icons
-import { BsExclamationTriangle } from 'react-icons/bs'
+import { BsExclamationTriangle, BsPerson } from 'react-icons/bs'
 import { MdPassword } from 'react-icons/md'
 import { SlUserUnfollow } from 'react-icons/sl'
 
@@ -12,6 +12,7 @@ import { useState } from 'react'
 const Settings = () => {
   const { user, loading } = useSelector((state) => state.auth)
 
+  const [photoURL, setPhotoURL] = useState('')
   const [displayName, setDisplayName] = useState(user.displayName || '')
   const [email, setEmail] = useState(user.email || '')
   const [address, setAddress] = useState(user.address || '')
@@ -25,6 +26,22 @@ const Settings = () => {
     <main>
       <h2>Meus dados</h2>
       <form onSubmit={handleSubmit}>
+        <div className='data-image'>
+          <div className='profile-image'>
+            {photoURL ? 
+              <img src={photoURL} alt="Foto de perfil" />
+              : <BsPerson />
+            }
+          </div>
+          <label>
+            <span>URL da imagem:</span>
+            <input 
+              type="text" 
+              value={photoURL}
+              onChange={(e) => setPhotoURL(e.target.value)}
+            />
+          </label>
+        </div>
         <label>
           <span>Razão social</span>
           <input type="text" 

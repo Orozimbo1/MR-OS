@@ -1,4 +1,4 @@
-import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, updateProfile, signOut } from 'firebase/auth'
+import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, updateProfile, signOut, updateEmail } from 'firebase/auth'
 import { app } from '../firebase/config'
 
 const auth = getAuth(app)
@@ -28,6 +28,13 @@ const register = async (data) => {
   }
 
   return user
+}
+
+// Update an user
+const updateUser = async (data) => {
+  localStorage.getItem('user', JSON.stringify(user))
+
+  await updateProfile(user, {displayName: data.displayName, photoURL: data.photoURL})
 }
 
 // Sign in an user
