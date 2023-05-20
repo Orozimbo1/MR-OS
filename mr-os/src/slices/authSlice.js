@@ -40,6 +40,17 @@ export const register = createAsyncThunk(
   }
 )
 
+// Update an user
+export const updateUser = createAsyncThunk(
+  'auth/update',
+  async (user, thunkAPI) => {
+
+    const data = await authService.updateUser(user)
+
+    return data
+  }
+)
+
 // Sign in an user
 export const login = createAsyncThunk(
   'auth/login',
@@ -86,6 +97,21 @@ export const authSlice = createSlice({
       state.user = action.payload;
     })
     .addCase(register.rejected, (state, action) => {
+      state.loading = false;
+      state.user = null;
+      state.error = action.payload;
+    })
+    .addCase(updateUser.pending, (state) => {
+      state.loading = true;
+      state.error = false;
+    })
+    .addCase(updateUser.fulfilled, (state, action) => {
+      state.loading = false;
+      state.error = false;
+      state.success = true;
+      state.user = action.payload;
+    })
+    .addCase(updateUser.rejected, (state, action) => {
       state.loading = false;
       state.user = null;
       state.error = action.payload;

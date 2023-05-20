@@ -75,6 +75,7 @@ const logout = () => {
 
 const authService = {
   register,
+  updateUser,
   login,
   logout
 }
