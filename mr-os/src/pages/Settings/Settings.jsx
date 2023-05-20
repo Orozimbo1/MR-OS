@@ -12,7 +12,7 @@ import { useState } from 'react'
 const Settings = () => {
   const { user, loading } = useSelector((state) => state.auth)
 
-  const [photoURL, setPhotoURL] = useState('')
+  const [photoURL, setPhotoURL] = useState(user.photoURL || '')
   const [displayName, setDisplayName] = useState(user.displayName || '')
   const [email, setEmail] = useState(user.email || '')
   const [address, setAddress] = useState(user.address || '')

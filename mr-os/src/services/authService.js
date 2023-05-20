@@ -32,9 +32,16 @@ const register = async (data) => {
 
 // Update an user
 const updateUser = async (data) => {
-  localStorage.getItem('user', JSON.stringify(user))
+  const user = auth.currentUser
 
-  await updateProfile(user, {displayName: data.displayName, photoURL: data.photoURL})
+  if(user.email !== data.email) {
+    await updateEmail(user, data.email)
+  }
+  if(user.displayName !== data.displayName || user.photoURL !== data.photoURL) {
+    await updateProfile(user, {displayName: data.displayName, photoURL: data.photoURL})
+  }
+
+  return user
 }
 
 // Sign in an user
