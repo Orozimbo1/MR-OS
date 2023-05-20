@@ -53,17 +53,17 @@ const Dashboard = () => {
             <div className='dash-card'>
               <h4>Total</h4> 
               <p>R$: {totalFinished}</p>                         
-              <p>100%</p>                         
+              <p>{ordersFinished.length > 0 ? 100 : 0}%</p>                         
             </div>
             <div className='dash-card'>
               <h4>Gastos</h4>
               <p>R$: {totalPartsFinished}</p>
-              <p>{((totalPartsFinished * 100) / totalFinished).toFixed(1)}%</p>
+              <p>{ordersFinished.length > 0 ? ((totalPartsFinished * 100) / totalFinished).toFixed(1): 0}%</p>
             </div>
             <div className='dash-card'>
               <h4>Lucro</h4>
               <p>R$: {totalLaborFinished}</p>
-              <p>{((totalLaborFinished * 100) / totalFinished).toFixed(1)}%</p>
+              <p>{ordersFinished.length > 0 ? ((totalLaborFinished * 100) / totalFinished).toFixed(1) : 0}%</p>
             </div>
           </div>
         </section>
