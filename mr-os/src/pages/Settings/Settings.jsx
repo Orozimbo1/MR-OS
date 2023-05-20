@@ -9,22 +9,39 @@ import { SlUserUnfollow } from 'react-icons/sl'
 import { useSelector, useDispatch } from 'react-redux'
 import { useState } from 'react'
 
+// Redux
+import { updateUser } from '../../slices/authSlice'
+
 const Settings = () => {
-  const { user, loading } = useSelector((state) => state.auth)
+  const { user, loading, error } = useSelector((state) => state.auth)
+  console.log(user)
+
+  const dispatch = useDispatch()
 
   const [photoURL, setPhotoURL] = useState(user.photoURL || '')
-  const [displayName, setDisplayName] = useState(user.displayName || '')
-  const [email, setEmail] = useState(user.email || '')
+  const [displayName, setDisplayName] = useState(user.displayName)
+  const [email, setEmail] = useState(user.email)
   const [address, setAddress] = useState(user.address || '')
   const [CNPJ, setCNPJ] = useState(user.CNPJ || '')
-
+  
   const handleSubmit = (e) => {
     e.preventDefault()
+
+    console.log(photoURL)
+    console.log(displayName)
+    const updatedUser = {
+      displayName,
+      photoURL
+    }
+
+    dispatch(updateUser(updatedUser))
+
   }
 
   return (
     <main>
       <h2>Meus dados</h2>
+      {error && <p>{error}</p>}
       <form onSubmit={handleSubmit}>
         <div className='data-image'>
           <div className='profile-image'>
@@ -54,6 +71,7 @@ const Settings = () => {
           <input type="text" 
             value={email}
             onChange={(e) => setEmail(e.target.value)}
+            disabled
           />
         </label>
         <label>

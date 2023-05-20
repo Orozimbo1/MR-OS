@@ -44,7 +44,7 @@ const Navbar = () => {
     <nav id='nav'>
       <RxHamburgerMenu className='hamburger' onClick={() => setShowMenu(true)} />
       <Link to='/'>
-        <span id='logo'>{user.displayName}</span>
+        {user && <span id='logo'>{user.displayName}</span>}
       </Link>
       <ul id='nav-links'>
         {user && (

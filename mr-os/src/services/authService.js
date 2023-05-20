@@ -1,4 +1,4 @@
-import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, updateProfile, signOut, updateEmail } from 'firebase/auth'
+import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, updateProfile, signOut, updateEmail, reauthenticateWithCredential } from 'firebase/auth'
 import { app } from '../firebase/config'
 
 const auth = getAuth(app)
@@ -33,13 +33,17 @@ const register = async (data) => {
 // Update an user
 const updateUser = async (data) => {
   const user = auth.currentUser
+  let res = {}
 
-  if(user.email !== data.email) {
-    await updateEmail(user, data.email)
+  try {
+    await updateProfile(auth.currentUser, {displayName: data.displayName, photoURL: data.photoURL})
+  } catch (error) {
+    return { error }
   }
-  if(user.displayName !== data.displayName || user.photoURL !== data.photoURL) {
-    await updateProfile(user, {displayName: data.displayName, photoURL: data.photoURL})
-  }
+
+  if(user) {
+    localStorage.setItem('user', JSON.stringify(user))
+  } 
 
   return user
 }
