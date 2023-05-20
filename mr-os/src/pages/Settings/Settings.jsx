@@ -14,7 +14,6 @@ import { updateUser } from '../../slices/authSlice'
 
 const Settings = () => {
   const { user, loading, error } = useSelector((state) => state.auth)
-  console.log(user)
 
   const dispatch = useDispatch()
 
@@ -23,6 +22,11 @@ const Settings = () => {
   const [email, setEmail] = useState(user.email)
   const [address, setAddress] = useState(user.address || '')
   const [CNPJ, setCNPJ] = useState(user.CNPJ || '')
+
+  const resetInputs = () => {
+    setPhotoURL(user.photoURL || '')
+    setDisplayName(user.displayName)
+  }
   
   const handleSubmit = (e) => {
     e.preventDefault()
@@ -100,7 +104,7 @@ const Settings = () => {
           </button>
         </div>
         <div className='finish-or-cancel'>
-          <button type='button' className='cancel-btn'>Cancelar</button>
+          <button type='button' className='cancel-btn' onClick={resetInputs}>Cancelar</button>
           {!loading && <input type="submit" value="Atualizar" />}
           {loading && <input type="submit" value="Aguarde.." disabled />}
         </div>
