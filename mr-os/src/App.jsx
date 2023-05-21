@@ -29,7 +29,7 @@ function App() {
     {name: 'Dashboard', path: '/dashboard'},
     {name: 'Configurações', path: '/settings'},
     {name: 'Tutorial', path: '/tutorial'},
-    {name: 'Relatório de bugs', path: 'https://github.com/Orozimbo1/MR-OS/pulls'},
+    {name: 'Relatório de bugs', path: 'https://github.com/Orozimbo1/MR-OS/issues'},
   ]
 
   return (
