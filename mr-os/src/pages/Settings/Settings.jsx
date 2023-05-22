@@ -7,38 +7,55 @@ import { SlUserUnfollow } from 'react-icons/sl'
 
 // Hooks
 import { useSelector, useDispatch } from 'react-redux'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 
 // Redux
 import { updateUser } from '../../slices/authSlice'
+import { registerUserData } from '../../slices/userDataSlice'
+
+// Components
+import { Message } from '../../components'
 
 const Settings = () => {
   const { user, loading, error } = useSelector((state) => state.auth)
+  const { userData, loading: loadingData, error: errorData } = useSelector((state) => state.user)
 
   const dispatch = useDispatch()
 
   const [photoURL, setPhotoURL] = useState(user.photoURL || '')
   const [displayName, setDisplayName] = useState(user.displayName)
   const [email, setEmail] = useState(user.email)
-  const [address, setAddress] = useState(user.address || '')
-  const [CNPJ, setCNPJ] = useState(user.CNPJ || '')
+  const [address, setAddress] = useState(userData.address || '')
+  const [CNPJ, setCNPJ] = useState(userData.CNPJ || '')
 
   const resetInputs = () => {
     setPhotoURL(user.photoURL || '')
     setDisplayName(user.displayName)
+    setAddress(userData.address || '')
+    setCNPJ(userData.CNPJ || '')
   }
   
   const handleSubmit = (e) => {
     e.preventDefault()
 
-    console.log(photoURL)
-    console.log(displayName)
     const updatedUser = {
       displayName,
       photoURL
     }
 
-    dispatch(updateUser(updatedUser))
+    const registeringUserData = {
+      userId: user.uid,
+      address,
+      CNPJ
+    }
+
+    if(displayName !== user.displayName || photoURL !== user.photoURL) {
+      dispatch(updateUser(updatedUser))
+    }
+
+    if(address !== userData.address || CNPJ !== userData.CNPJ) {
+      dispatch(registerUserData(registeringUserData))
+    }
 
   }
 
@@ -108,6 +125,7 @@ const Settings = () => {
           {!loading && <input type="submit" value="Atualizar" />}
           {loading && <input type="submit" value="Aguarde.." disabled />}
         </div>
+        {error && <Message msg={error} type='error' />}
       </form>
     </main>
   )
