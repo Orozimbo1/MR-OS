@@ -1,7 +1,7 @@
 import { db } from "../firebase/config";
 import { collection, addDoc, Timestamp, getDocs, getDoc, query, where, orderBy, doc, updateDoc } from "firebase/firestore";
 
-// Register user data
+// Register an user data
 const registerUserData = async (document) => {
 
   try {
