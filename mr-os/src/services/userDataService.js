@@ -11,8 +11,6 @@ const registerUserData = async (document) => {
       collection(db, 'userData'),
       newDocument
     )
-    console.log(newDocument)
-    console.log(addDocument)
     return newDocument
   } catch (error) {
     console.log(error)
@@ -21,7 +19,7 @@ const registerUserData = async (document) => {
 
 // Get an user data
 const getUserData = async (uid) => {
-  const userDataRef = collection(db, 'userDatauserData')
+  const userDataRef = collection(db, 'userData')
 
   let q;
   let documents = []
@@ -32,9 +30,9 @@ const getUserData = async (uid) => {
     const querySnapshot = await getDocs(q);
     querySnapshot.forEach((doc) => {
       // doc.data() is never undefined for query doc snapshots
-      documents.push({ id: doc.id, ...doc.data() })
+      documents.push({ ...doc.data() })
     });
-    return documents
+    return documents[0]
     
   } catch (error) {
     console.log(error)

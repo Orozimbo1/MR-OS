@@ -11,23 +11,29 @@ import { useEffect, useState } from 'react'
 
 // Redux
 import { updateUser } from '../../slices/authSlice'
-import { registerUserData } from '../../slices/userDataSlice'
+import { registerUserData, getUserData } from '../../slices/userDataSlice'
 
 // Components
 import { Message } from '../../components'
 
 const Settings = () => {
   const { user, loading, error } = useSelector((state) => state.auth)
-  const { userData, loading: loadingData, error: errorData } = useSelector((state) => state.user)
-  console.log(userData)
+  const { userData, success } = useSelector((state) => state.user)
 
   const dispatch = useDispatch()
 
   const [photoURL, setPhotoURL] = useState(user.photoURL || '')
   const [displayName, setDisplayName] = useState(user.displayName)
   const [email, setEmail] = useState(user.email)
-  const [address, setAddress] = useState(userData && userData.address || '')
-  const [CNPJ, setCNPJ] = useState(userData && userData.CNPJ || '')
+  const [address, setAddress] = useState(userData && userData.address)
+  const [CNPJ, setCNPJ] = useState(userData && userData.CNPJ)
+
+  // console.log(address)
+  // console.log(CNPJ)
+
+  useEffect(() => {
+    dispatch(getUserData(user.uid))
+  }, [dispatch]) 
 
   const resetInputs = () => {
     setPhotoURL(user.photoURL || '')
@@ -100,15 +106,17 @@ const Settings = () => {
         <label>
           <span>Endereço</span>
           <input type="text" 
-            value={address}
+            value={userData && address}
             onChange={(e) => setAddress(e.target.value)}
+            placeholder='Ex: Av Brasil'
           />
         </label>
         <label>
           <span>CNPJ</span>
           <input type="text" 
-            value={CNPJ}
+            value={userData && CNPJ}
             onChange={(e) => setCNPJ(e.target.value)}
+            placeholder='111.111.11/0001.87'
           />
         </label>
         <div className='danger-zone'>
