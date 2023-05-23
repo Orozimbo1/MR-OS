@@ -18,11 +18,13 @@ const arrayInfo = [
 
 const Home = () => {
   const { user } = useSelector((state) => state.auth)
+  // const { userData } = useSelector((state) => state.user)
 
   const dispatch = useDispatch()
 
   useEffect(() => {
     dispatch(getUserData(user.uid))
+    // console.log(userData.id)
   }, [])
 
   return (

@@ -33,6 +33,7 @@ const Settings = () => {
 
   useEffect(() => {
     dispatch(getUserData(user.uid))
+    console.log(userData)
   }, [dispatch]) 
 
   const resetInputs = () => {
@@ -54,6 +55,11 @@ const Settings = () => {
       userId: user.uid,
       address,
       CNPJ
+    }
+
+    if(userData) {
+      console.log('oi')
+      return
     }
 
     if(displayName !== user.displayName || photoURL !== user.photoURL) {
