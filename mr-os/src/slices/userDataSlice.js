@@ -1,5 +1,5 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import userData from "../services/userDataService";
+import userDataService from "../services/userDataService";
 
 const initialState = {
   userData: {},
@@ -13,7 +13,7 @@ export const registerUserData = createAsyncThunk(
   'userdata/register',
   async (data, thunkAPI) => {
 
-    const res = await userData.registerUserData(data)
+    const res = await userDataService.registerUserData(data)
 
     return res
   }
@@ -21,11 +21,21 @@ export const registerUserData = createAsyncThunk(
 
 // Get an user data
 export const getUserData = createAsyncThunk(
-  'userData/get',
+  'userdata/get',
   async (uid, thunkAPI) => {
-    const res = await userData.getUserData(uid)
+    const res = await userDataService.getUserData(uid)
 
     return res
+  }
+)
+
+// Update an user data 
+export const updateUserData = createAsyncThunk(
+  'userdata/update',
+  async (id, thunkAPI) => {
+    const data = await userDataService.updateUserData(id)
+
+    return data
   }
 )
 
@@ -66,6 +76,21 @@ export const userDataSlice = createSlice({
       state.userData = action.payload;
     })
     .addCase(getUserData.rejected, (state, action) => {
+      state.loading = false;
+      state.userData = null;
+      state.error = action.payload;
+    })
+    .addCase(updateUserData.pending, (state) => {
+      state.loading = true;
+      state.error = false;
+    })
+    .addCase(updateUserData.fulfilled, (state, action) => {
+      state.loading = false;
+      state.error = false;
+      state.success = true;
+      state.userData = action.payload;
+    })
+    .addCase(updateUserData.rejected, (state, action) => {
       state.loading = false;
       state.userData = null;
       state.error = action.payload;
