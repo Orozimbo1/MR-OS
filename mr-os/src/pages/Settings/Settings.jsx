@@ -26,8 +26,8 @@ const Settings = () => {
   const [photoURL, setPhotoURL] = useState(user.photoURL || '')
   const [displayName, setDisplayName] = useState(user.displayName)
   const [email, setEmail] = useState(user.email)
-  const [address, setAddress] = useState(userData.address || '')
-  const [CNPJ, setCNPJ] = useState(userData.CNPJ || '')
+  const [address, setAddress] = useState(userData && userData.address || '')
+  const [CNPJ, setCNPJ] = useState(userData && userData.CNPJ || '')
 
   const resetInputs = () => {
     setPhotoURL(user.photoURL || '')
