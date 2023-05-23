@@ -3,6 +3,13 @@ import './Home.css'
 // Components
 import { Orders } from '../../components'
 
+// Redux
+import { getUserData } from '../../slices/userDataSlice'
+import { useEffect } from 'react'
+
+// Hooks
+import { useSelector, useDispatch } from 'react-redux'
+
 const arrayInfo = [
   {status: 'pending', title: 'Em andamento'},
   {status: 'finished', title: 'Concluídas'},
@@ -10,6 +17,14 @@ const arrayInfo = [
 ]
 
 const Home = () => {
+  const { user } = useSelector((state) => state.auth)
+
+  const dispatch = useDispatch()
+
+  useEffect(() => {
+    dispatch(getUserData(user.uid))
+  }, [])
+
   return (
     <section>
       {arrayInfo.map((item, i) => (
