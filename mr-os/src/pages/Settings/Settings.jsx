@@ -19,6 +19,7 @@ import { Message } from '../../components'
 const Settings = () => {
   const { user, loading, error } = useSelector((state) => state.auth)
   const { userData, loading: loadingData, error: errorData } = useSelector((state) => state.user)
+  console.log(userData)
 
   const dispatch = useDispatch()
 
@@ -54,6 +55,7 @@ const Settings = () => {
     }
 
     if(address !== userData.address || CNPJ !== userData.CNPJ) {
+      console.log(registeringUserData)
       dispatch(registerUserData(registeringUserData))
     }
 

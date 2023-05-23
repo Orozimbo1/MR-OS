@@ -11,11 +11,11 @@ const initialState = {
 // Register an user data
 export const registerUserData = createAsyncThunk(
   'userdata/register',
-  async (userData, thunkAPI) => {
+  async (data, thunkAPI) => {
 
-    const data = await userData.registerUserData(userData)
+    const res = await userData.registerUserData(data)
 
-    return data
+    return res
   }
 )
 

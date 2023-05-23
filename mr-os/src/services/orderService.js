@@ -8,7 +8,7 @@ const newOrder = async (document) => {
 
     const newDocument = { ...document, createdAt: Timestamp.now() }
     const addDocument = await addDoc(
-      collection(db, 'serviceOrders'),
+      collection(db, 'serviceOrders'), 
       newDocument
     )
 

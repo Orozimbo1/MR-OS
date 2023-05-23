@@ -5,13 +5,14 @@ import { collection, addDoc, Timestamp, getDocs, getDoc, query, where, orderBy, 
 const registerUserData = async (document) => {
 
   try {
-
+ 
     const newDocument = { ...document }
     const addDocument = await addDoc(
       collection(db, 'userData'),
       newDocument
     )
-
+    console.log(newDocument)
+    console.log(addDocument)
     return newDocument
   } catch (error) {
     console.log(error)
