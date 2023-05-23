@@ -19,6 +19,15 @@ export const registerUserData = createAsyncThunk(
   }
 )
 
+// Get an user data
+export const getUserData = createAsyncThunk(
+  'userData/get',
+  async (uid, thunkAPI) => {
+    const res = await userData.getUserData(uid)
+
+    return res
+  }
+)
 
 export const userDataSlice = createSlice({
   name: 'userData',
@@ -42,6 +51,21 @@ export const userDataSlice = createSlice({
       state.userData = action.payload;
     })
     .addCase(registerUserData.rejected, (state, action) => {
+      state.loading = false;
+      state.userData = null;
+      state.error = action.payload;
+    })
+    .addCase(getUserData.pending, (state) => {
+      state.loading = true;
+      state.error = false;
+    })
+    .addCase(getUserData.fulfilled, (state, action) => {
+      state.loading = false;
+      state.error = false;
+      state.success = true;
+      state.userData = action.payload;
+    })
+    .addCase(getUserData.rejected, (state, action) => {
       state.loading = false;
       state.userData = null;
       state.error = action.payload;
