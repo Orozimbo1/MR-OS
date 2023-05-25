@@ -11,30 +11,26 @@ import { useEffect, useState } from 'react'
 
 // Redux
 import { updateUser } from '../../slices/authSlice'
-import { registerUserData, getUserData } from '../../slices/userDataSlice'
+import { registerUserData, getUserData, updateUserData } from '../../slices/userDataSlice'
 
 // Components
 import { Message } from '../../components'
 
 const Settings = () => {
   const { user, loading, error } = useSelector((state) => state.auth)
-  const { userData, success } = useSelector((state) => state.user)
+  const { userData } = useSelector((state) => state.user)
 
   const dispatch = useDispatch()
 
   const [photoURL, setPhotoURL] = useState(user.photoURL || '')
   const [displayName, setDisplayName] = useState(user.displayName)
   const [email, setEmail] = useState(user.email)
-  const [address, setAddress] = useState(userData && userData.address)
-  const [CNPJ, setCNPJ] = useState(userData && userData.CNPJ)
-
-  // console.log(address)
-  // console.log(CNPJ)
+  const [address, setAddress] = useState(userData.address || '')
+  const [CNPJ, setCNPJ] = useState(userData.CNPJ || '')
 
   useEffect(() => {
     dispatch(getUserData(user.uid))
-    console.log(userData)
-  }, [dispatch]) 
+  }, [user.uid, dispatch]) 
 
   const resetInputs = () => {
     setPhotoURL(user.photoURL || '')
@@ -51,27 +47,38 @@ const Settings = () => {
       photoURL
     }
 
-    const registeringUserData = {
-      userId: user.uid,
-      address,
-      CNPJ
-    }
-
-    if(userData) {
-      console.log('oi')
-      return
-    }
-
     if(displayName !== user.displayName || photoURL !== user.photoURL) {
       dispatch(updateUser(updatedUser))
     }
+    
+    if(userData) {
 
-    if(address !== userData.address || CNPJ !== userData.CNPJ) {
-      console.log(registeringUserData)
+      const updatedDataUser = {
+        address,
+        CNPJ
+      }
+
+      // console.log(userData.id, updatedDataUser, user.uid)
+      dispatch(updateUserData({id: userData.id, document: updatedDataUser}))
+      return
+    }
+
+    if(!userData) {
+      console.log('register')
+      const registeringUserData = {
+        userId: user.uid,
+        address,
+        CNPJ
+      }
+      
       dispatch(registerUserData(registeringUserData))
     }
 
   }
+
+  // if(loadingUserData) {
+  //   return <p>Loading...</p>
+  // }
 
   return (
     <main>
@@ -112,7 +119,7 @@ const Settings = () => {
         <label>
           <span>Endereço</span>
           <input type="text" 
-            value={userData && address}
+            value={address}
             onChange={(e) => setAddress(e.target.value)}
             placeholder='Ex: Av Brasil'
           />
@@ -120,7 +127,7 @@ const Settings = () => {
         <label>
           <span>CNPJ</span>
           <input type="text" 
-            value={userData && CNPJ}
+            value={CNPJ}
             onChange={(e) => setCNPJ(e.target.value)}
             placeholder='111.111.11/0001.87'
           />

@@ -17,7 +17,7 @@ const registerUserData = async (document) => {
   }
 }
 
-// Get an user data
+// Get an user data by userId
 const getUserData = async (uid) => {
   const userDataRef = collection(db, 'userData')
 
@@ -39,25 +39,38 @@ const getUserData = async (uid) => {
   }
 }
 
+// Get an user data by Id
+const getUserDataId = async (id) => {
+  try {
+    const docRef = await doc(db, 'userData', id)
+    const docSnap = await getDoc(docRef)
+
+    return docSnap.data()
+  } catch (error) {
+    console.log(error)
+  }
+}
+
 // Update an user data
-const updateUserData = async (id) => {
+const updateUserData = async (id, document) => {
   try {
     const docRef = await doc(db, 'userData', id)
 
-    await updateDoc(docRef)
+    await updateDoc(docRef, { address: document.address, CNPJ: document.CNPJ })
 
-    const updatedDocument = await getServiceOrder(id)
+    const updatedDocument = await getUserDataId(id)
 
     return updatedDocument
   } catch (error) {
 
-    console.log(error)
+    console.log(error.message)
   }
 }
 
 const userData = {
   registerUserData,
   getUserData,
+  getUserDataId,
   updateUserData
 }
 

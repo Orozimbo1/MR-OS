@@ -32,8 +32,8 @@ export const getUserData = createAsyncThunk(
 // Update an user data 
 export const updateUserData = createAsyncThunk(
   'userdata/update',
-  async (id, thunkAPI) => {
-    const data = await userDataService.updateUserData(id)
+  async ({id, document}, thunkAPI) => {
+    const data = await userDataService.updateUserData(id, document)
 
     return data
   }
