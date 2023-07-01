@@ -1,9 +1,9 @@
-.customer-data{
+.customer_data{
   width: 100vw;
   display: flex;
   flex-direction: column;
 }
-.status-container {
+.status_container {
   display: flex;
   align-items: center;
   font-size: 1.2em;
@@ -34,7 +34,7 @@
 }
 
 @media screen and (max-width: 800px) {
-  .status-container {
+  .status_container {
     width: 100%;
     height: fit-content;
     padding: 10px 0 10px 30px;
@@ -42,14 +42,14 @@
 }
 
 @media screen and (min-width: 800px) {
-  .customer-data {
+  .customer_data {
     width: 100vw;
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
     height: 20vh;
   }
-  .customer-data h2, h3 {
+  .customer_data h2, h3 {
     text-align: center;
   }
 }

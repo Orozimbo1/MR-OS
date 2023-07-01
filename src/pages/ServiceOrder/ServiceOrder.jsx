@@ -15,7 +15,8 @@ import { newOrder } from '../../slices/orderSlice'
 import { useStateContext } from '../../context/StateContext'
 
 // Components
-import { DeviceData, ModalDevice, Message, OrderPDF } from '../../components'
+import { DeviceData, ModalDevice, Message} from '../../components'
+// import { OrderPDF } from '../../components'
 
 const ServiceOrder = () => {
   const { loading } = useSelector((state) => state.order)
@@ -135,7 +136,7 @@ const ServiceOrder = () => {
     }
       
     // dispatch(newOrder(serviceOrder))
-    OrderPDF(serviceOrder, displayName, logo )
+    // OrderPDF(serviceOrder, displayName, logo )
     // reset()
     // navigate('/')
   }

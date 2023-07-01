@@ -1,4 +1,4 @@
-import './OrderDetails.css'
+import styles from './OrderDetails.module.css'
 
 // Firebase
 import { Timestamp } from 'firebase/firestore'
@@ -37,21 +37,21 @@ const Order = () => {
   }
 
   return (
-    <div className='order-details'>
+    <div>
       {order && order.status && (
         <div>
-          <div className="customer-data">
+          <div className={styles.customer_data}>
             <h2>Nome: {order.name}</h2>
             <h3>Endereço: {order.address}</h3>
             <h3>Telefone: {order.phoneNumber}</h3>
             <h3>Data de criação: {date}</h3>
-            {order.status.status !== 'pending' && <h3>Finalizou em: {dateFinished}</h3>}
+            {order.status.status !== styles.pending && <h3>Finalizou em: {dateFinished}</h3>}
           </div>
-          <div className='status-container'>Status: 
-            <div className={`status ${order.status && order.status.status}`}></div> 
+          <div className={styles.status_container}>Status: 
+            <div className={`${styles.status} ${order.status && order.status.status}`}></div> 
             <p>{order.status && order.status.text}</p>
           </div>
-          <div className='devices'>
+          <div className={styles.devices}>
           <h4>Dispositivos:</h4>
             {order.devices && order.devices.map((device,i) => (
               <div key={i}>
@@ -62,7 +62,7 @@ const Order = () => {
               </div>
             ))}
           </div>
-          <div className="total">
+          <div className={styles.total}>
             <h4>Total</h4>
             <p><span>R$:</span> {order.total}</p>
           </div>
