@@ -1,4 +1,4 @@
-import './Auth.css'
+import styles from './Auth.module.css'
 
 // Components
 import { Link } from 'react-router-dom'
@@ -36,8 +36,8 @@ const Login = () => {
   }, [dispatch])
 
   return (
-    <div className='formulario'>
-      <div id='auth'>
+    <div className={styles.form}>
+      <div id={styles.auth}>
       <h2><span>Login</span></h2>
       <form onSubmit={handleSubmit}>
         <label>
@@ -64,7 +64,7 @@ const Login = () => {
       </form>
       <p>Não tem conta? <Link to='/register'>Clique aqui</Link> </p>
     </div>
-      <div className='imagem'>
+      <div className={styles.image}>
 
       </div>
     </div>

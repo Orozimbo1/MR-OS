@@ -1,4 +1,4 @@
-import './Auth.css'
+import styles from './Auth.module.css'
 
 // Components
 import { Link } from 'react-router-dom'
@@ -37,8 +37,8 @@ const Register = () => {
   }, [dispatch])
 
   return (
-    <div className='formulario'>
-        <div id='auth'>
+    <div className={styles.form}>
+        <div id={styles.auth}>
           <h2>Cadastre-se</h2>
           <form onSubmit={handleSubmit}>
             <label>
@@ -74,7 +74,7 @@ const Register = () => {
           </form>
           <p>Já tem conta? <Link to='/login'>Clique aqui</Link> </p>
       </div>
-      <div className='imagem'>
+      <div className={styles.image}>
       </div>
     </div>
    
