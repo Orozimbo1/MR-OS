@@ -1,4 +1,4 @@
-import './Navbar.css'
+import styles from './Navbar.module.css'
 
 // Components
 import { Link} from 'react-router-dom'
@@ -41,12 +41,12 @@ const Navbar = () => {
 
   return (
    
-    <nav id='nav'>
-      <RxHamburgerMenu className='hamburger' onClick={() => setShowMenu(true)} />
+    <nav id={styles.nav}>
+      <RxHamburgerMenu className={styles.hamburger} onClick={() => setShowMenu(true)} />
       <Link to='/'>
-        {user && <span id='logo'>{user.displayName}</span>}
+        {user && <span id={styles.logo}>{user.displayName}</span>}
       </Link>
-      <ul id='nav-links'>
+      <ul id={styles.nav_links}>
         {user && (
           <li>
             <span id='Sair' onClick={handleLogout}><FiLogOut /></span>
