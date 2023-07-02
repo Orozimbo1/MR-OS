@@ -1,4 +1,4 @@
-import './Tutorial.css'
+import styles from './Tutorial.module.css'
 
 const Tutorial = () => {
   return (
