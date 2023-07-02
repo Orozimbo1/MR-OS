@@ -1,4 +1,4 @@
-import './Settings.css'
+import './Settings.modules.css'
 
 // Icons
 import { BsExclamationTriangle, BsPerson } from 'react-icons/bs'
@@ -81,12 +81,12 @@ const Settings = () => {
   // }
 
   return (
-    <main>
+    <main className='Settings'>
       <h2>Meus dados</h2>
       {error && <p>{error}</p>}
       <form onSubmit={handleSubmit}>
-        <div className='data-image'>
-          <div className='profile-image'>
+        <div className='data_image'>
+          <div className='profile_image'>
             {photoURL ? 
               <img src={photoURL} alt="Foto de perfil" />
               : <BsPerson />
@@ -132,7 +132,7 @@ const Settings = () => {
             placeholder='111.111.11/0001.87'
           />
         </label>
-        <div className='danger-zone'>
+        <div className='danger_zone'>
           <span><BsExclamationTriangle /> Danger zone</span>
           <button type='button' onClick={() => alert('Estamos trabalhando nisso. ;)')}>
               <SlUserUnfollow />
