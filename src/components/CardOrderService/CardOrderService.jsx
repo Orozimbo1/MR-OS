@@ -1,4 +1,4 @@
-import './CardOrderService.css'
+import styles from './CardOrderService.module.css'
 import React from 'react'
 
 import { Link } from 'react-router-dom'
@@ -8,18 +8,18 @@ const CardOrderService = ({ name, address, phoneNumber, createdAt, id, devices, 
   const dateFinished = finishedAt && finishedAt.toDate() && finishedAt.toDate().toLocaleString('pt-BR', { timezone: 'UTC' })
 
   return (
-    <div className='card-order-service-container'>
+    <div className={styles.card_order_service_container}>
       <Link to={`/order-service/${id}`}>
-        <div className='card-order-service'>
-          <div className={`qtd ${status}`}>{devices.length}</div>
+        <div className={styles.card_order_service}>
+          <div className={`${styles.qtd} ${status}`}>{devices.length}</div>
           <div>
             <h3>{name}</h3>
             <p>{address}</p>
           </div>
           <div>
             <p>{phoneNumber}</p>
-            <p className='date'><strong>Criado:</strong> {date}</p> 
-            {finishedAt && <p className='date'><strong>Finalizado:</strong> {dateFinished}</p> }
+            <p className={styles.date}><strong>Criado:</strong> {date}</p> 
+            {finishedAt && <p className={styles.date}><strong>Finalizado:</strong> {dateFinished}</p> }
           </div>
           <div className="total">
               <h4>Total</h4>
