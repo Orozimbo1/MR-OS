@@ -1,4 +1,4 @@
-import './SideBar.css'
+import styles from './SideBar.module.css'
 
 // Icons
 import { BsStar } from 'react-icons/bs'
@@ -12,16 +12,12 @@ import { BsCardChecklist } from 'react-icons/bs'
 // Context
 import { useStateContext } from '../../context/StateContext'
 
-// Components
-import SideMenu from '../SideMenu/SideMenu'
-
-
 const SideBar = () => {
   const { showMenu, setShowMenu } = useStateContext()
 
   return (
-    <div className='side-bar' onMouseEnter={() => setShowMenu(true)}>
-      <div className="logo">
+    <div className={styles.side_bar} onMouseEnter={() => setShowMenu(true)}>
+      <div className={styles.logo}>
         <BsStar />
       </div>
       <ul>

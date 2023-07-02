@@ -1,4 +1,4 @@
-.side-bar {
+.side_bar {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -12,11 +12,11 @@
   z-index: 1;
 }
 
-.side-bar ul {
+.side_bar ul {
   display: flex;
   flex-direction: column;
 }
-.side-bar ul li {
+.side_bar ul li {
   height: 3em;
   margin: .4em;
   padding: 40px;
@@ -38,7 +38,7 @@
 }
 
 @media screen and (max-width:800px) {
-  .side-bar{
+  .side_bar{
     display:none;
   }
 }
