@@ -1,4 +1,4 @@
-import './SideMenu.css'
+import styles from './SideMenu.module.css'
 
 import { Link } from 'react-router-dom'
 
@@ -11,9 +11,9 @@ const SideMenu = ({ array }) => {
   return (
     <div>
       <div className='blackout' onClick={() => setShowMenu(false)} onMouseEnter={() => setShowMenu(false)}></div>
-      <div className={`side-menu`}>
-        <div className='back'>
-          <span className='right' onClick={() => setShowMenu(false)}>Voltar</span>
+      <div className={styles.side_menu}>
+        <div className={styles.back}>
+          <span className={styles.right} onClick={() => setShowMenu(false)}>Voltar</span>
         </div>  
         <ul >
         {array && array.map((item, i) => (
