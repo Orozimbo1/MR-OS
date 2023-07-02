@@ -1,4 +1,4 @@
-import './Dashboard.css'
+import styles from './Dashboard.module.css'
 
 import { Link } from 'react-router-dom'
 
@@ -28,39 +28,39 @@ const Dashboard = () => {
   const totalLaborRejected = ordersRejected.reduce((acc, val) => acc + val.devices.reduce((acc, val) => acc + parseInt(val.labor), 0), 0)
 
   return (
-    <div className='dashboard'>
-      <main className='dash'>
-        <section className='topics'>
+    <div className={styles.dashboard}>
+      <main className={styles.dash}>
+        <section className={styles.topics}>
           <h2>Dashboard</h2>
-          <div className='dash-data'>
-            <div className='dash-card'>
+          <div className={styles.dash_data}>
+            <div className={styles.dash_card}>
               <h4>Em andamento</h4>
               <p>{ordersPending.length}</p>
             </div>
-            <div className='dash-card'>
+            <div className={styles.dash_card}>
               <h4>Rejeitadas</h4>
               <p>{ordersRejected.length}</p>
             </div>
-            <div className='dash-card'>
+            <div className={styles.dash_card}>
               <h4>Concluídas</h4>
               <p>{ordersFinished.length}</p>
             </div>
           </div>
         </section>
-        <section className='topics'>
+        <section className={styles.topics}>
           <h2>Finanças</h2>
-          <div className="dash-data">
-            <div className='dash-card'>
+          <div className={styles.dash_data}>
+            <div className={styles.dash_card}>
               <h4>Total</h4> 
               <p>R$: {totalFinished}</p>                         
               <p>{ordersFinished.length > 0 ? 100 : 0}%</p>                         
             </div>
-            <div className='dash-card'>
+            <div className={styles.dash_card}>
               <h4>Gastos</h4>
               <p>R$: {totalPartsFinished}</p>
               <p>{ordersFinished.length > 0 ? ((totalPartsFinished * 100) / totalFinished).toFixed(1): 0}%</p>
             </div>
-            <div className='dash-card'>
+            <div className={styles.dash_card}>
               <h4>Lucro</h4>
               <p>R$: {totalLaborFinished}</p>
               <p>{ordersFinished.length > 0 ? ((totalLaborFinished * 100) / totalFinished).toFixed(1) : 0}%</p>
@@ -68,11 +68,11 @@ const Dashboard = () => {
           </div>
         </section>
       </main>
-      <aside className='dash-graphic'>
-        <div className='graphic'>
+      <aside className={styles.dash_graphic}>
+        <div className={styles.graphic}>
           <p></p>
         </div>
-        <div className='graphic'>
+        <div className={styles.graphic}>
           <p></p>
         </div>
       </aside>

@@ -8,7 +8,7 @@
   width: 75%;
 }
 
-.dash-data {
+.dash_data {
   display: flex;
 }
 
@@ -16,7 +16,7 @@
   height: 35vh;
 }
 
-.dash-card {
+.dash_card {
   width: 33%;
   text-align: left;
   margin: .5em 1em;
@@ -26,18 +26,18 @@
   text-align: center;
 }
 
-.dash-card h4 {
+.dash_card h4 {
   font-size: 1.5em;
   border-bottom: 1px solid #333;
 }
 
-.dash-card p {
+.dash_card p {
   font-size: 2.5em;
   font-weight: 900;
   color: #3381b3;
 }
 
-.dash-graphic {
+.dash_graphic {
   width: 30%;
 }
 
