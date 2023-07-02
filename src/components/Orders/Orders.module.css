@@ -1,4 +1,4 @@
-.order-service-cards {
+.order_service_cards {
     display: flex;
     flex-wrap: wrap;
     justify-content: space-around;
@@ -6,7 +6,7 @@
 }
 
 @media screen and (max-width:500px) {
-    .order-service-cards{
+    .order_service_cards{
         display: flex;
         width: 100vw;
     }

@@ -1,4 +1,4 @@
-import './Orders.css'
+import styles from './Orders.module.css'
 
 // Hooks
 import { useEffect } from 'react'
@@ -27,7 +27,7 @@ const Orders = ({ status, title }) => {
     <>
       <div className='container'>
         <h2>{title}:</h2>
-        <div className='order-service-cards'>
+        <div className={styles.order_service_cards}>
             {ordersFilter && ordersFilter.map((order) => (
               <CardOrderService 
                 key={order.id} 
