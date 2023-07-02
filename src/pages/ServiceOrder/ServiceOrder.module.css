@@ -1,14 +1,14 @@
-.service-order-container {
+.service_order_container {
   width: 100%;
   height: 100%;
 }
 
-.new-section {
+.new_section {
   display: flex;
   justify-content: flex-end;
 }
 
-.new-section button {
+.new_section button {
   display: flex;
   align-items: center;
   margin: 20px 10px;
@@ -19,7 +19,7 @@
   font-size: .9em;
 }
 
-.new-section button svg {
+.new_section button svg {
   font-size: 1.5em;
   font-weight: bold;
 }
@@ -50,13 +50,13 @@
 }
 
 @media screen and (max-width:800px){
-  .service-order-container form {
+  .service_order_container form {
     display: flex;
     max-width: 100vw;
     min-height: 80vh;
     justify-content: flex-start;
   }
-  .service-order-container h2 {
+  .service_order_container h2 {
     /* display: none; */
     width: 100%;
     font-size: 1.6em;
@@ -70,7 +70,7 @@
     font-weight: bold;
     margin-bottom: 20px;
   }
-  .new-section {
+  .new_section {
     height: 30vh;
   }
   .finish-or-cancel input {

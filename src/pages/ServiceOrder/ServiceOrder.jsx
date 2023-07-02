@@ -1,4 +1,4 @@
-import './ServiceOrder.css'
+import styles from './ServiceOrder.module.css'
 
 // Icons
 import { BsPlus } from 'react-icons/bs'
@@ -146,7 +146,7 @@ const ServiceOrder = () => {
   })
 
   return (
-    <div className='service-order-container'>
+    <div className={styles.service_order_container}>
       {showModalDevice && 
         <ModalDevice 
           handleNewDevice={addDevice} 
@@ -194,13 +194,13 @@ const ServiceOrder = () => {
               </div>
             )
           )}
-          <div className='new-section'>
+          <div className={styles.new_section}>
             <button type='button' onClick={() => setShowModalDevice(true)}>
               <BsPlus />
               Add dispositivo
             </button>
           </div>
-          <div className="total">
+          <div className={styles.total}>
             <h4>Total</h4>
             <p><span>R$:</span> {total}</p>
           </div>
