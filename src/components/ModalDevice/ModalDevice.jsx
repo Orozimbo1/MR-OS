@@ -1,4 +1,4 @@
-import './ModalDevice.css'
+import styles from './ModalDevice.module.css'
 import { useState, useReducer, useEffect } from 'react'
 
 // Context
@@ -69,6 +69,7 @@ const ModalDevice = ({ handleNewDevice, device, handleEditDevice, setDevice }) =
   const [parts, dispatchParts] = useReducer(partsReducer, initialParts)
 
   const addPart = () => {
+    if(partName.length <= 0 || partPrice.length <= 0) return
     dispatchParts({type: 'ADD'})
   }
 
@@ -173,13 +174,13 @@ const ModalDevice = ({ handleNewDevice, device, handleEditDevice, setDevice }) =
   }, [parts, labor]) 
 
   return (
-    <div className='modal-container'>
+    <div className={styles.modal_container}>
       <div className='blackout' onClick={reset}></div>
-      <div className='modal'>
-        <div className='new-device'>
+      <div className={styles.modal}>
+        <div className={styles.new_device}>
           <h2>Novo dispositivo</h2>
         </div>
-        <div className="tec-data-modal">
+        <div className={styles.tec_data_modal}>
             <label>
               <span>Tipo do dispositvo:</span> 
               <input 
@@ -222,7 +223,7 @@ const ModalDevice = ({ handleNewDevice, device, handleEditDevice, setDevice }) =
             >
             </textarea>
           </label>
-          <div className="todo">
+          <div className={styles.todo}>
             <label>
               <span>Peça:</span>
               <input type="text" value={partName} onChange={(e) => setPartName(e.target.value)}/>
@@ -237,11 +238,11 @@ const ModalDevice = ({ handleNewDevice, device, handleEditDevice, setDevice }) =
             }
           </div>
           {parts.length > 0 && parts.map((part, i) => (
-            <li key={part.id} className='parts'>
+            <li key={part.id} className={styles.parts}>
               <span>{i + 1} -</span>
-              <p className='part-name'>{part.part}</p>
-              <p className='part-price'>R$: {part.price}</p>
-              <div className="icons">
+              <p className={styles.part_name}>{part.part}</p>
+              <p className={styles.part_price}>R$: {part.price}</p>
+              <div className={styles.icons}>
                 <BsTrash onClick={() => removePart(part.id)}/>
                 {!edit 
                 ? <BsPenFill onClick={() => {
@@ -264,7 +265,7 @@ const ModalDevice = ({ handleNewDevice, device, handleEditDevice, setDevice }) =
             <input type="number" placeholder='R$: 99,99' value={labor} onChange={(e) => setLabor(e.target.value)} />
           </label>
           <h3>
-            Total: R$: {total}
+            Total: R$: <span>{total}</span>
           </h3>
           <div className='finish-or-cancel'>
             <button className='cancel-btn' onClick={reset}>Cancelar</button>

@@ -1,4 +1,4 @@
-.modal-container {
+.modal_container {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -16,14 +16,27 @@
   overflow: auto;
 }
 
-.tec-data-modal {
+.modal h3 {
+  text-align: end;
+  padding-top: 1em;
+  text-transform: uppercase;
+  font-weight: 900;
+  font-size: 1.5em;
+}
+
+.modal h3 span {
+  font-size: 1.5em;
+  margin: 0 .5em;
+}
+
+.tec_data_modal {
   display: flex;
   flex-wrap: wrap;
   margin: 0 auto;
   width: 100%;
 }
 
-.tec-data-modal label {
+.tec_data_modal label {
   width: 45%;
   margin-right: 10px;
 }
@@ -36,7 +49,7 @@
   text-align: center;
 }
 
-.new-device {
+.new_device {
   display: flex;
   background-color: transparent;
   border-bottom: 0.5px solid #464141;
@@ -81,7 +94,7 @@ button {
   width: 10%;
 }
 
-.parts .part-name {
+.parts .part_name {
   font-weight: bold;
   width: 25%;
   margin-right: 5%;
@@ -89,12 +102,12 @@ button {
   text-overflow: ''
 }
 
-.part-name::-webkit-scrollbar {
+.part_name::-webkit-scrollbar {
   width: 0px;
   height: 0px;
 }
 
-.parts .part-price {
+.parts .part_price {
   font-weight: bold;
   margin-right: 10%;
   width: 25%;
@@ -111,7 +124,7 @@ button {
 }
 
 /* @media screen and (max-width:800px) {
-  .new-device {
+  .new_device {
     width: 70%;
     height: 60%;
   }
