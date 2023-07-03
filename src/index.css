@@ -71,7 +71,6 @@ textarea::placeholder {
   border: none;
   border-radius: 4px;
   padding: 1em 1.5em;
-  /* width: 25%; */
   cursor: pointer;
   font-weight: bold;
   font-size: 1em;
@@ -124,4 +123,11 @@ input:disabled {
 
 .finished {
   background-color: rgb(2, 253, 2);
+}
+
+@media screen and (max-width: 425px) {
+  .btn {
+    font-size: .8em;
+    min-width: 40%;
+  }
 }
