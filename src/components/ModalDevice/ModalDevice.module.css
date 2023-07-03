@@ -130,12 +130,25 @@ button {
   }
 } */
 
-@media screen and (max-width: 800px) {
+@media screen and (max-width: 425px) {
   .modal {
-    width: 80vw;
-    height: fit-content;
-    left: 50px;
-    top: 50px;
-    bottom: 50px;
+    width: 95%;
+    height: 90%;
+    margin: 0 auto;
+    top: 5%;
+  }
+
+  .tec_data_modal {
+    flex-direction: column;
+  }
+
+  .tec_data_modal label {
+    width: 100%;
+    margin: 0;
+  }
+
+  .todo {
+    flex-direction: column;
+    margin-bottom: 1em;
   }
 }
