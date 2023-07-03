@@ -10,11 +10,7 @@
 
 body {
   font-family: "Titillium Web", sans-serif;
-  margin: 0;
-  padding: 0;
-  width: 100vw;
-  height: 100vh;
-  box-sizing: border-box;
+  max-width: 100vw;
   background-color: #FFF;
   color: #000;
   position: relative;
@@ -56,13 +52,11 @@ label span {
 
 input,
 textarea {
-  /* background-color: #f7f4f4; */
   color: #aaa;
   border-bottom: 1px solid #646161;
   border-radius: 2px;
   padding: 10px 8px;
   outline: none;
-  /* margin-bottom: .7em; */
   font-family: 'Titillium Web', sans-serif;
 }
 
@@ -122,9 +116,9 @@ input[type="submit"]:hover {
 .blackout {
   position: fixed;
   top: 0;
-  left: 50px;
-  height: 100vh;
-  width: 100vw;
+  left: 0;
+  height: 100%;
+  width: 100%;
   background-color: rgba(0, 0, 0, 0.479);
   z-index: 1;
 }
@@ -139,34 +133,4 @@ input[type="submit"]:hover {
 
 .finished {
   background-color: rgb(2, 253, 2);
-}
-
-@media screen and (max-width:800px) {
-  body{
-    width: 100vw;
-    height: 100vh;
-  }
-
-  div .blackout {
-    position: fixed;
-    top: 0;
-    left: 0;
-    height: 100%;
-    width: 100%;
-    background-color: rgba(0, 0, 0, 0.295);
-  }
-}
-
-@media screen and (max-width:800px) {
- body {
-    font-family: "Titillium Web", sans-serif;
-    margin: 0;
-    padding: 0;
-    width: 100vw;
-    height: 100vh;
-    box-sizing: border-box;
-    background-color: #FFF;
-    color: #000;
-    position: relative;
- } 
 }
