@@ -144,8 +144,8 @@ const Settings = () => {
           </button>
         </div>
         <div className='finish-or-cancel'>
-          <button type='button' className='cancel-btn' onClick={resetInputs}>Cancelar</button>
-          {!loading && <input type="submit" value="Atualizar" />}
+          <button type='button' className='btn cancel-btn' onClick={resetInputs}>Cancelar</button>
+          {!loading && <input type="submit" value="Atualizar" className='btn' />}
           {loading && <input type="submit" value="Aguarde.." disabled />}
         </div>
         {error && <Message msg={error} type='error' />}

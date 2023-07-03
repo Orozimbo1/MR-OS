@@ -66,19 +66,25 @@ textarea::placeholder {
   color: #646161;
 }
 
-.btn,
-input[type="submit"] {
-  width: fit-content;
-  background-color: #0094f6;
+.btn {
   color: #fff;
   border: none;
   border-radius: 4px;
-  padding: 10px 8px;
-  font-weight: bold;
+  padding: 10px 0;
+  width: 130px;
   cursor: pointer;
-  opacity: .8;
+  font-weight: bold;
   font-size: 1em;
-  margin: 1em;
+  text-align: center;
+  opacity: .8;
+  transition: .5s;
+}
+.btn:hover {
+  opacity: 1;
+}
+
+input[type="submit"] {
+  background-color: #0094f6;
 }
 
 input:disabled {
@@ -86,32 +92,14 @@ input:disabled {
   background-color: transparent;
 }
 
-button:hover,
-input[type="submit"]:hover {
-  opacity: 1;
-}
-
 .cancel-btn {
-  width: fit-content;
   background-color: #e21414;
-  color: #fff;
-  border: none;
-  border-radius: 4px;
-  padding: 10px 8px;
-  font-weight: bold;
-  cursor: pointer;
-  opacity: .8;
-  font-size: 1em;
-}
-
-.cancel-btn:hover {
-  opacity: 1;
 }
 
 .finish-or-cancel {
   display: flex;
   justify-content: space-between;
-  padding: 0 3em;
+  margin-top: 2em;
 }
 
 .blackout {

@@ -205,8 +205,8 @@ const ServiceOrder = () => {
             <p><span>R$:</span> {total}</p>
           </div>
           <div className='finish-or-cancel'>
-            <Link className='cancel-btn' to='/'>Cancelar</Link>
-            {!loading && <input type="submit" value="Finalizar" />}
+            <Link className='btn cancel-btn' to='/'>Cancelar</Link>
+            {!loading && <input type="submit" value="Finalizar" className='btn'/>}
             {loading && <input type="submit" value="Aguarde.." disabled />}
           </div>
           {error && <Message msg={error} type='error' />}

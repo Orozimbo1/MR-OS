@@ -268,8 +268,8 @@ const ModalDevice = ({ handleNewDevice, device, handleEditDevice, setDevice }) =
             Total: R$: <span>{total}</span> 
           </h3>
           <div className='finish-or-cancel'>
-            <button className='cancel-btn' onClick={reset}>Cancelar</button>
-            {!device.id && <input type="submit" value="Adicionar" onClick={handleSubmit}/>}
+            <button className='btn cancel-btn' onClick={reset}>Cancelar</button>
+            {!device.id && <input type="submit" value="Adicionar" className='btn' onClick={handleSubmit}/>}
             {device.id && <input type="submit" value="Editar" onClick={handleEdit}/>}
           </div>
           {error && <Message msg={error} type='error' />}
