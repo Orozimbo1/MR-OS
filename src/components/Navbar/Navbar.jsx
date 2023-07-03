@@ -40,23 +40,17 @@ const Navbar = () => {
   }
 
   return (
-   
-    <nav id={styles.nav}>
-      <RxHamburgerMenu className={styles.hamburger} onClick={() => setShowMenu(true)} />
-      <Link to='/'>
-        {user && <span id={styles.logo}>{user.displayName}</span>}
-      </Link>
-      <ul id={styles.nav_links}>
-        {user && (
-          <li>
-            <span id='Sair' onClick={handleLogout}><FiLogOut /></span>
-          </li>)}
-        <ReactTooltip
-          anchorId="Sair"
-          place="bottom"
-          content="Sair" />
-      </ul>
-    </nav>
+    <header className={styles.nav}>
+      <div className={styles.hamburger}>
+        <RxHamburgerMenu onClick={() => setShowMenu(true)} />
+      </div>
+      <nav>
+        <Link to='/'>
+          {user && <h1 className={styles.logo}>{user.displayName}</h1>}
+        </Link>
+        <span onClick={handleLogout}>Sair</span>
+      </nav>
+    </header>
   )
 }
 

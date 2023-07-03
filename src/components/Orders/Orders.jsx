@@ -25,7 +25,7 @@ const Orders = ({ status, title }) => {
   loading && <p>Carregando...</p>
   return (
     <>
-      <div className='container'>
+      <div>
         <h2>{title}:</h2>
         <div className={styles.order_service_cards}>
             {ordersFilter && ordersFilter.map((order) => (

@@ -1,8 +1,8 @@
 .container {
   text-align: end;
-  width: 100%;
+  /* min-width: 100vw; */
   /* min-height: 80vh; */
-  /* padding: 60px 0px 0px 60px; */
+  padding: 4em 2em 2em 4em;
   margin: 0;
   /* box-sizing: border-box; */
 }
