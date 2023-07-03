@@ -1,28 +1,21 @@
-.card_order_service_container {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-}
-
 .card_order_service {
   position: relative;
-  padding: 20px;
-  text-align: justify;
+  padding: 1.5em;
+  margin: 1em;
+  text-align: left;
   border: 1px solid #aaaaaa84;
   border-radius: 3px;
-  box-sizing: border-box;
-  z-index: -1;
 }
 
 .card_order_service p {
   padding-top: 1em;
 }
 
-.card_order_service_container a {
+.card_order_service {
   transition: .8s;
 }
 
-.card_order_service_container a:hover {
+.card_order_service:hover {
   background-color: rgba(22, 168, 230, 0.294);
 }
 
@@ -45,7 +38,6 @@
 }
 @media screen and (max-width:800px){
   .card_order_service {
-   width: 100vw;
    display : flex;
    transition: .4s;
   }

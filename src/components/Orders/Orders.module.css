@@ -4,14 +4,3 @@
     justify-content: space-around;
     padding: 10px;
 }
-
-@media screen and (max-width:500px) {
-    .order_service_cards{
-        display: flex;
-        width: 100vw;
-    }
-}
-
-/* @media screen and (min-width: 800px) {
-
-} */
