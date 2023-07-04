@@ -102,7 +102,7 @@ const Settings = () => {
           </label>
         </div>
         <label>
-          <span>Razão social</span>
+          <span>Nome Fantasia</span>
           <input type="text" 
             value={displayName}
             onChange={(e) => setDisplayName(e.target.value)}

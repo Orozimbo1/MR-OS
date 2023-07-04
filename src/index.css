@@ -31,13 +31,6 @@ ul {
   list-style: none;
 }
 
-form {
-  display: flex;
-  flex-direction: column;
-  margin: 0 auto;
-  width: 70%;
-}
-
 label {
   display: flex;
   flex-direction: column;

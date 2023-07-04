@@ -155,7 +155,7 @@ const ServiceOrder = () => {
           setDevice={setDevice}
       />}
       <h2>Nova ordem de serviço</h2>
-      <form onSubmit={handleSubmit} className='w-100 sm:w-12/12 md:w-12/12'>
+      <form onSubmit={handleSubmit}>
           <label>
             <span>Nome:</span> 
             <input 
