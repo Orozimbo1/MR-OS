@@ -1,6 +1,7 @@
 .customer_data{
-  width: 100vw;
+  width: 100%;
   display: flex;
+  text-align: center;
   flex-direction: column;
 }
 .status_container {
@@ -8,6 +9,7 @@
   align-items: center;
   font-size: 1.2em;
   font-weight: bold;
+  margin: 1em 0;
 }
 
 .status {
@@ -33,23 +35,9 @@
   gap: 2em;
 }
 
-@media screen and (max-width: 800px) {
-  .status_container {
+@media screen and (max-width: 425px) {
+  /* .status_container {
     width: 100%;
-    height: fit-content;
     padding: 10px 0 10px 30px;
-  }
-}
-
-@media screen and (min-width: 800px) {
-  .customer_data {
-    width: 100vw;
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-    height: 20vh;
-  }
-  .customer_data h2, h3 {
-    text-align: center;
-  }
+  } */
 }

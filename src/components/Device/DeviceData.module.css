@@ -1,6 +1,5 @@
 #data {
     position: relative;
-    box-sizing: border-box;
     width: 100%;
     border: solid 1px #ece7e7;  
     border-radius: 4px;
@@ -38,11 +37,18 @@ span {
 }
 
 .subtotal {
-    margin: 0 auto;
+    display: flex;
+    justify-content: flex-end;
+    padding-right: 1em;
+    width: 30%;
+    align-items: center;
+    gap: .5em;
 }
 
 .subtotal p {
-    display: inline-block;
+    display: flex;
+    width: fit-content;
+    flex-direction: row;
     font-size: 1.2em;
 }
 
@@ -66,12 +72,16 @@ textarea{
 }
 
 @media screen and (max-width:400px){
+    .subtotal {
+        width: 100%;
+    }
+
+    .tec_data {
+        flex-direction: column;
+    }
+
     .tec_data label {
         width: 100%;
         flex-direction: column;
     }
-}
-
-@media screen and (max-width: 800px), (orientation: landscape) {
-    
 }
