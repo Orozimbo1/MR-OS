@@ -62,7 +62,7 @@ const Order = () => {
               </div>
             ))}
           </div>
-          <div className={styles.total}>
+          <div className='total'>
             <h4>Total</h4>
             <p><span>R$:</span> {order.total}</p>
           </div>

@@ -90,6 +90,15 @@ input:disabled {
   background-color: #e21414;
 }
 
+.total {
+  display: flex;
+  align-items: flex-end;
+  justify-content: flex-end;
+  gap: .5em;
+  font-size: 1.5em;
+  font-weight: bold;
+}
+
 .finish-or-cancel {
   display: flex;
   justify-content: space-between;

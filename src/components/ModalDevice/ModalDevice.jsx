@@ -264,9 +264,10 @@ const ModalDevice = ({ handleNewDevice, device, handleEditDevice, setDevice }) =
             <span>Mão de obra:</span>
             <input type="number" placeholder='R$: 99,99' value={labor} onChange={(e) => setLabor(e.target.value)} />
           </label>
-          <h3>
-            Total: R$: <span>{total}</span> 
-          </h3>
+          <div className='total'>
+            <h4>Total</h4>
+            <p>R$: {total}</p>
+          </div>
           <div className='finish-or-cancel'>
             <button className='btn cancel-btn' onClick={reset}>Cancelar</button>
             {!device.id && <input type="submit" value="Adicionar" className='btn' onClick={handleSubmit}/>}

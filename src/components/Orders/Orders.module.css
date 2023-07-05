@@ -1,6 +1,6 @@
 .order_service_cards {
     display: flex;
     flex-wrap: wrap;
-    justify-content: space-around;
+    justify-content: flex-start;
     padding: 10px;
 }

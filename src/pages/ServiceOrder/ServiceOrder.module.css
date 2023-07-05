@@ -29,24 +29,6 @@
   font-weight: bold;
 }
 
-.total {
-  display: flex;
-  flex-direction: column;
-}
-
-.total h4 {
-  font-weight: 600;
-  font-size: 2em;
-}
-
-.total p {
-  font-size: 1.3em;
-}
-
-.total p span {
-  font-weight: bold;
-}
-
 .finish-or-cancel {
   width: 100%;
   display: flex;
@@ -56,7 +38,7 @@
 
 @media screen and (max-width:800px){
   .service_order_container form {
-    width: 90%;
+    width: 100%;
     justify-content: flex-start;
   }
   .service_order_container h2 {

@@ -25,19 +25,3 @@
   font-weight: bold;
   margin: 1em 0 .5em;
 }
-
-.total {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: flex-end;
-  margin: 1em 2em;
-  gap: 2em;
-}
-
-@media screen and (max-width: 425px) {
-  /* .status_container {
-    width: 100%;
-    padding: 10px 0 10px 30px;
-  } */
-}

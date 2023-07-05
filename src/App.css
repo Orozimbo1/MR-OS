@@ -1,13 +1,12 @@
 .container {
   text-align: end;
   min-width: 98.2vw;
-  /* min-height: 80vh; */
   padding: 4em 2em 2em 4em;
   margin: 0;
 }
 
 @media screen and (max-width:800px){
   .container {
-    padding: 4em .5em .5em .5em;
+    padding: 4em 1em 1em 1em;
   }
 }

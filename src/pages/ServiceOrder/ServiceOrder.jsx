@@ -200,9 +200,9 @@ const ServiceOrder = () => {
               Add dispositivo
             </button>
           </div>
-          <div className={styles.total}>
+          <div className='total'>
             <h4>Total</h4>
-            <p><span>R$:</span> {total}</p>
+            <p>R$: {total}</p>
           </div>
           <div className='finish-or-cancel'>
             <Link className='btn cancel-btn' to='/'>Cancelar</Link>
