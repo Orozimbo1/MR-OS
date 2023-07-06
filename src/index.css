@@ -78,7 +78,7 @@ textarea::placeholder {
 }
 
 input[type="submit"] {
-  background-color: #0094f6;
+  background-color: #1f51ff;
 }
 
 input:disabled {
@@ -87,7 +87,7 @@ input:disabled {
 }
 
 .cancel-btn {
-  background-color: #e21414;
+  background-color: #ff3131;
 }
 
 .total {
@@ -111,7 +111,7 @@ input:disabled {
   left: 0;
   height: 100%;
   width: 100%;
-  background-color: rgba(0, 0, 0, 0.479);
+  background-color: #09101f73;
   z-index: 1;
 }
 
