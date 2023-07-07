@@ -13,15 +13,15 @@ const SideMenu = ({ array }) => {
       <div className='blackout' onClick={() => setShowMenu(false)} onMouseEnter={() => setShowMenu(false)}></div>
       <div className={styles.side_menu}>
         <div className={styles.back}>
-          <span className={styles.right} onClick={() => setShowMenu(false)}>Voltar</span>
+          <button className={styles.right} onClick={() => setShowMenu(false)}>Voltar</button>
         </div>  
         <ul >
         {array && array.map((item, i) => (
-          <li key={i} onClick={() => setShowMenu(false)}>
-            <Link to={item.path}>
-              {item.name}
-            </Link>
-          </li>
+          <Link className={styles.link} to={item.path}>
+            <li key={i} onClick={() => setShowMenu(false)}>
+                {item.name}
+            </li>
+          </Link>
         ))}
         </ul>
       </div>
