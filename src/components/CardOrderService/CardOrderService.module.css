@@ -36,9 +36,3 @@
   font-size: .8em;
   color: gray;
 }
-@media screen and (max-width:800px){
-  .card_order_service {
-   display : flex;
-   transition: .4s;
-  }
-}
