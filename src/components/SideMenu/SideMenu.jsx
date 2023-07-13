@@ -17,8 +17,8 @@ const SideMenu = ({ array }) => {
         </div>  
         <ul >
         {array && array.map((item, i) => (
-          <Link className={styles.link} to={item.path}>
-            <li key={i} onClick={() => setShowMenu(false)}>
+          <Link key={i} className={styles.link} to={item.path}>
+            <li onClick={() => setShowMenu(false)}>
                 {item.name}
             </li>
           </Link>
