@@ -68,8 +68,8 @@ const Register = () => {
                 value={password}
               />
             </label>
-            {!loading && <input type="submit" value="Cadastrar" />}
-            {loading && <input type="submit" value="Aguarde.." disabled />}
+            {!loading && <input type="submit" className='btn' value="Cadastrar" />}
+            {loading && <input type="submit" className='btn' value="Aguarde.." disabled />}
             {error && <Message msg={error} type='error' />}
           </form>
           <p>Já tem conta? <Link to='/login'>Clique aqui</Link> </p>
