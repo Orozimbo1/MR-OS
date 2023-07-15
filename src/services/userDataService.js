@@ -11,6 +11,7 @@ const registerUserData = async (document) => {
       collection(db, 'userData'),
       newDocument
     )
+    console.log(newDocument)
     return newDocument
   } catch (error) {
     console.log(error)

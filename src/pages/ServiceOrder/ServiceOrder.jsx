@@ -16,7 +16,7 @@ import { useStateContext } from '../../context/StateContext'
 
 // Components
 import { DeviceData, ModalDevice, Message} from '../../components'
-// import { OrderPDF } from '../../components'
+import { OrderPDF } from '../../components'
 
 const ServiceOrder = () => {
   const { loading } = useSelector((state) => state.order)
@@ -118,7 +118,8 @@ const ServiceOrder = () => {
     e.preventDefault()
 
     const displayName = user.displayName
-    const logo = user.logo && user.logo 
+    const logo = user.photoURL && user.photoURL 
+    console.log(user.photoURL)
     
     // const validate = validateInputs()
     
@@ -136,7 +137,7 @@ const ServiceOrder = () => {
     }
       
     // dispatch(newOrder(serviceOrder))
-    // OrderPDF(serviceOrder, displayName, logo )
+    OrderPDF(serviceOrder, displayName, logo )
     // reset()
     // navigate('/')
   }
