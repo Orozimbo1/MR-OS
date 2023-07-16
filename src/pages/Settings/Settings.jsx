@@ -58,7 +58,7 @@ const Settings = () => {
         CNPJ
       }
 
-      // console.log(userData.id, updatedDataUser, user.uid)
+      console.log(updatedDataUser)
       dispatch(updateUserData({id: userData.id, document: updatedDataUser}))
       return
     }

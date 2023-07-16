@@ -5,17 +5,19 @@ import { collection, addDoc, Timestamp, getDocs, getDoc, query, where, orderBy, 
 const registerUserData = async (document) => {
 
   try {
- 
     const newDocument = { ...document }
     const addDocument = await addDoc(
       collection(db, 'userData'),
       newDocument
     )
-    console.log(newDocument)
+    console.log(document)
     return newDocument
   } catch (error) {
     console.log(error)
   }
+  localStorage.setItem('user', JSON.stringify({...user, address: document.address, CNPJ: document.CNPJ}))
+  console.log(user.address)
+  console.log(user.CNPJ)
 }
 
 // Get an user data by userId
