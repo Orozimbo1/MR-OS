@@ -271,7 +271,7 @@ const ModalDevice = ({ handleNewDevice, device, handleEditDevice, setDevice }) =
           <div className='finish-or-cancel'>
             <button className='btn cancel-btn' onClick={reset}>Cancelar</button>
             {!device.id && <input type="submit" value="Adicionar" className='btn' onClick={handleSubmit}/>}
-            {device.id && <input type="submit" value="Editar" onClick={handleEdit}/>}
+            {device.id && <input type="submit" value="Editar" className='btn' onClick={handleEdit}/>}
           </div>
           {error && <Message msg={error} type='error' />}
       </div>

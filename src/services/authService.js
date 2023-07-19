@@ -24,7 +24,7 @@ const register = async (data) => {
   })
 
   if(user) {
-    localStorage.setItem('user', JSON.stringify({...user, address: '', CNPJ: ''}))
+    localStorage.setItem('user', JSON.stringify(user))
   }
 
   return user
@@ -42,7 +42,7 @@ const updateUser = async (data) => {
   }
 
   if(user) {
-    localStorage.setItem('user', JSON.stringify({...user, address: '', CNPJ: ''}))
+    localStorage.setItem('user', JSON.stringify(user))
   } 
 
   return user
@@ -66,7 +66,7 @@ const login = async (data) => {
   const { user } = res
 
   if(user) {
-    localStorage.setItem('user', JSON.stringify({...user, address: '', CNPJ: ''}))
+    localStorage.setItem('user', JSON.stringify(user))
   }
   return user
 }

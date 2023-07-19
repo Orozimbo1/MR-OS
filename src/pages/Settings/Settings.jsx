@@ -7,11 +7,12 @@ import { SlUserUnfollow } from 'react-icons/sl'
 
 // Hooks
 import { useSelector, useDispatch } from 'react-redux'
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 
 // Redux
 import { updateUser } from '../../slices/authSlice'
-import { registerUserData, getUserData, updateUserData } from '../../slices/userDataSlice'
+import { registerUserData, updateUserData } from '../../slices/userDataSlice'
 
 // Components
 import { Message } from '../../components'
@@ -21,16 +22,13 @@ const Settings = () => {
   const { userData } = useSelector((state) => state.user)
 
   const dispatch = useDispatch()
+  const navigate = useNavigate()
 
   const [photoURL, setPhotoURL] = useState(user.photoURL || '')
   const [displayName, setDisplayName] = useState(user.displayName)
   const [email, setEmail] = useState(user.email)
   const [address, setAddress] = useState(userData ? userData.address : '')
   const [CNPJ, setCNPJ] = useState(userData ? userData.CNPJ : '')
-
-  // useEffect(() => {
-  //   dispatch(getUserData(user.uid))
-  // }, [user.uid, dispatch]) 
 
   const resetInputs = () => {
     setPhotoURL(user.photoURL || '')
@@ -49,22 +47,22 @@ const Settings = () => {
 
     if(displayName !== user.displayName || photoURL !== user.photoURL) {
       dispatch(updateUser(updatedUser))
+      navigate('/')
+      return
     }
     
-    if(userData) {
-
+    if(userData && address != userData.address || CNPJ != userData.CNPJ) {
       const updatedDataUser = {
         address,
         CNPJ
       }
 
-      console.log(updatedDataUser)
       dispatch(updateUserData({id: userData.id, document: updatedDataUser}))
+      navigate('/')
       return
     }
 
     if(!userData) {
-      console.log('register')
       const registeringUserData = {
         userId: user.uid,
         address,
@@ -72,13 +70,10 @@ const Settings = () => {
       }
       
       dispatch(registerUserData(registeringUserData))
+      navigate('/')
     }
 
   }
-
-  // if(loadingUserData) {
-  //   return <p>Loading...</p>
-  // }
 
   return (
     <main>
@@ -146,7 +141,7 @@ const Settings = () => {
         <div className='finish-or-cancel'>
           <button type='button' className='btn cancel-btn' onClick={resetInputs}>Cancelar</button>
           {!loading && <input type="submit" value="Atualizar" className='btn' />}
-          {loading && <input type="submit" value="Aguarde.." disabled />}
+          {loading && <input type="submit" value="Aguarde.." className='btn' disabled />}
         </div>
         {error && <Message msg={error} type='error' />}
       </form>
