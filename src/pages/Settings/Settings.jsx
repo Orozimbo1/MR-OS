@@ -19,7 +19,7 @@ import { Message } from '../../components'
 
 const Settings = () => {
   const { user, loading, error } = useSelector((state) => state.auth)
-  const { userData } = useSelector((state) => state.user)
+  const { userData, error: errorData, success } = useSelector((state) => state.user)
 
   const dispatch = useDispatch()
   const navigate = useNavigate()
@@ -33,8 +33,8 @@ const Settings = () => {
   const resetInputs = () => {
     setPhotoURL(user.photoURL || '')
     setDisplayName(user.displayName)
-    setAddress(userData.address || '')
-    setCNPJ(userData.CNPJ || '')
+    setAddress(userData ? userData.address : '')
+    setCNPJ(userData ? userData.CNPJ : '')
   }
   
   const handleSubmit = (e) => {
@@ -47,6 +47,7 @@ const Settings = () => {
 
     if(displayName !== user.displayName || photoURL !== user.photoURL) {
       dispatch(updateUser(updatedUser))
+      alert('Usuário modificado.') // Vai sair
       navigate('/')
       return
     }
@@ -58,7 +59,15 @@ const Settings = () => {
       }
 
       dispatch(updateUserData({id: userData.id, document: updatedDataUser}))
-      navigate('/')
+      console.log(errorData)
+      // console.log(success)
+      if(errorData) {
+        alert('Houve um erro.')
+        return
+      }
+      alert('Usuário modificado.') // Vai sair
+      console.log(errorData)
+      // navigate('/')
       return
     }
 
@@ -70,7 +79,8 @@ const Settings = () => {
       }
       
       dispatch(registerUserData(registeringUserData))
-      navigate('/')
+      alert('Usuário modificado.') // Vai sair
+      // navigate('/')
     }
 
   }
@@ -143,7 +153,7 @@ const Settings = () => {
           {!loading && <input type="submit" value="Atualizar" className='btn' />}
           {loading && <input type="submit" value="Aguarde.." className='btn' disabled />}
         </div>
-        {error && <Message msg={error} type='error' />}
+        {error || errorData && <Message msg={error || errorData} type='error' />}
       </form>
     </main>
   )

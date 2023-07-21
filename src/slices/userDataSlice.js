@@ -15,6 +15,7 @@ export const registerUserData = createAsyncThunk(
   'userdata/register',
   async (data, thunkAPI) => {
 
+    console.log('error')
     const res = await userDataService.registerUserData(data)
 
     return res
@@ -37,6 +38,11 @@ export const updateUserData = createAsyncThunk(
   async ({id, document}, thunkAPI) => {
     const data = await userDataService.updateUserData(id, document)
 
+    // console.log(data.error)
+    if(data.error) {
+      console.log('error')
+      return thunkAPI.rejectWithValue('Houve um erro')
+    }
     return data
   }
 )
@@ -95,7 +101,7 @@ export const userDataSlice = createSlice({
     .addCase(updateUserData.rejected, (state, action) => {
       state.loading = false;
       state.userData = null;
-      state.error = action.payload;
+      state.error = true;
     })
   }
 })

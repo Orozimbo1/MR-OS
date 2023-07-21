@@ -10,14 +10,10 @@ const registerUserData = async (document) => {
       collection(db, 'userData'),
       newDocument
     )
-    console.log(document)
     return newDocument
   } catch (error) {
     console.log(error)
   }
-  localStorage.setItem('user', JSON.stringify({...user, address: document.address, CNPJ: document.CNPJ}))
-  console.log(user.address)
-  console.log(user.CNPJ)
 }
 
 // Get an user data by userId
@@ -56,6 +52,8 @@ const getUserDataId = async (id) => {
 
 // Update an user data
 const updateUserData = async (id, document) => {
+  let res = {}
+  console.log(document)
   try {
     const docRef = await doc(db, 'userData', id)
 
@@ -64,9 +62,9 @@ const updateUserData = async (id, document) => {
     const updatedDocument = await getUserDataId(id)
 
     return updatedDocument
-  } catch (error) {
-
-    console.log(error.message)
+  } catch (err) {
+    res = {error: err}
+    return res
   }
 }
 
