@@ -12,8 +12,16 @@ import { useParams, useNavigate } from 'react-router-dom'
 import { getServiceOrder, updateOrderStatus } from '../../slices/orderSlice'
 import { DeviceData } from '../../components'
 
+// Context
+import { useStateContext } from '../../context/StateContext'
+
+// Component
+import { Print } from '../../components'
+
 const Order = () => {
   const { order, loading } = useSelector((state) => state.order)
+
+  const { showPrint, setShowPrint } = useStateContext()
 
   const dispatch = useDispatch()
   const navigate = useNavigate()
@@ -40,6 +48,7 @@ const Order = () => {
     <div>
       {order && order.status && (
         <div>
+          {showPrint && <Print />}
           <div className={styles.customer_data}>
             <h2>{order.name}</h2>
             <h3>Endereço: {order.address}</h3>
@@ -65,6 +74,9 @@ const Order = () => {
           <div className='total'>
             <h4>Total</h4>
             <p><span>R$:</span> {order.total}</p>
+          </div>
+          <div className={styles.print}>
+            <button onClick={() => setShowPrint(true)}>Gerar print</button>
           </div>
           {order.status.status === 'pending' && (
             <div className='finish-or-cancel'>

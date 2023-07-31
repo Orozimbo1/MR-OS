@@ -25,3 +25,19 @@
   font-weight: bold;
   margin: 1em 0 .5em;
 }
+
+.print {
+  display: flex;
+  justify-content: flex-end;
+  padding: 1em 0 0;
+}
+
+.print button {
+  color: rgb(85, 85, 233);
+  font-weight: 900;
+  transition: .3s;
+}
+
+.print button:hover {
+  color: rgb(177, 177, 197);
+}
