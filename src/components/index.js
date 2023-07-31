@@ -8,3 +8,4 @@ export { default as CardOrderService } from './CardOrderService/CardOrderService
 export { default as SideBar } from './SideBar/SideBar'
 export { default as SideMenu } from './SideMenu/SideMenu'
 export { default as OrderPDF } from './OrderPDF/OrderPDF'
+export { default as Print } from './Print/Print'
