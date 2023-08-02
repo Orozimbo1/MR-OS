@@ -27,6 +27,7 @@ const Print = () => {
             <p>Data de criação</p>
           </section>
         </header>
+        <hr />
         <main>
           <section>
             <h2>Cliente</h2>
