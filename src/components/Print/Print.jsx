@@ -1,11 +1,18 @@
 import styles from './Print.module.css'
 import logo from '../../assets/logo_completa.png'
 
+// Icons
+import { BsFillPersonCheckFill } from 'react-icons/bs'
+import { FaMapMarkerAlt, FaFingerprint } from 'react-icons/fa'
+import { AiOutlineMessage } from 'react-icons/ai'
+
 // Context
 import { useStateContext } from '../../context/StateContext'
 
-const Print = () => {
+const Print = ({ id }) => {
   const { setShowPrint } = useStateContext()
+  
+  const actualDate = new Date(Date.now()).toLocaleDateString('pt-BR', { timezone: 'UTC' })
 
   return (
     <div className={styles.lightblue} onClick={() => setShowPrint(false)}>
@@ -17,14 +24,14 @@ const Print = () => {
           </section>
           <section className={styles.data}>
             <h1>SSL Assistencia Tecnica Celulares e Informatica</h1>
-            <h3>CNPJ</h3>
-            <p>Endereço</p>
-            <p>Email</p>
-            <p>Responsável</p>
+            <p><FaFingerprint /> CNPJ</p>
+            <p><FaMapMarkerAlt /> Endereço</p>
+            <p><AiOutlineMessage /> Email</p>
+            <p><BsFillPersonCheckFill /> Responsável</p>
           </section>
           <section className={styles.id}>
-            <h3>Identificação da order</h3>
-            <p>Data de criação</p>
+            <h3>ID OS: <span>{id.split('').slice(0, 6)}</span></h3>
+            <p>Emissão: <span>{actualDate}</span></p>
           </section>
         </header>
         <hr />

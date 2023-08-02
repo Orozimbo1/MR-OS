@@ -21,14 +21,22 @@
   font-family: sans-serif;
 }
 
+.print_order p {
+  display: flex;
+  align-items: center;
+  font-size: .8em;
+  gap: .5em;
+}
+
 .header {
   display: flex;
   width: 100%;
-  padding: .5em;
+  padding: .5em 0;
+  gap: .5em;
 }
 
 .logo {
-  width: 30%;
+  width: 25%;
 }
 
 .data {
@@ -36,7 +44,31 @@
   text-align: start;
 }
 
+.data h1 {
+  font-size: 1.1em;
+  text-transform: uppercase;
+}
+
 .id {
-  width: 20%;
+  display: flex;
+  flex-direction: column;
+  gap: 2em;
+  width: 25%;
   text-align: center;
+}
+
+.id h3 {
+  /* display: flex; */
+  font-weight: 900;
+  font-size: .8em;
+  margin-right: .2em;
+}
+
+.id span {
+  font-weight: 400;
+}
+
+.id p {
+  flex-direction: column;
+  align-items: center;
 }
