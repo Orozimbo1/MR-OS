@@ -9,9 +9,9 @@ import { AiOutlineMessage } from 'react-icons/ai'
 // Context
 import { useStateContext } from '../../context/StateContext'
 
-const Print = ({ id }) => {
+const Print = ({ id, address, name, phoneNumber }) => {
   const { setShowPrint } = useStateContext()
-  
+
   const actualDate = new Date(Date.now()).toLocaleDateString('pt-BR', { timezone: 'UTC' })
 
   return (
@@ -36,12 +36,12 @@ const Print = ({ id }) => {
         </header>
         <hr />
         <main>
-          <section>
+          <section className={styles.client_date}>
             <h2>Cliente</h2>
-            <p>Nome do Cliente</p>
-            <p>Endereço do cliente</p>
-            <p>Email</p>
-            <p>Celular do cliente</p>
+            <p>{name}</p>
+            <p>{address}</p>
+            <p>Email:</p>
+            <p>{phoneNumber}</p>
           </section>
           <hr />
           <section>

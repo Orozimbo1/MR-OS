@@ -48,7 +48,14 @@ const Order = () => {
     <div>
       {order && order.status && (
         <div>
-          {showPrint && <Print id={id}/>}
+          {showPrint && 
+            <Print 
+              id={id}
+              address={order.address}
+              name={order.name}
+              phoneNumber={order.phoneNumber}
+            />
+          }
           <div className={styles.customer_data}>
             <h2>{order.name}</h2>
             <h3>Endereço: {order.address}</h3>
