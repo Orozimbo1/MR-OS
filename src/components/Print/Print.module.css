@@ -14,7 +14,7 @@
 }
 
 .print_order {
-  width: 60%;
+  width: 50%;
   background-color: white;
   box-shadow: 1px 1px 10px 2px rgba(0, 0, 0, 0.123);
   padding: 3em;
@@ -29,11 +29,26 @@
   padding: .1em 0;
 }
 
+.print_order span {
+  font-size: 1em;
+  font-weight: 400;
+  text-transform: none;
+}
+
+.print_order h3 {
+  display: flex;
+  padding: .5em 0;
+  font-weight: 800;
+  font-size: .7em;
+  text-transform: uppercase;
+  gap: .3em;
+}
+
 .header {
   display: flex;
   width: 100%;
   padding: .5em 0;
-  gap: .5em;
+  gap: .8em;
 }
 
 .logo {
@@ -41,7 +56,7 @@
 }
 
 .data {
-  width: 50%;
+  width: 55%;
   text-align: start;
 }
 
@@ -53,26 +68,13 @@
 .id {
   display: flex;
   flex-direction: column;
+  align-items: center;
   gap: 2em;
-  width: 25%;
-  text-align: center;
-}
-
-.id h3 {
-  /* display: flex; */
-  font-weight: 800;
-  font-size: .7em;
-  margin-right: .2em;
-}
-
-.id span {
-  font-size: 1em;
-  font-weight: 400;
+  width: 20%;
 }
 
 .id p {
   flex-direction: column;
-  align-items: center;
 }
 
 .client_date {
@@ -85,4 +87,9 @@
   text-align: left;
   text-transform: uppercase;
   padding: 0 0 .5em;
+}
+
+.print_status {
+  display: flex;
+  justify-content: space-between;
 }

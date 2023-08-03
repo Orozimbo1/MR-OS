@@ -54,6 +54,8 @@ const Order = () => {
               address={order.address}
               name={order.name}
               phoneNumber={order.phoneNumber}
+              createdAt={order.createdAt}
+              finishedAt={order.finishedAt}
             />
           }
           <div className={styles.customer_data}>

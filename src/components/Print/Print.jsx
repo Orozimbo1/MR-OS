@@ -9,10 +9,12 @@ import { AiOutlineMessage } from 'react-icons/ai'
 // Context
 import { useStateContext } from '../../context/StateContext'
 
-const Print = ({ id, address, name, phoneNumber }) => {
+const Print = ({ id, address, name, phoneNumber, createdAt, finishedAt }) => {
   const { setShowPrint } = useStateContext()
 
   const actualDate = new Date(Date.now()).toLocaleDateString('pt-BR', { timezone: 'UTC' })
+  const date = createdAt && createdAt.toDate() && createdAt.toDate().toLocaleDateString('pt-BR', { timezone: 'UTC' })
+  const dateFinished = finishedAt && finishedAt.toDate() && finishedAt.toDate().toLocaleDateString('pt-BR', { timezone: 'UTC' })
 
   return (
     <div className={styles.lightblue} onClick={() => setShowPrint(false)}>
@@ -44,20 +46,20 @@ const Print = ({ id, address, name, phoneNumber }) => {
             <p>{phoneNumber}</p>
           </section>
           <hr />
-          <section>
-            <h3>Status da OS: <p>Orçamento</p></h3>
-            <h3>Data inicial: <p>10/10/2020</p></h3>
-            <h3>Data final: <p>10/10/2020</p></h3>
-            <h3>Garantia: <p>90 dias</p></h3>
+          <section className={styles.print_status}>
+            <h3>Status OS: <span>Orçamento</span></h3>
+            <h3>Data inicial: <span>{date}</span></h3>
+            <h3>Data final: <span>{dateFinished ? dateFinished : '--/--/----'}</span></h3>
+            <h3>Garantia: <span>90 dias</span></h3>
           </section>
           <hr />
           {/* Loop de dispositivos */}
           <section>
-            <h3>Dispositivo: <p>Tipo de dispositivo + Marca + Modelo</p></h3>
+            <h3>Dispositivo: <span>Tipo de dispositivo + Marca + Modelo</span></h3>
             <hr />
-            <h3>Defeito apresentado: <p>Descrição do problema</p></h3>
+            <h3>Defeito apresentado: <span>Descrição do problema</span></h3>
             <hr />
-            <h3>Laudo técnico: <p>Laudo técnico</p></h3>
+            <h3>Laudo técnico: <span>Laudo técnico</span></h3>
             <hr />
             {/* Condicional de peças */}
             <table>

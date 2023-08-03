@@ -4,8 +4,8 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 
 const CardOrderService = ({ name, address, phoneNumber, createdAt, id, devices, status, finishedAt, total }) => {
-  const date = createdAt && createdAt.toDate() && createdAt.toDate().toLocaleString('pt-BR', { timezone: 'UTC' })
-  const dateFinished = finishedAt && finishedAt.toDate() && finishedAt.toDate().toLocaleString('pt-BR', { timezone: 'UTC' })
+  const date = createdAt && createdAt.toDate() && createdAt.toDate().toLocaleDateString('pt-BR', { timezone: 'UTC' })
+  const dateFinished = finishedAt && finishedAt.toDate() && finishedAt.toDate().toLocaleDateString('pt-BR', { timezone: 'UTC' })
 
   return (
     <Link to={`/order-service/${id}`}>
