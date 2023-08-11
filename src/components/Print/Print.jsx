@@ -59,48 +59,85 @@ const Print = ({ id, address, name, phoneNumber, createdAt, finishedAt }) => {
             <hr />
             <h3>Defeito apresentado: <span>Descrição do problema</span></h3>
             <hr />
-            <h3>Laudo técnico: <span>Laudo técnico</span></h3>
+            <h3>Laudo técnico: <span>Troca de placa mãe</span></h3>
             <hr />
             {/* Condicional de peças */}
             <table>
-              <tr>
-                <td>Produtos</td>
-                <td>Qtd</td>
-                <td>V. UN R$</td>
-                <td>S. Total R$</td>
-              </tr>
+              <thead>
+                <tr>
+                  <th className='prod_serv'>Produtos</th>
+                  <th className='qtd'>Qtd</th>
+                  <th>V. UN R$</th>
+                  <th>S. Total R$</th>
+                </tr>
+              </thead>
               {/* Loop de peças */}
-              <tr>
-                <td>Peça</td>
-                <td>Quantidade de peças</td>
-                <td>Valor da peça</td>
-                <td>Valor Total</td>
-              </tr>
+              <tbody>
+                <tr>
+                  <td>Placa mãe Positivo SIM 5110M(a14HVOX REV:4.0)</td>
+                  <td>1</td>
+                  <td>R$ 130</td>
+                  <td>R$ 130</td>
+                </tr>
+              </tbody>
               {/* Final de loop */}
-              <tr>
-                <td>Total</td>
-                <td>R$ Valor total</td>
-              </tr>
+              <tfoot>
+                <tr>
+                  <td></td>
+                  <td></td>
+                  <td className='totalText'>Total</td>
+                  <td>R$ 130</td>
+                </tr>
+              </tfoot>
+            </table>
+            <table>
+              <thead>
+                <tr>
+                  <th className='prod_serv'>Serviços</th>
+                  <th className='qtd'>Qtd</th>
+                  <th>V. UN R$</th>
+                  <th>S. Total R$</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Troca de placa mãe</td>
+                  <td>1</td>
+                  <td>R$ 130</td>
+                  <td>R$ 130</td>
+                </tr>
+              </tbody>
+              {/* Final de loop */}
+              <tfoot>
+                <tr>
+                  <td></td>
+                  <td></td>
+                  <td className='totalText'>Total</td>
+                  <td>R$ 130</td>
+                </tr>
+              </tfoot>
             </table>
           </section>
-          <h3>Valor Total da OS: R$:000</h3>
+          <h3 className='total'>Valor Total da OS: R$:000</h3>
         </main>
-        <hr />
         <footer>
           <table>
-            <tr>
-              <td>Data</td>
-              <td>Assinatura do Cliente</td>
-              <td>Assinatura do Tecnico Responsável</td>
-            </tr>
-            <tr>
-              <td> . </td>
-              <td> . </td>
-              <td> . </td>
-            </tr>
+            <thead>
+              <tr>
+                <th>Data</th>
+                <th>Assinatura do Cliente</th>
+                <th>Assinatura do Tecnico Responsável</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td className='date'> </td>
+                <td className='signature'> . </td>
+                <td className='signature'> . </td>
+              </tr>
+            </tbody>
           </table>
         </footer>
-        <hr />
       </div>
     </div>
   )

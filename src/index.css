@@ -59,6 +59,54 @@ textarea::placeholder {
   color: #646161;
 }
 
+table, th, td {
+  border: 1px solid #CCC;
+  border-collapse: collapse;
+  font-size: .8em;
+  padding: .3em .5em;
+}
+
+td {
+  text-align: left;
+}
+
+th {
+  text-align: center;
+  font-weight: 700;
+}
+
+table {
+  margin: .5em 0;
+  width: 100%;
+}
+
+tfoot td {
+  font-weight: 800;
+  font-size: .9em;
+  border: none;
+}
+
+.totalText {
+  border-right: 1px solid #CCC;
+  text-align: right;
+}
+
+.prod_serv {
+  width: 60%;
+}
+
+.qtd {
+  width: 10%;
+}
+
+.date {
+  width: 20%;
+}
+
+.signature {
+  width: 40%;
+}
+
 .btn {
   color: #fff;
   border: none;
