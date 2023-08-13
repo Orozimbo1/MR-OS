@@ -67,7 +67,7 @@ button {
 }
 
 .todo button {
-  padding: 10px 20px;
+  padding: 10px 30px;
   height: 45px;
   margin: 47px 0 0 0;
   border: 2px solid #0094f6;
@@ -115,12 +115,14 @@ button {
 
 .icons {
   display: flex;
-  width: 25%;
-  justify-content: space-evenly;
+  width: 18%;
+  justify-content: space-between;
+  margin-left: 7%;
 }
 
 .icons svg {
   font-size: 20px;
+  cursor: pointer;
 }
 
 @media screen and (max-width: 425px) {

@@ -16,16 +16,21 @@ const ModalDevice = ({ handleNewDevice, device, handleEditDevice, setDevice }) =
   const [model, setModel] = useState(device.model || '')
   const [color, setColor] = useState(device.color || '')
   const [problemDesc, setProblemDesc] = useState(device.problemDesc || '')
+  const [technicalReport, setTechnicalReport] = useState(device.technicalReport || '')
   const [labor, setLabor] = useState(device.labor || '')
   const [total, setTotal] = useState(0)
   const [error, setError] = useState('')
   const [partName, setPartName] = useState('')
   const [partPrice, setPartPrice] = useState('')
+  const [serviceName, setServiceName] = useState('')
+  const [servicePrice, setServicePrice] = useState('')
   const [edit, setEdit] = useState(false)
   const [partId, setPartId] = useState('')
+  const [serviceId, setServiceId] = useState('')
   let totalParts
 
   const initialParts = []
+  const initialServices = []
 
   useEffect(() => {
     if(device.parts) {
@@ -33,6 +38,7 @@ const ModalDevice = ({ handleNewDevice, device, handleEditDevice, setDevice }) =
     }
   }, [])
 
+  // Reducer de Peças
   const partsReducer = (state, action) => {
     switch (action.type) {
       case 'ADD':
@@ -81,6 +87,55 @@ const ModalDevice = ({ handleNewDevice, device, handleEditDevice, setDevice }) =
     dispatchParts({type: 'EDIT', part})
   }
 
+  // Reducer de Serviços
+  const servicesReducer = (state, action) => {
+    switch (action.type) {
+      case 'ADD':
+        const newService = {
+          id: Math.random(),
+          service: serviceName,
+          price: parseInt(servicePrice)
+        }
+        setServiceName('')
+        setServicePrice('')
+
+        return [...state, newService]
+      case 'REMOVE':
+        return state.filter((service) => service.id !== action.id) 
+      case 'EDIT':
+        const updatedService = {
+          service: action.service.service,
+          price: parseInt(action.service.price)
+        }
+
+        setServiceName('')
+        setServicePrice('')
+        setEdit(false)
+
+        let index = state.findIndex(element => element.id === action.service.id)
+        state[index] = {...updatedService}
+        
+        return [...state]
+      default:
+        return state 
+    }
+  }
+
+  const [services, dispatchServices] = useReducer(servicesReducer, initialServices)
+
+  const addService = () => {
+    if(serviceName.length <= 0 || servicePrice.length <= 0) return
+    dispatchServices({type: 'ADD'})
+  }
+
+  const removeService = (id) => {
+    dispatchServices({type: 'REMOVE', id})
+  }
+
+  const editService = (part) => {
+    dispatchService({type: 'EDIT', service})
+  }
+
   const reset = () => {
     setDevice({})
     setShowModalDevice(false)
@@ -107,6 +162,10 @@ const ModalDevice = ({ handleNewDevice, device, handleEditDevice, setDevice }) =
       setError('O campo descrição do problema é obrigatório')
       return false
     }
+    if(!technicalReport) {
+      setError('O campo laudo técnico é obrigatório')
+      return false
+    }
     if(!labor) {
       setError('O campo mão de obra é obrigatório')
       return false
@@ -130,6 +189,7 @@ const ModalDevice = ({ handleNewDevice, device, handleEditDevice, setDevice }) =
       model,
       color,
       problemDesc,
+      technicalReport,
       parts: parts,
       labor,
       total: total,
@@ -223,6 +283,16 @@ const ModalDevice = ({ handleNewDevice, device, handleEditDevice, setDevice }) =
             >
             </textarea>
           </label>
+          <label>
+            <span>Laudo técnico:</span>
+            <textarea 
+              placeholder='Descreva a solução dada pelo técnico'
+              onChange={(e) => setTechnicalReport(e.target.value)}
+              value={technicalReport}
+            >
+            </textarea>
+          </label>
+          {/* todo peça */}
           <div className={styles.todo}>
             <label>
               <span>Peça:</span>
@@ -233,7 +303,7 @@ const ModalDevice = ({ handleNewDevice, device, handleEditDevice, setDevice }) =
               <input type="number" value={partPrice} onChange={(e) => setPartPrice(e.target.value)}/>
             </label>
             {!edit 
-              ? <button onClick={() => addPart()}>+Add peça</button>
+              ? <button onClick={() => addPart()}>+ Add</button>
               : <button onClick={() => editPart( {id: partId, part: partName, price: partPrice} )}>Editar</button>
             }
           </div>
@@ -255,6 +325,44 @@ const ModalDevice = ({ handleNewDevice, device, handleEditDevice, setDevice }) =
                   setEdit(false)
                   setPartName('')
                   setPartPrice('')
+                }} />
+                }   
+              </div> 
+            </li>
+          ))}
+          {/* todo serviço */}
+          <div className={styles.todo}>
+            <label>
+              <span>Serviço:</span>
+              <input type="text" value={serviceName} onChange={(e) => setServiceName(e.target.value)}/>
+            </label>
+            <label>
+              <span>Valor:</span>
+              <input type="number" value={servicePrice} onChange={(e) => setServicePrice(e.target.value)}/>
+            </label>
+            {!edit 
+              ? <button onClick={() => addService()}>+ Add</button>
+              : <button onClick={() => editService( {id: serviceId, service: serviceName, price: servicePrice} )}>Editar</button>
+            }
+          </div>
+          {services.length > 0 && services.map((service, i) => (
+            <li key={service.id} className={styles.parts}>
+              <span>{i + 1} -</span>
+              <p className={styles.part_name}>{service.service}</p>
+              <p className={styles.part_price}>R$: {service.price}</p>
+              <div className={styles.icons}>
+                <BsTrash onClick={() => removeService(service.id)}/>
+                {!edit 
+                ? <BsPenFill onClick={() => {
+                  setServiceId(service.id)
+                  setEdit(true)
+                  setServiceName(service.service)
+                  setServicePrice(service.price)
+                }} /> 
+                : <BsExclamationCircle onClick={() => {
+                  setEdit(false)
+                  setServiceName('')
+                  setServicePrice('')
                 }} />
                 }   
               </div> 
