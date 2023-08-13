@@ -17,8 +17,6 @@ const ModalDevice = ({ handleNewDevice, device, handleEditDevice, setDevice }) =
   const [color, setColor] = useState(device.color || '')
   const [problemDesc, setProblemDesc] = useState(device.problemDesc || '')
   const [technicalReport, setTechnicalReport] = useState(device.technicalReport || '')
-  const [labor, setLabor] = useState(device.labor || '')
-  const [total, setTotal] = useState(0)
   const [error, setError] = useState('')
   const [partName, setPartName] = useState('')
   const [partPrice, setPartPrice] = useState('')
@@ -28,6 +26,7 @@ const ModalDevice = ({ handleNewDevice, device, handleEditDevice, setDevice }) =
   const [partId, setPartId] = useState('')
   const [serviceId, setServiceId] = useState('')
   let totalParts
+  let totalServices
 
   const initialParts = []
   const initialServices = []
@@ -35,6 +34,9 @@ const ModalDevice = ({ handleNewDevice, device, handleEditDevice, setDevice }) =
   useEffect(() => {
     if(device.parts) {
       device.parts.map((part) => initialParts.push(part))
+    }
+    if(device.services) {
+      device.services.map((service) => initialServices.push(service))
     }
   }, [])
 
@@ -132,8 +134,8 @@ const ModalDevice = ({ handleNewDevice, device, handleEditDevice, setDevice }) =
     dispatchServices({type: 'REMOVE', id})
   }
 
-  const editService = (part) => {
-    dispatchService({type: 'EDIT', service})
+  const editService = (service) => {
+    dispatchServices({type: 'EDIT', service})
   }
 
   const reset = () => {
@@ -166,10 +168,6 @@ const ModalDevice = ({ handleNewDevice, device, handleEditDevice, setDevice }) =
       setError('O campo laudo técnico é obrigatório')
       return false
     }
-    if(!labor) {
-      setError('O campo mão de obra é obrigatório')
-      return false
-    }
 
     return true
   }
@@ -182,6 +180,7 @@ const ModalDevice = ({ handleNewDevice, device, handleEditDevice, setDevice }) =
     if(!validate) return
 
     totalParts = parts.reduce((acc, val) => acc + val.price , 0)
+    totalServices = services.reduce((acc, val) => acc + val.price , 0)
 
     const device = {
       deviceType,
@@ -191,9 +190,10 @@ const ModalDevice = ({ handleNewDevice, device, handleEditDevice, setDevice }) =
       problemDesc,
       technicalReport,
       parts: parts,
-      labor,
-      total: total,
-      totalParts
+      services: services,
+      total: totalParts + totalServices,
+      totalParts,
+      totalServices
     }
 
     handleNewDevice({type: 'ADD-DEVICE', device: device})
@@ -214,24 +214,18 @@ const ModalDevice = ({ handleNewDevice, device, handleEditDevice, setDevice }) =
       model,
       color,
       problemDesc,
+      technicalReport,
       parts: parts,
-      labor,
-      total,
-      totalParts
+      services: services,
+      total: totalParts + totalServices,
+      totalParts,
+      totalServices
     }
 
     handleEditDevice({type: 'EDIT', device: deviceEdited})
     setDevice({})
     setShowModalDevice(false)
   }
-
-  useEffect(() => {  
-    if(labor) {
-      setTotal(parseInt(labor) + parts.reduce((acc, val) => acc + val.price , 0))
-    } else {
-      setTotal(0 + parts.reduce((acc, val) => acc + val.price , 0))
-    }
-  }, [parts, labor]) 
 
   return (
     <div className={styles.modal_container}>
@@ -368,13 +362,9 @@ const ModalDevice = ({ handleNewDevice, device, handleEditDevice, setDevice }) =
               </div> 
             </li>
           ))}
-          <label>
-            <span>Mão de obra:</span>
-            <input type="number" placeholder='R$: 99,99' value={labor} onChange={(e) => setLabor(e.target.value)} />
-          </label>
           <div className='total'>
             <h4>Total</h4>
-            <p>R$: {total}</p>
+            <p>R$:{services.reduce((acc, val) => acc + val.price , 0) + parts.reduce((acc, val) => acc + val.price , 0)}</p>
           </div>
           <div className='finish-or-cancel'>
             <button className='btn cancel-btn' onClick={reset}>Cancelar</button>

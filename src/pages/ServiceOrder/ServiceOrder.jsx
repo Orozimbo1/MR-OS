@@ -46,10 +46,12 @@ const ServiceOrder = () => {
           model: action.device.model,
           color: action.device.color,
           problemDesc: action.device.problemDesc,
+          technicalReport: action.device.technicalReport,
           parts: action.device.parts,
-          labor: action.device.labor,
+          services: action.device.services,
           total: action.device.total,
-          totalParts: action.device.totalParts
+          totalParts: action.device.totalParts,
+          totalServices: action.device.totalServices
         }
 
         return [...state, newDevice]
@@ -63,10 +65,12 @@ const ServiceOrder = () => {
           model: action.device.model,
           color: action.device.color,
           problemDesc: action.device.problemDesc,
+          technicalReport: action.device.technicalReport,
           parts: action.device.parts,
-          labor: action.device.labor,
+          services: action.device.services,
           total: action.device.total,
-          totalParts: action.device.totalParts
+          totalParts: action.device.totalParts,
+          totalServices: action.device.totalServices
         }
         
         let index = state.findIndex(element => element.id === action.device.id)
@@ -117,13 +121,13 @@ const ServiceOrder = () => {
   const handleSubmit = (e) => {
     e.preventDefault()
 
-    const displayName = user.displayName
-    const logo = user.photoURL && user.photoURL 
-    console.log(user.photoURL)
+    // const displayName = user.displayName
+    // const logo = user.photoURL && user.photoURL 
+    // console.log(user.photoURL)
     
-    // const validate = validateInputs()
+    const validate = validateInputs()
     
-    // if(!validate) return
+    if(!validate) return
     
     const serviceOrder = {
       name,
@@ -136,10 +140,10 @@ const ServiceOrder = () => {
       total
     }
       
-    // dispatch(newOrder(serviceOrder))
-    OrderPDF(serviceOrder, displayName, logo )
-    // reset()
-    // navigate('/')
+    dispatch(newOrder(serviceOrder))
+    // OrderPDF(serviceOrder, displayName, logo )
+    reset()
+    navigate('/')
   }
 
   useEffect(() => {
