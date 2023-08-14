@@ -125,7 +125,8 @@ tfoot td {
   opacity: 1;
 }
 
-input[type="submit"] {
+input[type="submit"],
+.submit {
   background-color: #1f51ff;
 }
 

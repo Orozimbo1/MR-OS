@@ -9,7 +9,7 @@ import { AiOutlineMessage } from 'react-icons/ai'
 // Context
 import { useStateContext } from '../../context/StateContext'
 
-const Print = ({ id, address, name, phoneNumber, createdAt, finishedAt }) => {
+const Print = ({ id, email, displayName, name, address, phoneNumber, createdAt, finishedAt, devices }) => {
   const { setShowPrint } = useStateContext()
 
   const actualDate = new Date(Date.now()).toLocaleDateString('pt-BR', { timezone: 'UTC' })
@@ -28,8 +28,8 @@ const Print = ({ id, address, name, phoneNumber, createdAt, finishedAt }) => {
             <h1>SSL Assistencia Tecnica Celulares e Informatica</h1>
             <p><FaFingerprint /> CNPJ</p>
             <p><FaMapMarkerAlt /> Endereço</p>
-            <p><AiOutlineMessage /> Email</p>
-            <p><BsFillPersonCheckFill /> Responsável</p>
+            <p><AiOutlineMessage /> {email}</p>
+            <p><BsFillPersonCheckFill /> {displayName}</p>
           </section>
           <section className={styles.id}>
             <h3>ID OS: <span>{id.split('').slice(0, 6)}</span></h3>
@@ -54,71 +54,77 @@ const Print = ({ id, address, name, phoneNumber, createdAt, finishedAt }) => {
           </section>
           <hr />
           {/* Loop de dispositivos */}
-          <section>
-            <h3>Dispositivo: <span>Tipo de dispositivo + Marca + Modelo</span></h3>
-            <hr />
-            <h3>Defeito apresentado: <span>Descrição do problema</span></h3>
-            <hr />
-            <h3>Laudo técnico: <span>Troca de placa mãe</span></h3>
-            <hr />
-            {/* Condicional de peças */}
-            <table>
-              <thead>
-                <tr>
-                  <th className='prod_serv'>Produtos</th>
-                  <th className='qtd'>Qtd</th>
-                  <th>V. UN R$</th>
-                  <th>S. Total R$</th>
-                </tr>
-              </thead>
-              {/* Loop de peças */}
-              <tbody>
-                <tr>
-                  <td>Placa mãe Positivo SIM 5110M(a14HVOX REV:4.0)</td>
-                  <td>1</td>
-                  <td>R$ 130</td>
-                  <td>R$ 130</td>
-                </tr>
-              </tbody>
-              {/* Final de loop */}
-              <tfoot>
-                <tr>
-                  <td></td>
-                  <td></td>
-                  <td className='totalText'>Total</td>
-                  <td>R$ 130</td>
-                </tr>
-              </tfoot>
-            </table>
-            <table>
-              <thead>
-                <tr>
-                  <th className='prod_serv'>Serviços</th>
-                  <th className='qtd'>Qtd</th>
-                  <th>V. UN R$</th>
-                  <th>S. Total R$</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td>Troca de placa mãe</td>
-                  <td>1</td>
-                  <td>R$ 130</td>
-                  <td>R$ 130</td>
-                </tr>
-              </tbody>
-              {/* Final de loop */}
-              <tfoot>
-                <tr>
-                  <td></td>
-                  <td></td>
-                  <td className='totalText'>Total</td>
-                  <td>R$ 130</td>
-                </tr>
-              </tfoot>
-            </table>
-          </section>
-          <h3 className='total'>Valor Total da OS: R$:000</h3>
+          {devices && devices.map((device) => (
+            <section  key={device.id}>
+              <h3>Dispositivo: <span>{device.deviceType} {device.brand} {device.model}</span></h3>
+              <hr />
+              <h3>Defeito apresentado: <span>{device.problemDesc}</span></h3>
+              <hr />
+              <h3>Laudo técnico: <span>{device.technicalReport}</span></h3>
+              <hr />
+              {device.parts && (
+                <table>
+                  <thead>
+                    <tr>
+                      <th className='prod_serv'>Produtos</th>
+                      <th className='qtd'>Qtd</th>
+                      <th>V. UN R$</th>
+                      <th>S. Total R$</th>
+                    </tr>
+                  </thead>
+                  {device.parts.map((part, i) => (
+                    <tbody key={i}>
+                      <tr>
+                        <td>{part.part}</td>
+                        <td>1</td>
+                        <td>R$ {part.price}</td>
+                        <td>R$ {part.price}</td>
+                      </tr>
+                    </tbody>
+                  ))}
+                  <tfoot>
+                    <tr>
+                      <td></td>
+                      <td></td>
+                      <td className='totalText'>Total</td>
+                      <td>{device.totalParts}</td>
+                    </tr>
+                  </tfoot>
+                </table>
+              )}
+              
+              <table>
+                <thead>
+                  <tr>
+                    <th className='prod_serv'>Serviços</th>
+                    <th className='qtd'>Qtd</th>
+                    <th>V. UN R$</th>
+                    <th>S. Total R$</th>
+                  </tr>
+                </thead>
+                {device.services && device.services.map((service) => (
+                  <tbody key={service.id}>
+                    <tr>
+                      <td>{service.service}</td>
+                      <td>1</td>
+                      <td>R$ {service.price}</td>
+                      <td>R$ {service.price}</td>
+                    </tr>
+                  </tbody>
+                ))}
+                {/* Final de loop */}
+                <tfoot>
+                  <tr>
+                    <td></td>
+                    <td></td>
+                    <td className='totalText'>Total</td>
+                    <td>R$ {device.totalServices}</td>
+                  </tr>
+                </tfoot>
+              </table>
+              <h3 className='total'>Valor Total da OS: R$:{device.total}</h3>
+            </section>
+          ))}
         </main>
         <footer>
           <table>

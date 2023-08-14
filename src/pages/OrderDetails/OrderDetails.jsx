@@ -20,6 +20,7 @@ import { Print } from '../../components'
 
 const Order = () => {
   const { order, loading } = useSelector((state) => state.order)
+  const { user } = useSelector((state) => state.auth)
 
   const { showPrint, setShowPrint } = useStateContext()
 
@@ -50,12 +51,15 @@ const Order = () => {
         <div>
           {showPrint && 
             <Print 
+              email={user.email}
+              displayName={user.displayName}
               id={id}
               address={order.address}
               name={order.name}
               phoneNumber={order.phoneNumber}
               createdAt={order.createdAt}
               finishedAt={order.finishedAt}
+              devices={order.devices}
             />
           }
           <div className={styles.customer_data}>
@@ -90,12 +94,12 @@ const Order = () => {
           {order.status.status === 'pending' && (
             <div className='finish-or-cancel'>
               <button 
-                className='cancel-btn' 
+                className='btn cancel-btn' 
                 onClick={() => handleUpdateStatusOrder('rejected', 'Rejeitada')}>
                   Cancelar
               </button>
               <button 
-                className='btn' 
+                className='btn submit' 
                 onClick={() => handleUpdateStatusOrder('finished', 'Concluída')}>
                   Finalizar
               </button>
