@@ -7,19 +7,17 @@ import { SlUserUnfollow } from 'react-icons/sl'
 
 // Hooks
 import { useSelector, useDispatch } from 'react-redux'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
-
-// Redux
-import { updateUser } from '../../slices/authSlice'
-import { registerUserData, updateUserData } from '../../slices/userDataSlice'
+import { useInsertDocument, useFetchDocument } from '../../hooks'
 
 // Components
 import { Message } from '../../components'
 
 const Settings = () => {
   const { user, loading, error } = useSelector((state) => state.auth)
-  const { userData, error: errorData, success } = useSelector((state) => state.user)
+  const { insertDocument, response } = useInsertDocument('userData');
+  const { document, loading: loadingDoc, error: errorDoc } = useFetchDocument('userData', user.uid)
 
   const dispatch = useDispatch()
   const navigate = useNavigate()
@@ -27,61 +25,26 @@ const Settings = () => {
   const [photoURL, setPhotoURL] = useState(user.photoURL || '')
   const [displayName, setDisplayName] = useState(user.displayName)
   const [email, setEmail] = useState(user.email)
-  const [address, setAddress] = useState(userData ? userData.address : '')
-  const [CNPJ, setCNPJ] = useState(userData ? userData.CNPJ : '')
+  const [address, setAddress] = useState('')
+  const [CNPJ, setCNPJ] = useState('')
 
-  const resetInputs = () => {
-    setPhotoURL(user.photoURL || '')
-    setDisplayName(user.displayName)
-    setAddress(userData ? userData.address : '')
-    setCNPJ(userData ? userData.CNPJ : '')
-  }
+  useEffect(() => {
+    if(document) {
+      setAddress(document.address)
+      setCNPJ(document.CNPJ)
+    }
+  }, [document])
   
   const handleSubmit = (e) => {
     e.preventDefault()
 
-    const updatedUser = {
-      displayName,
-      photoURL
-    }
+    insertDocument({
+      userId: user.uid,
+      address,
+      CNPJ
+    })
 
-    if(displayName !== user.displayName || photoURL !== user.photoURL) {
-      dispatch(updateUser(updatedUser))
-      alert('Usuário modificado.') // Vai sair
-      navigate('/')
-      return
-    }
-    
-    if(userData && address != userData.address || CNPJ != userData.CNPJ) {
-      const updatedDataUser = {
-        address,
-        CNPJ
-      }
-
-      dispatch(updateUserData({id: userData.id, document: updatedDataUser}))
-      console.log(errorData)
-      // console.log(success)
-      if(errorData) {
-        alert('Houve um erro.')
-        return
-      }
-      alert('Usuário modificado.') // Vai sair
-      console.log(errorData)
-      // navigate('/')
-      return
-    }
-
-    if(!userData) {
-      const registeringUserData = {
-        userId: user.uid,
-        address,
-        CNPJ
-      }
-      
-      dispatch(registerUserData(registeringUserData))
-      alert('Usuário modificado.') // Vai sair
-      // navigate('/')
-    }
+    alert('Usuário modificado.') // Vai sair
 
   }
 
@@ -149,11 +112,11 @@ const Settings = () => {
           </button>
         </div>
         <div className='finish-or-cancel'>
-          <button type='button' className='btn cancel-btn' onClick={resetInputs}>Cancelar</button>
+          {/* <button type='button' className='btn cancel-btn' onClick={resetInputs}>Cancelar</button> */}
           {!loading && <input type="submit" value="Atualizar" className='btn' />}
           {loading && <input type="submit" value="Aguarde.." className='btn' disabled />}
         </div>
-        {error || errorData && <Message msg={error || errorData} type='error' />}
+        {/* {error || errorData && <Message msg={error || errorData} type='error' />} */}
       </form>
     </main>
   )
