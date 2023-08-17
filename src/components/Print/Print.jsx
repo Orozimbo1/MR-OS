@@ -9,12 +9,12 @@ import { AiOutlineMessage } from 'react-icons/ai'
 // Context
 import { useStateContext } from '../../context/StateContext'
 
-const Print = ({ id, email, displayName, name, address, phoneNumber, createdAt, finishedAt, devices }) => {
+const Print = ({ userData, user, order, id }) => {
   const { setShowPrint } = useStateContext()
 
   const actualDate = new Date(Date.now()).toLocaleDateString('pt-BR', { timezone: 'UTC' })
-  const date = createdAt && createdAt.toDate() && createdAt.toDate().toLocaleDateString('pt-BR', { timezone: 'UTC' })
-  const dateFinished = finishedAt && finishedAt.toDate() && finishedAt.toDate().toLocaleDateString('pt-BR', { timezone: 'UTC' })
+  const date = order.createdAt && order.createdAt.toDate() && order.createdAt.toDate().toLocaleDateString('pt-BR', { timezone: 'UTC' })
+  const dateFinished = order.finishedAt && order.finishedAt.toDate() && order.finishedAt.toDate().toLocaleDateString('pt-BR', { timezone: 'UTC' })
 
   return (
     <div className={styles.lightblue} onClick={() => setShowPrint(false)}>
@@ -22,14 +22,14 @@ const Print = ({ id, email, displayName, name, address, phoneNumber, createdAt, 
         <hr />
         <header className={styles.header}>
           <section className={styles.logo}>
-            <img src={logo} alt="Logo da empresa" />
+            <img src={user.photoURL} alt="Logo da empresa" />
           </section>
           <section className={styles.data}>
-            <h1>SSL Assistencia Tecnica Celulares e Informatica</h1>
-            <p><FaFingerprint /> CNPJ</p>
-            <p><FaMapMarkerAlt /> Endereço</p>
-            <p><AiOutlineMessage /> {email}</p>
-            <p><BsFillPersonCheckFill /> {displayName}</p>
+            <h1>{userData.corporateName}</h1>
+            <p><FaFingerprint /> {userData.CNPJ}</p>
+            <p><FaMapMarkerAlt /> {userData.address}</p>
+            <p><AiOutlineMessage /> {user.email}</p>
+            <p><BsFillPersonCheckFill /> {user.displayName}</p>
           </section>
           <section className={styles.id}>
             <h3>ID OS: <span>{id.split('').slice(0, 6)}</span></h3>
@@ -40,10 +40,9 @@ const Print = ({ id, email, displayName, name, address, phoneNumber, createdAt, 
         <main>
           <section className={styles.client_date}>
             <h2>Cliente</h2>
-            <p>{name}</p>
-            <p>{address}</p>
-            <p>Email:</p>
-            <p>{phoneNumber}</p>
+            <p>{order.name}</p>
+            <p>{order.address}</p>
+            <p>{order.phoneNumber}</p>
           </section>
           <hr />
           <section className={styles.print_status}>
@@ -54,7 +53,7 @@ const Print = ({ id, email, displayName, name, address, phoneNumber, createdAt, 
           </section>
           <hr />
           {/* Loop de dispositivos */}
-          {devices && devices.map((device) => (
+          {order.devices && order.devices.map((device) => (
             <section  key={device.id}>
               <h3>Dispositivo: <span>{device.deviceType} {device.brand} {device.model}</span></h3>
               <hr />

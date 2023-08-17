@@ -7,6 +7,7 @@ import { Timestamp } from 'firebase/firestore'
 import { useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { useParams, useNavigate } from 'react-router-dom'
+import { useFetchDocument } from '../../hooks'
 
 // Redux
 import { getServiceOrder, updateOrderStatus } from '../../slices/orderSlice'
@@ -21,6 +22,7 @@ import { Print } from '../../components'
 const Order = () => {
   const { order, loading } = useSelector((state) => state.order)
   const { user } = useSelector((state) => state.auth)
+  const { document, loading: loadingData, error } = useFetchDocument('userData', user.uid)
 
   const { showPrint, setShowPrint } = useStateContext()
 
@@ -51,15 +53,10 @@ const Order = () => {
         <div>
           {showPrint && 
             <Print 
-              email={user.email}
-              displayName={user.displayName}
+              userData={document}
+              user={user}
+              order={order}
               id={id}
-              address={order.address}
-              name={order.name}
-              phoneNumber={order.phoneNumber}
-              createdAt={order.createdAt}
-              finishedAt={order.finishedAt}
-              devices={order.devices}
             />
           }
           <div className={styles.customer_data}>
