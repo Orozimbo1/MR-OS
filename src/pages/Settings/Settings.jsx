@@ -14,10 +14,14 @@ import { useInsertDocument, useFetchDocument, useUpdateDocument } from '../../ho
 // Components
 import { Message } from '../../components'
 
+// Redux
+import { updateUser } from '../../slices/authSlice'
+
 const Settings = () => {
   const { user, loading, error } = useSelector((state) => state.auth)
+  const id = user.uid
   const { insertDocument, response } = useInsertDocument('userData');
-  const { document, loading: loadingDoc, error: errorDoc } = useFetchDocument('userData', user.uid)
+  const { document, loading: loadingDoc, error: errorDoc } = useFetchDocument('userData', id)
   const { updateDocument, loading: loadingUpDoc, error: errorUpDoc } = useUpdateDocument('userData')
 
   const dispatch = useDispatch()
@@ -50,6 +54,15 @@ const Settings = () => {
   const handleSubmit = (e) => {
     e.preventDefault()
 
+    if(displayName !== user.displayName || photoURL !== user.photoURL) {
+      const updatedUser = {
+        displayName,
+        photoURL
+      }
+
+      dispatch(updateUser(updatedUser))
+    }
+
     if(!document) {
       insertDocument({
         userId: user.uid,
@@ -59,16 +72,18 @@ const Settings = () => {
       })
   
       alert('Usuário criado.') // Vai sair
-    } else {
+    }
+    if(document.corporateName !== corporateName || document.address !== address || document.CNPJ !== CNPJ) {
       updateDocument(document.id, {
         corporateName,
         address,
         CNPJ
       })
-      alert('Usuario atualizado')
+      alert('Usuario atualizado') // Vai sair
     }
   }
-
+  
+  // console.log(user)
   return (
     <main>
       <h2>Meus dados</h2>
@@ -77,7 +92,7 @@ const Settings = () => {
         <div className={styles.data_image}>
           <div className={styles.profile_image}>
             {photoURL ? 
-              <img src={photoURL} alt="Foto de perfil" />
+              <img src={photoURL} />
               : <BsPerson />
             }
           </div>

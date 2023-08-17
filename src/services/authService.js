@@ -33,10 +33,9 @@ const register = async (data) => {
 // Update an user
 const updateUser = async (data) => {
   const user = auth.currentUser
-  let res = {}
 
   try {
-    await updateProfile(auth.currentUser, {displayName: data.displayName, photoURL: data.photoURL})
+    await updateProfile(auth.currentUser, data)
   } catch (error) {
     return { error }
   }
