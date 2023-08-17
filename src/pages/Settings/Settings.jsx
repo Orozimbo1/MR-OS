@@ -9,7 +9,7 @@ import { SlUserUnfollow } from 'react-icons/sl'
 import { useSelector, useDispatch } from 'react-redux'
 import { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { useInsertDocument, useFetchDocument } from '../../hooks'
+import { useInsertDocument, useFetchDocument, useUpdateDocument } from '../../hooks'
 
 // Components
 import { Message } from '../../components'
@@ -18,6 +18,7 @@ const Settings = () => {
   const { user, loading, error } = useSelector((state) => state.auth)
   const { insertDocument, response } = useInsertDocument('userData');
   const { document, loading: loadingDoc, error: errorDoc } = useFetchDocument('userData', user.uid)
+  const { updateDocument, loading: loadingUpDoc, error: errorUpDoc } = useUpdateDocument('userData')
 
   const dispatch = useDispatch()
   const navigate = useNavigate()
@@ -25,11 +26,13 @@ const Settings = () => {
   const [photoURL, setPhotoURL] = useState(user.photoURL || '')
   const [displayName, setDisplayName] = useState(user.displayName)
   const [email, setEmail] = useState(user.email)
+  const [corporateName, setCorporateName] = useState('')
   const [address, setAddress] = useState('')
   const [CNPJ, setCNPJ] = useState('')
 
   useEffect(() => {
     if(document) {
+      setCorporateName(document.corporateName)
       setAddress(document.address)
       setCNPJ(document.CNPJ)
     }
@@ -38,13 +41,24 @@ const Settings = () => {
   const handleSubmit = (e) => {
     e.preventDefault()
 
-    insertDocument({
-      userId: user.uid,
-      address,
-      CNPJ
-    })
+    if(!document) {
+      insertDocument({
+        userId: user.uid,
+        corporateName,
+        address,
+        CNPJ
+      })
+  
+      alert('Usuário modificado.') // Vai sair
+    } else {
+      updateDocument(document.id, {
+        corporateName,
+        address,
+        CNPJ
+      })
+      alert('Usuario atualizado')
+    }
 
-    alert('Usuário modificado.') // Vai sair
 
   }
 
@@ -70,7 +84,7 @@ const Settings = () => {
           </label>
         </div>
         <label>
-          <span>Nome Fantasia</span>
+          <span>Nome</span>
           <input type="text" 
             value={displayName}
             onChange={(e) => setDisplayName(e.target.value)}
@@ -82,6 +96,14 @@ const Settings = () => {
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             disabled
+          />
+        </label>
+        <label>
+          <span>Razão Social</span>
+          <input type="text" 
+            value={corporateName}
+            onChange={(e) => setCorporateName(e.target.value)}
+            placeholder='Ex: SmartMania'
           />
         </label>
         <label>
