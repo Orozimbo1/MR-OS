@@ -1,5 +1,4 @@
 import styles from './Print.module.css'
-import logo from '../../assets/logo_completa.png'
 
 // Icons
 import { BsFillPersonCheckFill } from 'react-icons/bs'
