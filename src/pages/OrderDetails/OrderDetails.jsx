@@ -47,6 +47,14 @@ const Order = () => {
     navigate('/')
   }
 
+  const printGenerate = () => {
+    if(!document || !document.corporateName || !document.address) {
+      alert('Voce precisa cadastrar seus dados na página de configurações.')
+      return
+    }
+    setShowPrint(true)
+  }
+
   return (
     <div>
       {order && order.status && (
@@ -86,7 +94,7 @@ const Order = () => {
             <p><span>R$:</span> {order.total}</p>
           </div>
           <div className={styles.print}>
-            <button onClick={() => setShowPrint(true)}>Gerar print</button>
+            <button onClick={printGenerate}>Gerar print</button>
           </div>
           {order.status.status === 'pending' && (
             <div className='finish-or-cancel'>

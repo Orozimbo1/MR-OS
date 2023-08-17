@@ -37,12 +37,10 @@ const useUpdateDocument = (docCollection) => {
 
   const updateDocument = async (id, document) => {
     checkCancelBeforeDispatch({ type: "LOADING" });
-    console.log(document)
 
     try {
       
       const docRef = doc(db, docCollection, id)
-      console.log(docRef)
 
       await updateDoc(docRef, { corporateName: document.corporateName, address: document.address, CNPJ: document.CNPJ })
       // console.log(updatedDocument)
