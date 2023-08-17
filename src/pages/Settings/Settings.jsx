@@ -37,6 +37,15 @@ const Settings = () => {
       setCNPJ(document.CNPJ)
     }
   }, [document])
+
+  const resetInputs = () => {
+    setPhotoURL(user.photoURL || '')
+    setDisplayName(user.displayName)
+    setEmail(user.email)
+    setCorporateName(document.corporateName)
+    setAddress(document.address)
+    setCNPJ(document.CNPJ)
+  }
   
   const handleSubmit = (e) => {
     e.preventDefault()
@@ -49,7 +58,7 @@ const Settings = () => {
         CNPJ
       })
   
-      alert('Usuário modificado.') // Vai sair
+      alert('Usuário criado.') // Vai sair
     } else {
       updateDocument(document.id, {
         corporateName,
@@ -58,8 +67,6 @@ const Settings = () => {
       })
       alert('Usuario atualizado')
     }
-
-
   }
 
   return (
@@ -134,11 +141,11 @@ const Settings = () => {
           </button>
         </div>
         <div className='finish-or-cancel'>
-          {/* <button type='button' className='btn cancel-btn' onClick={resetInputs}>Cancelar</button> */}
+          <button type='button' className='btn cancel-btn' onClick={resetInputs}>Cancelar</button>
           {!loading && <input type="submit" value="Atualizar" className='btn' />}
           {loading && <input type="submit" value="Aguarde.." className='btn' disabled />}
         </div>
-        {/* {error || errorData && <Message msg={error || errorData} type='error' />} */}
+        {error && <Message msg={error} type='error' />}
       </form>
     </main>
   )

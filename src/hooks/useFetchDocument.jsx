@@ -30,7 +30,6 @@ const useFetchDocument = (docCollection, id) => {
         querySnapshot.forEach((doc) => {
           // doc.data() is never undefined for query doc snapshots
           // console.log(doc.id, " => ", doc.data());
-          console.log(doc.data())
           setDocument({id: doc.id, ...doc.data()})
         });
         setLoading(false)
