@@ -4,6 +4,8 @@ import { Link } from 'react-router-dom'
 
 import { useSelector } from 'react-redux'
 
+import { ChartDash } from '../../components'
+
 const Dashboard = () => {
   const { orders } = useSelector((state) => state.order)
   const { user } = useSelector((state) => state.auth)
@@ -29,7 +31,7 @@ const Dashboard = () => {
 
   return (
     <div className={styles.dashboard}>
-      <main className={styles.dash}>
+      {/* <main className={styles.dash}>
         <section className={styles.topics}>
           <h2>Dashboard</h2>
           <div className={styles.dash_data}>
@@ -75,7 +77,8 @@ const Dashboard = () => {
         <div className={styles.graphic}>
           <p></p>
         </div>
-      </aside>
+      </aside> */}
+      <ChartDash />
     </div>
   )
 }
