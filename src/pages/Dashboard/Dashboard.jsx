@@ -31,54 +31,28 @@ const Dashboard = () => {
 
   return (
     <div className={styles.dashboard}>
-      {/* <main className={styles.dash}>
-        <section className={styles.topics}>
-          <h2>Dashboard</h2>
-          <div className={styles.dash_data}>
-            <div className={styles.dash_card}>
-              <h4>Em andamento</h4>
-              <p>{ordersPending.length}</p>
-            </div>
-            <div className={styles.dash_card}>
-              <h4>Rejeitadas</h4>
-              <p>{ordersRejected.length}</p>
-            </div>
-            <div className={styles.dash_card}>
-              <h4>Concluídas</h4>
-              <p>{ordersFinished.length}</p>
-            </div>
-          </div>
-        </section>
-        <section className={styles.topics}>
-          <h2>Finanças</h2>
-          <div className={styles.dash_data}>
-            <div className={styles.dash_card}>
-              <h4>Total</h4> 
-              <p>R$: {totalFinished}</p>                         
-              <p>{ordersFinished.length > 0 ? 100 : 0}%</p>                         
-            </div>
-            <div className={styles.dash_card}>
-              <h4>Gastos</h4>
-              <p>R$: {totalPartsFinished}</p>
-              <p>{ordersFinished.length > 0 ? ((totalPartsFinished * 100) / totalFinished).toFixed(1): 0}%</p>
-            </div>
-            <div className={styles.dash_card}>
-              <h4>Lucro</h4>
-              <p>R$: {totalLaborFinished}</p>
-              <p>{ordersFinished.length > 0 ? ((totalLaborFinished * 100) / totalFinished).toFixed(1) : 0}%</p>
-            </div>
-          </div>
-        </section>
-      </main>
-      <aside className={styles.dash_graphic}>
-        <div className={styles.graphic}>
-          <p></p>
-        </div>
-        <div className={styles.graphic}>
-          <p></p>
-        </div>
-      </aside> */}
-      <ChartOrder />
+      <section className={styles.dash}>
+        <ul className={styles.dash_data}>
+          <li>
+            <p>Ordens:</p>
+            <span>780</span>
+          </li>
+          <li>
+            <p>Gastos:</p>
+            <span>R$: 1.300</span>
+          </li>
+          <li>
+            <p>Lucro:</p>
+            <span>R$: 8.700</span>
+          </li>
+          <li>
+            <p>Total:</p>
+            <span>R$: 10.000</span>
+          </li>
+        </ul>
+        <ChartOrder />
+      </section>
+      <h2>Finanças</h2>
       <ChartDash />
     </div>
   )

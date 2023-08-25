@@ -1,57 +1,55 @@
 .dashboard {
   min-height: 70vh;
   display: flex;
+  flex-direction: column;
   justify-content: space-between;
 }
 
 .dash {
-  width: 75%;
+  display: flex;
+  margin-bottom: 2em;
+  width: 100%;
 }
 
 .dash_data {
   display: flex;
+  justify-content: space-between;
+  padding: .5em;
+  width: 70%;
 }
 
-.topics {
-  height: 35vh;
-}
-
-.dash_card {
-  width: 33%;
-  text-align: left;
-  margin: .5em 1em;
-  padding: 1em .5em;
-  border-radius: 5px;
-  border: 1px solid #333;
-  text-align: center;
-}
-
-.dash_card h4 {
-  font-size: 1.5em;
-  border-bottom: 1px solid #333;
-}
-
-.dash_card p {
-  font-size: 2.5em;
-  font-weight: 900;
-  color: #3381b3;
-}
-
-.dash_graphic {
-  width: 30%;
-}
-
-.graphic {
+.dash_data li {
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
-  height: 35vh;
+  text-align: center;
+  font-size: .8em;
+  font-weight: 900;
+  width: 22%;
+  /* gap: .5em; */
 }
 
-.graphic p {
-  height: 200px;
-  width: 200px;
-  background-color: blue;
-  border-radius: 50%;
+.dash_data p {
+  width: 100%;
+  font-size: 1.8em;
+  font-weight: 900;
+  border-bottom: 1px solid #ccc;
+}
+
+.dash_data span {
+  font-size: 1.8em;
+}
+
+@media screen and (max-width: 425px) {
+  .dash {
+    flex-direction: column;
+  }
+
+  .dash_data {
+    width: 100%;
+  }
+
+  .dash_data li {
+    font-size: .5em;
+  }
 }
