@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom'
 
 import { useSelector } from 'react-redux'
 
-import { ChartDash } from '../../components'
+import { ChartDash, ChartOrder } from '../../components'
 
 const Dashboard = () => {
   const { orders } = useSelector((state) => state.order)
@@ -78,6 +78,7 @@ const Dashboard = () => {
           <p></p>
         </div>
       </aside> */}
+      <ChartOrder />
       <ChartDash />
     </div>
   )

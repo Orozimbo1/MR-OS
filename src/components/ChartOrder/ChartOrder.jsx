@@ -1,8 +1,8 @@
 import Chart from 'react-apexcharts'
 
-import styles from './ChartDash.module.css'
+import styles from './ChartOrder.module.css'
 
-const ChartDash = () => {
+const ChartOrder = () => {
 
       const options = {
         chart: {
@@ -55,4 +55,4 @@ const ChartDash = () => {
   );
 }
 
-export default ChartDash
+export default ChartOrder
