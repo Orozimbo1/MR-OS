@@ -72,7 +72,7 @@ const Order = () => {
             <h3>Endereço: {order.address}</h3>
             <h3>Telefone: {order.phoneNumber}</h3>
             <h3>Data de criação: {date}</h3>
-            {order.status.status !== styles.pending && <h3>Finalizou em: {dateFinished}</h3>}
+            {order.status.status !== 'pending' && <h3>Finalizou em: {dateFinished}</h3>}
           </div>
           <div className={styles.status_container}>Status: 
             <div className={`${styles.status} ${order.status && order.status.status}`}></div> 

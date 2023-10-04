@@ -53,6 +53,22 @@ const getAllServiceOrders = async (uid) => {
   }
 }
 
+// Update the service order
+const updateServiceOrder = async (order) => {
+  try {
+    const docRef = await doc(db, 'serviceOrders', order.id)
+
+    await updateDoc(docRef, order)
+
+    const updatedDocument = await getServiceOrder(order.id)
+
+    return updatedDocument
+  } catch (error) {
+
+    console.log(error)
+  }
+}
+
 // Update the order status 
 const updateOrderStatus = async (id, finshed) => {
   try {
@@ -73,6 +89,7 @@ const orderService = {
   newOrder,
   getAllServiceOrders,
   getServiceOrder,
+  updateServiceOrder,
   updateOrderStatus
 }
 

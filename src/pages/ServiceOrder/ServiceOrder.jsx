@@ -5,11 +5,11 @@ import { BsPlus } from 'react-icons/bs'
 
 // Hooks
 import { useEffect, useReducer, useState } from 'react'
-import { Link, useNavigate } from 'react-router-dom'
+import { Link, useNavigate, useParams } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
 
 // Redux
-import { newOrder } from '../../slices/orderSlice'
+import { newOrder, getServiceOrder, updateOrderStatus, updateServiceOrder } from '../../slices/orderSlice'
 
 // Context
 import { useStateContext } from '../../context/StateContext'
@@ -19,18 +19,20 @@ import { DeviceData, ModalDevice, Message} from '../../components'
 import { OrderPDF } from '../../components'
 
 const ServiceOrder = () => {
-  const { loading } = useSelector((state) => state.order)
+  const { order, loading } = useSelector((state) => state.order)
   const { user } = useSelector((state) => state.auth)
 
   let { setShowModalDevice, showModalDevice } = useStateContext()
 
   const navigate = useNavigate()
   const dispatch = useDispatch()
+  const { id } = useParams()
 
   const [name, setName] = useState('')
   const [phoneNumber, setPhoneNumber] = useState('')
   const [address, setAddress] = useState('')
   const [device, setDevice] = useState({})
+  // const [orderDevices, setOrderDevices] = useState([])
   const [error, setError] = useState('') 
   const [total, setTotal] = useState(0)
 
@@ -85,6 +87,17 @@ const ServiceOrder = () => {
 
   const [devices, dispatchDevices] = useReducer(deviceReducer, initialDevices)
 
+  useEffect(() => {
+    if(id) {
+      dispatch(getServiceOrder(id))
+      setName(order.name)
+      setPhoneNumber(order.phoneNumber)
+      setAddress(order.address)
+      initialDevices.push(...order.devices)
+      console.log(order)
+    }
+  }, [id])
+  
   const reset = () => {
     setName('')
     setAddress('')
@@ -146,6 +159,25 @@ const ServiceOrder = () => {
     navigate('/')
   }
 
+  const handleUpdate = () => {
+    const updatedServiceOrder = {
+      id,
+      name,
+      phoneNumber,
+      devices,
+      address,
+      userId: user.uid,
+      createdBy: user.displayName,
+      status: {status: 'pending', text: 'Em andamento'},
+      finishedAt: '',
+      total
+    }
+
+    // dispatch(updateOrderStatus({id, finshed: {status: {status: 'pending', text: 'Em andamento'}, finishedAt: ''}}))
+    dispatch(updateServiceOrder(updatedServiceOrder))
+    navigate('/')
+  }
+
   useEffect(() => {
     setTotal(devices.reduce((acc, val) => acc + val.total, 0))
   })
@@ -185,7 +217,7 @@ const ServiceOrder = () => {
               type="text" 
               placeholder='Ex: Av Brasil'
               onChange={(e) => setAddress(e.target.value)}
-              value={address} 
+              value={address}
             />
           </label>
           {devices && devices.map((device) =>(
@@ -211,8 +243,20 @@ const ServiceOrder = () => {
           </div>
           <div className='finish-or-cancel'>
             <Link className='btn cancel-btn' to='/'>Cancelar</Link>
-            {!loading && <input type="submit" value="Finalizar" className='btn'/>}
-            {loading && <input type="submit" value="Aguarde.." className='btn' disabled />}
+            {id ? (
+              <button 
+                type='button' 
+                className='btn submit'
+                onClick={handleUpdate}
+              >
+                Atualizar
+              </button>
+            ) : (
+              <>
+                {!loading && <input type="submit" value="Finalizar" className='btn'/>}
+                {loading && <input type="submit" value="Aguarde.." className='btn' disabled />}
+              </>
+            )}
           </div>
           {error && <Message msg={error} type='error' />}
       </form>
