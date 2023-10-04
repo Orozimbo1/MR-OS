@@ -6,7 +6,7 @@ import { Timestamp } from 'firebase/firestore'
 // Hooks
 import { useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
-import { useParams, useNavigate } from 'react-router-dom'
+import { useParams, useNavigate, Link } from 'react-router-dom'
 import { useFetchDocument } from '../../hooks'
 
 // Redux
@@ -94,6 +94,9 @@ const Order = () => {
             <p><span>R$:</span> {order.total}</p>
           </div>
           <div className={styles.print}>
+            {order.status.status != 'finished' && (
+              <Link to={`/new-order/${id}`}>Editar ordem</Link>
+            )}
             <button onClick={printGenerate}>Gerar print</button>
           </div>
           {order.status.status === 'pending' && (

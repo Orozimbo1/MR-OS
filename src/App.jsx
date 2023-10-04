@@ -25,7 +25,7 @@ function App() {
   }
 
   const array = [
-    {name: 'Nova ordem de serviço', path: '/order-service'},
+    {name: 'Nova ordem de serviço', path: '/new-order'},
     {name: 'Dashboard', path: '/dashboard'},
     {name: 'Configurações', path: '/settings'},
     {name: 'Tutorial', path: '/tutorial'},
@@ -40,7 +40,7 @@ function App() {
         <div className='container'>
           <Routes>
             <Route path='/' element={auth ? <Home /> : <Navigate to='/login' />} /> 
-            <Route path='/order-service' element={auth ? <ServiceOrder /> : <Navigate to='/login' />} /> 
+            <Route path='/new-order/:id?' element={auth ? <ServiceOrder /> : <Navigate to='/login' />} /> 
             <Route path='/order-service/:id' element={auth ? <OrderDetails /> : <Navigate to='/login' />} /> 
             <Route path='/login' element={!auth ? <Login /> : <Navigate to='/' />} /> 
             <Route path='/register' element={!auth ? <Register /> : <Navigate to='/' />} /> 

@@ -29,15 +29,18 @@
 .print {
   display: flex;
   justify-content: flex-end;
+  gap: 2em;
   padding: 1em 0 0;
 }
 
-.print button {
+.print button,
+.print a {
   color: rgb(85, 85, 233);
   font-weight: 900;
   transition: .3s;
 }
 
-.print button:hover {
+.print button:hover,
+.print a:hover {
   color: rgb(177, 177, 197);
 }
