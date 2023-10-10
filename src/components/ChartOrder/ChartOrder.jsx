@@ -2,9 +2,9 @@ import Chart from 'react-apexcharts'
 
 import styles from './ChartOrder.module.css'
 
-const ChartOrder = () => {
+const ChartOrder = ({ pending, rejected, finished }) => {
 
-      const series = [44, 55, 41]
+      const series = [pending, rejected, finished]
       const options = {
         labels : ['Andamento', 'Rejeitadas', 'Concluídas'],
         fill: {

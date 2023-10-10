@@ -17,17 +17,17 @@ const Dashboard = () => {
   // Valor de ordens em andamento
   const totalPending = ordersPending.reduce((acc, val) => acc + val.total, 0)
   const totalPartsPending = ordersPending.reduce((acc, val) => acc + val.devices.reduce((acc, val) => acc + val.totalParts, 0), 0)
-  const totalLaborPending = ordersPending.reduce((acc, val) => acc + val.devices.reduce((acc, val) => acc + parseInt(val.labor), 0), 0)
+  const totalLaborPending = ordersPending.reduce((acc, val) => acc + val.devices.reduce((acc, val) => acc + parseInt(val.totalServices), 0), 0)
 
   // Valor de ordens Concluídas
   const totalFinished = ordersFinished.reduce((acc, val) => acc + val.total, 0)
   const totalPartsFinished = ordersFinished.reduce((acc, val) => acc + val.devices.reduce((acc, val) => acc + val.totalParts, 0), 0)
-  const totalLaborFinished = ordersFinished.reduce((acc, val) => acc + val.devices.reduce((acc, val) => acc + parseInt(val.labor), 0), 0)
+  const totalLaborFinished = ordersFinished.reduce((acc, val) => acc + val.devices.reduce((acc, val) => acc + parseInt(val.totalServices), 0), 0)
 
   // Valor de ordens rejeitadas
   const totalRejected = ordersRejected.reduce((acc, val) => acc + val.total, 0)
   const totalPartsRejected = ordersRejected.reduce((acc, val) => acc + val.devices.reduce((acc, val) => acc + val.totalParts, 0), 0)
-  const totalLaborRejected = ordersRejected.reduce((acc, val) => acc + val.devices.reduce((acc, val) => acc + parseInt(val.labor), 0), 0)
+  const totalLaborRejected = ordersRejected.reduce((acc, val) => acc + val.devices.reduce((acc, val) => acc + parseInt(val.totalServices), 0), 0)
 
   return (
     <div className={styles.dashboard}>
@@ -35,25 +35,34 @@ const Dashboard = () => {
         <ul className={styles.dash_data}>
           <li>
             <p>Ordens:</p>
-            <span>780</span>
+            <span>{orders.length}</span>
           </li>
           <li>
             <p>Gastos:</p>
-            <span>R$: 1.300</span>
+            <span>R$: {totalPartsFinished}</span>
           </li>
           <li>
             <p>Lucro:</p>
-            <span>R$: 8.700</span>
+            <span>R$: {totalLaborFinished}</span>
           </li>
           <li>
             <p>Total:</p>
-            <span>R$: 10.000</span>
+            <span>R$: {totalFinished}</span>
           </li>
         </ul>
-        <ChartOrder />
+        <ChartOrder 
+          pending={ordersPending.length}
+          rejected={ordersRejected.length}
+          finished={ordersFinished.length}
+        />
       </section>
       <h2>Finanças</h2>
-      <ChartDash />
+      <ChartDash
+        orders={orders}
+        pending={ordersPending}
+        rejected={ordersRejected}
+        finished={ordersFinished}
+      />
     </div>
   )
 }

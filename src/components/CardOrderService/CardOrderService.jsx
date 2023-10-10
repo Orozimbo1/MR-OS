@@ -6,7 +6,6 @@ import { Link } from 'react-router-dom'
 const CardOrderService = ({ name, address, phoneNumber, createdAt, id, devices, status, finishedAt, total }) => {
   const date = createdAt && createdAt.toDate() && createdAt.toDate().toLocaleDateString('pt-BR', { timezone: 'UTC' })
   const dateFinished = finishedAt && finishedAt.toDate() && finishedAt.toDate().toLocaleDateString('pt-BR', { timezone: 'UTC' })
-
   return (
     <Link to={`/order-service/${id}`}>
       <div className={styles.card_order_service}>
